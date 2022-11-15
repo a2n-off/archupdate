@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+
+    <entry name="displayFormat" type="string">
+      <label>The display format.</label>
+      <default>desktopCount</default>
+    </entry>
+
+    <entry name="showTotal" type="Bool">
+      <label>Show the total count of window for the desktopCount display format.</label>
+      <default>false</default>
+    </entry>
+
+    <entry name="showDesktop" type="Bool">
+      <label>Show the id of the current desktop for the desktopCount display format.</label>
+      <default>false</default>
+    </entry>
+
+    <entry name="filterByActivity" type="Bool">
+      <label>Filter the result by activity.</label>
+      <default>false</default>
+    </entry>
+
+    <entry name="groupingApp" type="Bool">
+      <label>Tasks are grouped by the application backing them (3 same app give +1 on the total result and not +3).</label>
+      <default>false</default>
+    </entry>
+
+  </group>
+
+</kcfg>

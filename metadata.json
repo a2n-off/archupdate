@@ -1,0 +1,30 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "a2n.dev@pm.me",
+                "Name": "Bouteiller <a2n> Alan"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Count and show the pending pacman update",
+        "Dependencies": [
+          "wmctrl"
+        ],
+        "EnabledByDefault": true,
+        "Icon": "preferences-desktop",
+        "Id": "archupdate",
+        "License": "GPL-2.0+",
+        "Name": "Arch Update Counter",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.1",
+        "Website": ""
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/archupdate.qml",
+    "X-Plasma-Provides": [
+      "org.kde.plasma.virtualdesktops"
+    ]
+}
