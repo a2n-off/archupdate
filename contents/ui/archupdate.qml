@@ -13,13 +13,44 @@ import org.kde.kwindowsystem 1.0 as KWindowSystem
 Item {
     id: root
 
-    property int total: 0
+    property string total: "0"
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
+    PlasmaCore.DataSource {
+      id: executable
+      engine: "executable"
+      connectedSources: []
+      onNewData: {
+        var exitCode = data["exit code"]
+        var exitStatus = data["exit status"]
+        var stdout = data["stdout"]
+        var stderr = data["stderr"]
+        exited(sourceName, exitCode, exitStatus, stdout, stderr)
+        disconnectSource(sourceName)
+      }
+
+      function exec(cmd) {
+        if (cmd) connectSource(cmd)
+      }
+
+      signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
+    }
+
     // count the number of update
     function count() {
-      root.total = root.total + 1
+      root.total = "↻"
+      executable.exec("pacman -Sup | wc -l")
+    }
+
+    // map the stdout with the widget
+    Connections {
+      target: executable
+      function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
+        // remove the leading newline
+        var output = stdout.replace(/\n/g, '')
+        root.total = output
+      }
     }
 
     // execute function count each 30 minutes
