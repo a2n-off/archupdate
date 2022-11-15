@@ -6,17 +6,14 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.private.taskmanager 0.1 as TaskManagerApplet
-import org.kde.kwindowsystem 1.0 as KWindowSystem
-
 Item {
     id: root
 
     property string total: "0"
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-
+    
+    // setup the data source for the command
     PlasmaCore.DataSource {
       id: executable
       engine: "executable"
@@ -56,7 +53,7 @@ Item {
     // execute function count each 30 minutes
     Timer {
       id: timer
-      interval: 1000 // ms
+      interval: 1800000 // ms
       running: true
       repeat: true
       onTriggered: count()
@@ -66,9 +63,7 @@ Item {
     Plasmoid.compactRepresentation: Item {
       id: output
 
-      PlasmaCore.IconItem {
-          source: ""
-      }
+      PlasmaCore.IconItem { source: "" }
 
       PlasmaComponents.Label {
         id: label
@@ -78,6 +73,13 @@ Item {
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+      }
+
+      // setup action for click event
+      MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: { count() }
       }
     }
 
