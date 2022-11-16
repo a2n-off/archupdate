@@ -63,10 +63,10 @@ Item {
     Plasmoid.compactRepresentation: Item {
       id: output
 
-      PlasmaCore.IconItem {
-        source: "/home/a2n/Nextcloud/save_linux_21/wallpaper-and-icon/archlinux-logo.svg"
-        implicitHeight: parent.height
-      }
+      //PlasmaCore.IconItem {
+      //  source: "/home/a2n/Nextcloud/save_linux_21/wallpaper-and-icon/archlinux-logo.svg"
+      //  implicitHeight: parent.height
+      //}
 
       PlasmaComponents.Label {
         id: label
