@@ -67,13 +67,17 @@ Item {
     // setup the ui and the output
     Plasmoid.compactRepresentation: Item {
       id: compactRepresentation
-
-      PlasmaCore.IconItem {
-        source: "../assets/archlinux-logo.svg"
-        implicitHeight: parent.height 
-        implicitWidth: parent.width
+      
+      Image {
+        id: updateIcon
+        fillMode: Image.PreserveAspectFit
+        height: parent.height
+        width: height
+        sourceSize: Qt.size(height, height)
+        smooth: true
+        source: "../assets/system-software-update-grey-02"
       }
-
+      
       // background for the text
       Rectangle {
         id: circle
