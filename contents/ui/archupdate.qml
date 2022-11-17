@@ -12,7 +12,7 @@ Item {
     property string total: "0"
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-    
+
     // setup the data source for the command
     PlasmaCore.DataSource {
       id: executable
@@ -37,6 +37,10 @@ Item {
     // count the number of update
     function count() {
       root.total = "↻"
+      // todo do something for that, maybe w/ fakeroot
+      // with paru -Syu the db is updated w/ no sudo
+      // executable.exec("echo -e 'no\n' | sudo pacman -Syu")
+      // sleep(5)
       executable.exec("pacman -Sup | wc -l")
     }
 
@@ -56,26 +60,42 @@ Item {
       interval: 1800000 // ms
       running: true
       repeat: true
+      triggeredOnStart: true // trigger on start for a first checkind
       onTriggered: count()
     }
 
     // setup the ui and the output
     Plasmoid.compactRepresentation: Item {
-      id: output
+      id: compactRepresentation
 
-      //PlasmaCore.IconItem {
-      //  source: "/home/a2n/Nextcloud/save_linux_21/wallpaper-and-icon/archlinux-logo.svg"
-      //  implicitHeight: parent.height
-      //}
+      PlasmaCore.IconItem {
+        source: "../assets/archlinux-logo.svg"
+        implicitHeight: parent.height 
+        implicitWidth: parent.width
+      }
 
-      PlasmaComponents.Label {
-        id: label
+      // background for the text
+      Rectangle {
+        id: circle
+        width: 16
+        height: width
+        radius: width / 2
+        color: "Black"
+        opacity: 0.7
+        visible: true
+        anchors {
+          right: parent.right
+          top: parent.top
+        }
+      }
+
+      // total of update
+      Text {
         text: root.total
-        width: parent.width
-        height: parent.height
-        anchors.fill: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+        font.pointSize: 8
+        color: "White"
+        anchors.centerIn: circle
+        visible: circle.visible
       }
 
       // setup action for click event
@@ -84,6 +104,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: { count() }
       }
+
     }
 
 }
