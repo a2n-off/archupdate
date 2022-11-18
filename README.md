@@ -1,6 +1,6 @@
 # Arch update counter - plasma widget
 
-![screenshot of the plugin](assets/screenshot.png)
+![screenshot of the plugin](git-assets/img/screenshot.png)
 
 ## Description
 
