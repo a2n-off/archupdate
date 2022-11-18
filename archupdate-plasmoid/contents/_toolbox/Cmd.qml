@@ -16,14 +16,15 @@ PlasmaCore.DataSource {
     exited(sourceName, exitCode, exitStatus, stdout, stderr)
     disconnectSource(sourceName)
   }
+  onSourceConnected: {
+    connected(source)
+  }
 
   // execute the given cmd
   function exec(cmd: string) {
-    if (cmd) {
-      console.log('exec following cmd', cmd)
-      connectSource(cmd)
-    }
+    if (cmd) connectSource(cmd)
   }
 
+  signal connected(string source)
   signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
 }

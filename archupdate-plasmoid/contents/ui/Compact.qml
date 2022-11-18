@@ -18,22 +18,28 @@ RowLayout {
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
-    refresh ? icon.source=iconRefresh : icon.source=iconUpdate
+    if (refresh) {
+      icon.source=iconRefresh
+      total="↻"
+    } else {
+      icon.source=iconUpdate
+    }
   }
 
   // event handler for MouseArea
   function onClick() {
-    updateUi(true)
     updater.count()
   }
 
-  // map the stdout with the widget
+  // map the cmd signal with the widget
   Connections {
     target: cmd
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
       total = stdout.replace(/\n/g, '')
-      console.log("get", total)
       updateUi(false)
+    }
+    function onConnected(source) {
+      updateUi(true)
     }
   }
 
@@ -49,7 +55,7 @@ RowLayout {
     MouseArea {
       anchors.fill: icon // cover all the zone
       cursorShape: Qt.PointingHandCursor // give user feedback
-      onClicked: { onClick() }
+      onClicked: onClick()
     }
 
     // background for the text
