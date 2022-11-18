@@ -13,6 +13,5 @@ Item {
     Plasmoid.compactRepresentation: Compact { id: compact }
     // load one instance of each needed service
     Sv.Updater{ id: updater }
-    Tb.Delay{ id: delay }
     Tb.Cmd { id: cmd }
 }

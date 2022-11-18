@@ -49,7 +49,8 @@ RowLayout {
     width: height
     Layout.fillWidth: true
     fillMode: Image.PreserveAspectFit
-    sourceSize: Qt.size(height, height) // w/ the sourceSize set to the height the svg have alway the right definition
+    // w/ the sourceSize set to the height the svg have alway the right definition
+    sourceSize: Qt.size(height, height)
     source: iconUpdate
 
     MouseArea {
