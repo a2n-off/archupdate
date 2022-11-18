@@ -20,8 +20,13 @@ Place the source (`archupdate-plasmoid` folder) in `~/.local/share/plasma/plasmo
 
 ## Todo
 
-- [ ] update the ui when `cmd` call `count`
+- [x] update the ui when `cmd` call `count`
 - [ ] execute db update before the calcul
+- [ ] add config :
+  - [ ] icon choice
+  - [ ] icon color
+  - [ ] text color
+  - [ ] timer choice
 
 ## Want to participate ?
 
