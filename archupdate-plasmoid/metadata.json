@@ -23,7 +23,7 @@
         "Website": ""
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml",
+    "X-Plasma-MainScript": "archupdate.qml",
     "X-Plasma-Provides": [
       "org.kde.plasma.virtualdesktops"
     ]
