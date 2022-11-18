@@ -10,7 +10,7 @@ Refresh each 30 minutes or on click.
 
 ## Installation
 
-Place the source in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
+Place the source (`archupdate-plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
 
 ## Configuration
 
@@ -20,8 +20,7 @@ Place the source in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store]
 
 ## Todo
 
-- [ ] icon color setting
-- [ ] circle & text color setting
+- [ ] update the ui when `cmd` call `count`
 - [ ] execute db update before the calcul
 
 ## Want to participate ?
