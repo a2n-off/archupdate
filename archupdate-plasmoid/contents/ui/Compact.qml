@@ -1,7 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+
+import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
+
 import "../service" as Service
+import "../toolbox" as Tb
 
 RowLayout {
   id: row
@@ -11,12 +17,38 @@ RowLayout {
   property string iconRefresh: "../assets/arch-unknown.svg"
   property string total: "0"
 
-  // service import
   Service.Updater { id: updater }
+  Tb.Cmd { id: cmd }
 
   anchors.fill: parent // the row fill the parent in height and width
   anchors.topMargin: margin // margin give a better look for the icon in the panel
   anchors.bottomMargin: margin
+
+  // map the result
+  // TODO place this fc in another service
+  Connections {
+    target: cmd.executable
+    function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
+      var output = stdout.replace(/\n/g, '') // remove the leading newline
+      updateUi(false, output)
+    }
+  }
+
+  // execute function count each 30 minutes
+  // TODO place this fc in another service
+  Timer {
+    interval: 1800000 // ms
+    running: true
+    repeat: true
+    triggeredOnStart: true // trigger on start for a first checkind
+    onTriggered: startRefresh()
+  }
+
+  // refresh the ui and launch the count
+  function startRefresh() {
+    updateUi(true, "↻")
+    updater.count()
+  }
 
   // updates the text and the icon according to the refresh status
   function updateUi(refresh: boolean, value: text) {
@@ -37,10 +69,7 @@ RowLayout {
     MouseArea {
       anchors.fill: icon // cover all the zone
       cursorShape: Qt.PointingHandCursor // give user feedback
-      onClicked: {
-        updateUi(true, "↻")
-        updater.count((value) => updateUi(false, value))
-      }
+      onClicked: { startRefresh() }
     }
 
     // background for the text
