@@ -4,26 +4,37 @@ import QtQuick.Controls 2.15
 
 import org.kde.plasma.plasmoid 2.0
 
-import "../service" as Service
-
 RowLayout {
   id: row
-
-  Service.Updater { id: updater }
 
   property int margin: 2
   property string iconUpdate: "../assets/software-update-available.svg"
   property string iconRefresh: "../assets/arch-unknown.svg"
-  property string total: updater.output
+  property string total: "0"
 
   anchors.fill: parent // the row fill the parent in height and width
   anchors.topMargin: margin // margin give a better look for the icon in the panel
   anchors.bottomMargin: margin
 
-  // updates the text and the icon according to the refresh status
-  function updateUi(refresh: boolean, value: text) {
-    refresh ? icon.source= iconRefresh : icon.source= iconUpdate
-    total=value
+  // updates the icon according to the refresh status
+  function updateUi(refresh: boolean) {
+    refresh ? icon.source=iconRefresh : icon.source=iconUpdate
+  }
+
+  // event handler for MouseArea
+  function onClick() {
+    updateUi(true)
+    updater.count()
+  }
+
+  // map the stdout with the widget
+  Connections {
+    target: cmd
+    function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
+      total = stdout.replace(/\n/g, '')
+      console.log("get", total)
+      updateUi(false)
+    }
   }
 
   Image {
@@ -35,11 +46,10 @@ RowLayout {
     sourceSize: Qt.size(height, height) // w/ the sourceSize set to the height the svg have alway the right definition
     source: iconUpdate
 
-    // TODO later
     MouseArea {
       anchors.fill: icon // cover all the zone
       cursorShape: Qt.PointingHandCursor // give user feedback
-      onClicked: { updateUi(true, "NN") }
+      onClicked: { onClick() }
     }
 
     // background for the text

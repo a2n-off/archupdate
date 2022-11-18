@@ -4,8 +4,6 @@ import QtQuick.Controls 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Item {
-
 PlasmaCore.DataSource {
   id: executable
   engine: "executable"
@@ -28,15 +26,4 @@ PlasmaCore.DataSource {
   }
 
   signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
-}
-
-// map the stdout with the widget
-Connections {
-  target: executable
-  function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-    var output = stdout.replace(/\n/g, '')
-    console.log(output)
-  }
-}
-
 }
