@@ -16,7 +16,7 @@ Place the source (`archupdate-plasmoid` folder) in `~/.local/share/plasma/plasmo
 
 | Name | Description | Result |
 |--|--|--|
-| x | x | x |
+| Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 
 ## Todo
 
@@ -26,7 +26,7 @@ Place the source (`archupdate-plasmoid` folder) in `~/.local/share/plasma/plasmo
   - [ ] icon choice
   - [ ] icon color
   - [ ] text color
-  - [ ] timer choice
+  - [x] interval choice
 
 ## Want to participate ?
 
