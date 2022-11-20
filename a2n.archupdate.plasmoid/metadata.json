@@ -20,7 +20,7 @@
             "Plasma/Applet"
         ],
         "Version": "1.1",
-        "Website": ""
+        "Website": "https://github.com/bouteillerAlan/archupdate"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/archupdate.qml",
