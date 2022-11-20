@@ -10,7 +10,7 @@ Refresh each 30 minutes or on click.
 
 ## Installation
 
-Place the source (`archupdate-plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
+Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
 
 ## Configuration
 

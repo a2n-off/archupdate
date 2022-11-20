@@ -5,3 +5,6 @@
 
 ### v2.2-beta
     - fixed a configuration issue ✌️
+
+### v2.3-beta
+    - add interval update configuration
