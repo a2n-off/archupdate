@@ -12,7 +12,7 @@ Refresh each 30 minutes or on click.
 
 You need to have the [`pacman-contrib`](https://archlinux.org/packages/community/x86_64/pacman-contrib/) package installed.
 
-Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
+Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://www.pling.com/p/1940819/)
 
 ## Configuration
 
