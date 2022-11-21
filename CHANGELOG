@@ -1,16 +1,19 @@
+### v3.1-beta
+  - update license and utils files
+
 ### v3-beta
-    - migrate to `checkupdates` from `pacman`, for avoiding to use sudo for syncronize the db
-    - added documentation about this
-    - added a warning in the config page about this
+  - migrate to `checkupdates` from `pacman`, for avoiding to use sudo for syncronize the db
+  - added documentation about this
+  - added a warning in the config page about this
 
 ### v2.3-beta
-    - add interval update configuration
+  - add interval update configuration
 
 ### v2.2-beta
-    - fixed a configuration issue ✌️
+  - fixed a configuration issue ✌️
 
 ### v2.1-beta
-    - improve the code and the logic structure
-    - add signal for `connected` event on `Tb.Cmd`
-    - update the ui with more usefull icon
-    - add CHANGELOG file
+  - improve the code and the logic structure
+  - add signal for `connected` event on `Tb.Cmd`
+  - update the ui with more usefull icon
+  - add CHANGELOG file
