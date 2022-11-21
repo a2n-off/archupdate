@@ -20,18 +20,37 @@ Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/pl
 |--|--|--|
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 
-## Todo
+## Code of conduct, license, authors, changelog, contributing
 
-- [x] update the ui when `cmd` call `count`
-- [x] execute db update before the calcul
-- [ ] setup a auto release w/ github action
+See the following file :
+- [code of conduct](CODE_OF_CONDUCT.md)
+- [license](LICENSE)
+- [authors](AUTHORS)
+- [contributing](CONTRIBUTING.md)
+- [changelog](CHANGELOG)
+- [security](SECURITY.md)
+
+## Roadmap
+
+- [x] ~~update the ui when `cmd` call `count`~~
+- [x] ~~execute db update before the calcul~~
+- [ ] setup a auto release w/ github action (ci/cd)
 - [ ] add config :
   - [ ] icon choice
   - [ ] icon color
   - [ ] text color
-  - [x] interval choice
+  - [x] ~~interval choice~~
 
-## Want to participate ?
+## Want to participate? Have a bug or a request feature?
 
-Do not hesitate to open a mr or an issue.
+Do not hesitate to open a pr or an issue. I reply when I can.
 
+## Want to support my work?
+
+- [Give me a tips](https://ko-fi.com/a2n00)
+- [Give a start on github](https://github.com/bouteillerAlan/archupdate)
+- [Add a rating and a comment on Pling](https://www.pling.com/p/1940819/)
+- [Become a fan on Pling](https://www.pling.com/p/1940819/)
+- Or just participate to the developement :D
+
+### Thanks !

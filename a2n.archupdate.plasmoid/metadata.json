@@ -14,12 +14,12 @@
         "EnabledByDefault": true,
         "Icon": "preferences-desktop",
         "Id": "archupdate",
-        "License": "GPL-2.0+",
+        "License": "GPL-3.0+",
         "Name": "Arch Update Counter",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "1.1",
+        "Version": "3",
         "Website": "https://github.com/bouteillerAlan/archupdate"
     },
     "X-Plasma-API": "declarativeappletscript",
