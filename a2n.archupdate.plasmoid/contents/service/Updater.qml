@@ -7,17 +7,16 @@ import org.kde.plasma.plasmoid 2.0
 
 Item {
 
-  property int interval: Plasmoid.configuration.updateInterval
+  property int intervalConfig: Plasmoid.configuration.updateInterval
 
   function count() {
-    console.log(interval)
-    cmd.exec("pacman -Sup | wc -l")
+    cmd.exec("checkupdates | wc -l")
   }
 
   // execute function count each 30 minutes
   Timer {
     id: timer
-    interval: interval * 60000 // minute to milisecond
+    interval: intervalConfig * 60000 // minute to milisecond
     running: true
     repeat: true
     triggeredOnStart: true // trigger on start for a first checkind
