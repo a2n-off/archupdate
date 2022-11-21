@@ -8,3 +8,8 @@
 
 ### v2.3-beta
     - add interval update configuration
+
+### v3-beta
+    - migrate to `checkupdates` from `pacman`, for avoiding to use sudo for syncronize the db
+    - added documentation about this
+    - added a warning in the config page about this

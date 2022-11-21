@@ -10,6 +10,8 @@ Refresh each 30 minutes or on click.
 
 ## Installation
 
+You need to have the [`pacman-contrib`](https://archlinux.org/packages/community/x86_64/pacman-contrib/) package installed.
+
 Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://store.kde.org/browse?cat=418&ord=latest)
 
 ## Configuration
@@ -21,7 +23,8 @@ Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/pl
 ## Todo
 
 - [x] update the ui when `cmd` call `count`
-- [ ] execute db update before the calcul
+- [x] execute db update before the calcul
+- [ ] setup a auto release w/ github action
 - [ ] add config :
   - [ ] icon choice
   - [ ] icon color
