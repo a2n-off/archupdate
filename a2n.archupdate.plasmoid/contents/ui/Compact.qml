@@ -29,6 +29,11 @@ Row {
     updater.count()
   }
 
+  // return true if the taskbar is vertical
+  function isBarVertical() {
+    return row.width < row.height;
+  }
+
   // map the cmd signal with the widget
   Connections {
     target: cmd
@@ -43,7 +48,7 @@ Row {
 
   Item {
     id: container
-    height: row.height
+    height: isBarVertical() ? row.width : row.height // usefull if the taskbar is vertical
     width: height
 
     Image {
@@ -57,12 +62,22 @@ Row {
       source: iconUpdate
     }
 
-    WorkspaceComponents.BadgeOverlay {
+    WorkspaceComponents.BadgeOverlay { // for the horizontal bar
       anchors {
         bottom: container.bottom
         horizontalCenter: container.right
       }
-      visible: true
+      visible: !isBarVertical()
+      text: total
+      icon: updateIcon
+    }
+
+    WorkspaceComponents.BadgeOverlay { // for the vertical bar
+      anchors {
+        verticalCenter: container.bottom
+        right: container.right
+      }
+      visible: isBarVertical()
       text: total
       icon: updateIcon
     }
