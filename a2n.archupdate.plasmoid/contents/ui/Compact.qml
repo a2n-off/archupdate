@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
 
 RowLayout {
   id: row
@@ -59,25 +60,15 @@ RowLayout {
       onClicked: onClick()
     }
 
-    // background for the text
-    Rectangle {
-      id: circle
-      width: icon.width / 3
-      height: width
-      radius: width / 2
-      color: "Black"
-      opacity: 1
-      anchors.right: parent.right
-      anchors.bottom: parent.bottom
-
-      // total of update
-      Text {
-        text: total
-        font.pointSize: 8
-        color: "White"
-        anchors.centerIn: circle
+    WorkspaceComponents.BadgeOverlay {
+      anchors {
+        bottom: parent.bottom
+        right: parent.right
       }
+      visible: true
+      text: total
     }
+
   }
 
 }
