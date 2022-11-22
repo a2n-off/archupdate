@@ -67,6 +67,7 @@ RowLayout {
       }
       visible: true
       text: total
+      icon: icon
     }
 
   }

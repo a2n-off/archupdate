@@ -10,7 +10,7 @@ import "../service" as Sv
 Item {
     id: archupdate
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-    Plasmoid.compactRepresentation: Compact { id: compact }
+    Plasmoid.compactRepresentation: Compact {}
     // load one instance of each needed service
     Sv.Updater{ id: updater }
     Tb.Cmd { id: cmd }
