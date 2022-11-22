@@ -48,7 +48,7 @@ Do not hesitate to open a pr or an issue. I reply when I can.
 ## Want to support my work?
 
 - [Give me a tips](https://ko-fi.com/a2n00)
-- [Give a start on github](https://github.com/bouteillerAlan/archupdate)
+- [Give a star on github](https://github.com/bouteillerAlan/archupdate)
 - [Add a rating and a comment on Pling](https://www.pling.com/p/1940819/)
 - [Become a fan on Pling](https://www.pling.com/p/1940819/)
 - Or just participate to the developement :D
