@@ -6,14 +6,10 @@
                 "Name": "Bouteiller <a2n> Alan"
             }
         ],
-        "Category": "Windows and Tasks",
+        "Category": "System Information",
         "Description": "Count and show the pending pacman update",
-        "Dependencies": [
-          "wmctrl"
-        ],
-        "EnabledByDefault": true,
         "Icon": "preferences-desktop",
-        "Id": "archupdate",
+        "Id": "a2n.archupdate.plasmoid",
         "License": "GPL-3.0+",
         "Name": "Arch Update Counter",
         "ServiceTypes": [
@@ -23,8 +19,5 @@
         "Website": "https://github.com/bouteillerAlan/archupdate"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml",
-    "X-Plasma-Provides": [
-      "org.kde.plasma.virtualdesktops"
-    ]
+    "X-Plasma-MainScript": "ui/archupdate.qml"
 }
