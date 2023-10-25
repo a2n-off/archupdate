@@ -13,6 +13,14 @@ Item {
     cmd.exec("checkupdates | wc -l")
   }
 
+  function launchUpdate() {
+    cmd.exec("konsole -e 'sudo pacman -Syu'")
+  }
+
+  function killProcess(process) {
+    cmd.exec("kill -9 " + process)
+  }
+
   // execute function count each 30 minutes
   Timer {
     id: timer

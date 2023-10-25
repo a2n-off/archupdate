@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
 
@@ -24,9 +25,14 @@ Row {
     }
   }
 
-  // event handler for MouseArea
-  function onClick() {
+  // event handler for the left click on MouseArea
+  function onLClick() {
     updater.count()
+  }
+
+  // event handler for the middle click on MouseArea
+  function onMClick() {
+    updater.launchUpdate()
   }
 
   // return true if the taskbar is vertical
@@ -37,12 +43,25 @@ Row {
   // map the cmd signal with the widget
   Connections {
     target: cmd
-    function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-      total = stdout.replace(/\n/g, '')
-      updateUi(false)
-    }
+
     function onConnected(source) {
       updateUi(true)
+    }
+
+    function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
+      var out = stdout.replace(/\n/g, '')
+      total = out
+
+      // handle the process if it's not kill
+      // if (stderr !== '') {
+      //   var process = stderr.match(/\d+/)[0] // grab the process id
+      //   if (process !== '') updater.killProcess(process)
+      // }
+
+      // update the count after the update
+      if (cmd === "konsole -e 'sudo pacman -Syu'") onLClick()
+
+      updateUi(false)
     }
   }
 
@@ -85,9 +104,15 @@ Row {
     MouseArea {
       anchors.fill: container // cover all the zone
       cursorShape: Qt.PointingHandCursor // give user feedback
-      onClicked: onClick()
+      acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+      onClicked: (mouse) => {
+        if (mouse.button == Qt.LeftButton) {
+          onLClick()
+        } else if (mouse.button == Qt.MiddleButton) {
+          onMClick()
+        }
+      }
     }
 
   }
-
 }
