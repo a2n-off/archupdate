@@ -9,13 +9,16 @@ import "../service" as Sv
 
 Item {
     id: archupdate
+
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.compactRepresentation: Compact {}
+
     // load one instance of each needed service
     Sv.Updater{ id: updater }
+    Sv.Checker{ id: checker }
     Tb.Cmd { id: cmd }
 
-    // this mendatory to have that in the root elem's : https://techbase.kde.org/Development/Tutorials/Plasma4/JavaScript/API-PlasmoidObject#Context_menu
+    // this is mendatory to have that in the root elem's : https://techbase.kde.org/Development/Tutorials/Plasma4/JavaScript/API-PlasmoidObject#Context_menu
     function action_launchUpdate() {
         updater.launchUpdate()
     }
