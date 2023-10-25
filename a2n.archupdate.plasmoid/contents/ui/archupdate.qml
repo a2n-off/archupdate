@@ -14,4 +14,13 @@ Item {
     // load one instance of each needed service
     Sv.Updater{ id: updater }
     Tb.Cmd { id: cmd }
+
+    // this mendatory to have that in the root elem's : https://techbase.kde.org/Development/Tutorials/Plasma4/JavaScript/API-PlasmoidObject#Context_menu
+    function action_launchUpdate() {
+        updater.launchUpdate()
+    }
+
+    Component.onCompleted: {
+      Plasmoid.setAction("launchUpdate", "Update", "preferences-other")
+    }
 }
