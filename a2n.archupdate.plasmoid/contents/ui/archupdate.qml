@@ -25,5 +25,7 @@ Item {
 
     Component.onCompleted: {
       Plasmoid.setAction("launchUpdate", "Update", "preferences-other")
+      checker.konsole()
+      checker.checkupdates()
     }
 }

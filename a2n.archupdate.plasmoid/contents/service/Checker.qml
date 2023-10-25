@@ -18,12 +18,12 @@ Item {
     cmd.exec("checkupdates --version")
   }
 
-  function validateKonsole() {
-    checkPassedKonsole = true
+  function validateKonsole(stderr) {
+    checkPassedKonsole = stderr === ''
   }
 
-  function validateCheckupdates() {
-    checkPassedCheckupdates = true
+  function validateCheckupdates(stderr) {
+    checkPassedCheckupdates = stderr === ''
   }
 
 }

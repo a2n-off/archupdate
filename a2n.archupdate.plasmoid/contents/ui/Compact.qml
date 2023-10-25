@@ -12,6 +12,7 @@ Row {
   property string iconUpdate: "../assets/software-update-available.svg"
   property string iconRefresh: "../assets/arch-unknown.svg"
   property string total: "0"
+  property bool debug: plasmoid.configuration.debugMode
 
   anchors.fill: parent // the row fill the parent in height and width
 
@@ -45,21 +46,20 @@ Row {
     target: cmd
 
     function onConnected(source) {
+      if (debug) console.log('ARCHUPDATE - cmd connected: ', source)
       updateUi(true)
     }
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-      var out = stdout.replace(/\n/g, '')
-      total = out
-
-      // handle the process if it's not kill
-      // if (stderr !== '') {
-      //   var process = stderr.match(/\d+/)[0] // grab the process id
-      //   if (process !== '') updater.killProcess(process)
-      // }
+      if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
+      total = stdout.replace(/\n/g, '')
 
       // update the count after the update
       if (cmd === "konsole -e 'sudo pacman -Syu'") onLClick()
+
+      // handle the result for the checker
+      if (cmd === "konsole -v") checker.validateKonsole(stderr)
+      if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
 
       updateUi(false)
     }
