@@ -16,7 +16,8 @@
             "Plasma/Applet"
         ],
         "Version": "3",
-        "Website": "https://github.com/bouteillerAlan/archupdate"
+        "Website": "https://github.com/bouteillerAlan/archupdate",
+        "Depends": ["konsole", "pacman-contrib"]
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/archupdate.qml"
