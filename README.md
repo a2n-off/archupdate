@@ -10,9 +10,13 @@ Refresh each 30 minutes, on click or on the interval you set.
 
 `new` And you can update via the context menu or the middle click of your mouse !
 
-## Installation
+## Dependencies
 
 You need to have the [`pacman-contrib`](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) and the [konsole](https://archlinux.org/packages/extra/x86_64/konsole/) package installed.
+
+Idealy you have `kdialog` too, but it's not mandatory.
+
+## Manual installation
 
 Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://www.pling.com/p/1940819/)
 
@@ -21,6 +25,7 @@ Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/pl
 | Name | Description | Result |
 |--|--|--|
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
+| Debug | Enable the debug mode if set to true | Show each command launch by the plasmoid |
 
 ## Code of conduct, license, authors, changelog, contributing
 
@@ -36,7 +41,7 @@ See the following file :
 
 - [x] ~~update the ui when `cmd` call `count`~~
 - [x] ~~execute db update before the calcul~~
-- [ ] setup a auto release w/ github action (ci/cd)
+- ~~setup a auto release w/ github action (ci/cd)~~
 - [ ] add config :
   - [ ] icon choice
   - [ ] icon color
