@@ -6,11 +6,13 @@
 
 Counts the number of pacman update available.
 
-Refresh each 30 minutes or on click.
+Refresh each 30 minutes, on click or on the interval you set.
+
+`new` And you can update via the context menu or the middle click of your mouse !
 
 ## Installation
 
-You need to have the [`pacman-contrib`](https://archlinux.org/packages/community/x86_64/pacman-contrib/) package installed.
+You need to have the [`pacman-contrib`](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) and the [konsole](https://archlinux.org/packages/extra/x86_64/konsole/) package installed.
 
 Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://www.pling.com/p/1940819/)
 
