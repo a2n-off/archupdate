@@ -17,10 +17,12 @@ Item {
 
   function validateKonsole(stderr) {
     plasmoid.configuration.konsoleIsValid = stderr === ''
+    cmd.exec("kdialog --passivepopup 'Missing dependency (konsole) for arch update plasmoid'")
   }
 
   function validateCheckupdates(stderr) {
     plasmoid.configuration.checkupdateIsValid = stderr === ''
+    cmd.exec("kdialog --passivepopup 'Missing dependency (pacman-contrib) for arch update plasmoid'")
   }
 
 }
