@@ -19,7 +19,7 @@ Kirigami.Page {
 
     Kirigami.InlineMessage {
       Layout.fillWidth: true
-      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/konsole/\">konsole<a/> package installed for this widget to work."
+      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/konsole/\">konsole</a> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
       visible: true
@@ -27,7 +27,7 @@ Kirigami.Page {
 
     Kirigami.InlineMessage {
       Layout.fillWidth: true
-      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/pacman-contrib/\">pacman-contrib<a/> package installed for this widget to work."
+      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/pacman-contrib/\">pacman-contrib</a> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
       visible: true
@@ -35,7 +35,7 @@ Kirigami.Page {
 
     Kirigami.InlineMessage {
       Layout.fillWidth: true
-      text: "This option enable some log in the stdout of plasma."
+      text: "This option enable log for each cmd exec by the plugin. (regex: ARCHUPDATE)"
       visible: debugModeBox.checked
     }
 
