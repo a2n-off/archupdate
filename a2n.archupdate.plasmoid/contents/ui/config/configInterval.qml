@@ -22,7 +22,7 @@ Kirigami.Page {
       text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/konsole/\">konsole</a> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
-      visible: true
+      visible: !plasmoid.configuraation.konsoleIsValid
     }
 
     Kirigami.InlineMessage {
@@ -30,7 +30,7 @@ Kirigami.Page {
       text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/pacman-contrib/\">pacman-contrib</a> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
-      visible: true
+      visible: !plasmoid.configuration.checkupdateIsValid
     }
 
     Kirigami.InlineMessage {

@@ -7,9 +7,6 @@ import org.kde.plasma.plasmoid 2.0
 
 Item {
 
-  property bool checkPassedKonsole: false
-  property bool checkPassedCheckupdates: false
-
   function konsole() {
     cmd.exec("konsole -v")
   }
@@ -19,11 +16,11 @@ Item {
   }
 
   function validateKonsole(stderr) {
-    checkPassedKonsole = stderr === ''
+    plasmoid.configuration.konsoleIsValid = stderr === ''
   }
 
   function validateCheckupdates(stderr) {
-    checkPassedCheckupdates = stderr === ''
+    plasmoid.configuration.checkupdateIsValid = stderr === ''
   }
 
 }
