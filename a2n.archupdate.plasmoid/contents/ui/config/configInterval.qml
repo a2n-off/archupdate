@@ -18,10 +18,18 @@ Kirigami.Page {
 
     Kirigami.InlineMessage {
       Layout.fillWidth: true
-      text: "You must have the pacman-contrib package installed for this widget to work. <a href=\"https://archlinux.org/packages/community/x86_64/pacman-contrib\">Download it here.<a/>"
+      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/konsole/\">konsole<a/> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
-      visible: true
+      visible: checker.checkPassedKonsole
+    }
+
+    Kirigami.InlineMessage {
+      Layout.fillWidth: true
+      text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/pacman-contrib/\">pacman-contrib<a/> package installed for this widget to work."
+      onLinkActivated: Qt.openUrlExternally(link)
+      type: Kirigami.MessageType.Warning
+      visible: checker.checkPassedCheckupdates
     }
 
     Kirigami.FormLayout {
