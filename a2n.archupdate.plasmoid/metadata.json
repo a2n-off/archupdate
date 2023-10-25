@@ -7,7 +7,7 @@
             }
         ],
         "Category": "System Information",
-        "Description": "Count and show the pending pacman update",
+        "Description": "Show and handle the pending pacman update",
         "Icon": "preferences-desktop",
         "Id": "a2n.archupdate.plasmoid",
         "License": "GPL-3.0+",
@@ -15,7 +15,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "3",
+        "Version": "4.0.0",
         "Website": "https://github.com/bouteillerAlan/archupdate",
         "Depends": ["konsole", "pacman-contrib"]
     },

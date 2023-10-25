@@ -1,3 +1,9 @@
+### v4.0.0
+  - Out of beta ! 🥳
+  - now you can launch an update console via the middle click or via the context menu
+  - the plasmoid check for the dependencies (konsole and pacman-contrib) and add an alert into the config page, if kdialog is installed he send a notification
+  - debug mode is available in the setting window
+
 ### v3.2-beta
   - fixed a placement problem on horizontal taskbars
   - use built-in badge component
@@ -22,3 +28,4 @@
   - add signal for `connected` event on `Tb.Cmd`
   - update the ui with more usefull icon
   - add CHANGELOG file
+
