@@ -1,3 +1,7 @@
+### v4.1.0
+  - New setting : an input where you can customize the command you want to use for the update
+  - New setting : you can now ask the console not to close after the update
+
 ### v4.0.0
   - Out of beta ! 🥳
   - now you can launch an update console via the middle click or via the context menu
