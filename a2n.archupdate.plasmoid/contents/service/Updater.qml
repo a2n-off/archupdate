@@ -9,7 +9,7 @@ Item {
 
   property int intervalConfig: Plasmoid.configuration.updateInterval
   property string userCommand: Plasmoid.configuration.userCommand
-  property bool notCloseCommand: Plasmoid.configuration.closeCommand
+  property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
 
   function count() {
     cmd.exec("checkupdates | wc -l")
