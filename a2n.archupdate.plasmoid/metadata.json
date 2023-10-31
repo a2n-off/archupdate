@@ -15,7 +15,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "4.0.0",
+        "Version": "4.1.0",
         "Website": "https://github.com/bouteillerAlan/archupdate",
         "Depends": ["konsole", "pacman-contrib"]
     },

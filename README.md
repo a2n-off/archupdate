@@ -8,7 +8,9 @@ Counts the number of pacman update available.
 
 Refresh each 30 minutes, on click or on the interval you set.
 
-`new` And you can update via the context menu or the middle click of your mouse !
+`new in 4.0.0` And you can update via the context menu or the middle click of your mouse !
+
+`new in 4.1.0` Custom setting for the update command !
 
 ## Dependencies
 
@@ -26,6 +28,18 @@ Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/pl
 |--|--|--|
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 | Debug | Enable the debug mode if set to true | Show each command launch by the plasmoid |
+| Close at end | if true add the `--noclose` flag into the `konsole` command | Prevent the console to close at the end of the command |
+| Command | The command you want to execute when the `update` action is called | Pass the command to `konsole -e` |
+
+### Regarding the customization of the command
+
+Is up to you to double check the command you want to exec.
+
+In no case I'm responsible of anything if your system break due to your command.
+
+The program launch the command with `konsole -e`. So you can test your command or script with `konsole -e "my_command"`.
+
+The default command is: `konsole -e (--noclose) 'sudo pacman -Syu'` where `noclose` is optional.
 
 ## Code of conduct, license, authors, changelog, contributing
 
