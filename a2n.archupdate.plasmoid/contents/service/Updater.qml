@@ -8,13 +8,19 @@ import org.kde.plasma.plasmoid 2.0
 Item {
 
   property int intervalConfig: Plasmoid.configuration.updateInterval
+  property string userCommand: Plasmoid.configuration.userCommand
+  property bool notCloseCommand: Plasmoid.configuration.closeCommand
 
   function count() {
     cmd.exec("checkupdates | wc -l")
   }
 
   function launchUpdate() {
-    cmd.exec("konsole -e 'sudo pacman -Syu'")
+    if (notCloseCommand) {
+      cmd.exec("konsole --noclose -e '" + userCommand + "'")
+    } else {
+      cmd.exec("konsole -e '" + userCommand + "'")
+    }
   }
 
   function killProcess(process) {
