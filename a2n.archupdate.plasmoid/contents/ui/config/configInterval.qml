@@ -9,6 +9,8 @@ Kirigami.Page {
 
   property alias cfg_updateInterval: updateIntervalSpin.value
   property alias cfg_debugMode: debugModeBox.checked
+  property alias cfg_notCloseCommand: notCloseBox.checked
+  property alias cfg_userCommand: commandInput.text
 
   ColumnLayout {
     anchors {
@@ -51,11 +53,23 @@ Kirigami.Page {
         valueFromText: (text) => parseInt(text)
       }
 
+      Controls.TextField {
+        id: commandInput
+        Kirigami.FormData.label: "Update command: "     
+      }
+
+      Controls.CheckBox {
+        id: notCloseBox
+        Kirigami.FormData.label: "Do not close the terminal at the end: "
+        checked: false
+      }
+
       Controls.CheckBox {
         id: debugModeBox
         Kirigami.FormData.label: "Debug: "
         checked: false
       }
+
 
     }
 
