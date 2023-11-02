@@ -5,16 +5,19 @@ import QtQuick.Controls 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import "components" as Components
 
 Row {
   id: row
 
-  property string iconUpdate: "../assets/software-update-available.svg"
-  property string iconRefresh: "../assets/arch-unknown.svg"
+  property string iconUpdate: "software-update-available.svg"
+  property string iconRefresh: "arch-unknown.svg"
   property string total: "0"
   property bool debug: plasmoid.configuration.debugMode
 
-  anchors.fill: parent // the row fill the parent in height and width
+  Layout.minimumWidth: PlasmaCore.Units.iconSizes.small
+  Layout.minimumHeight: PlasmaCore.Units.iconSizes.small
+  anchors.fill: parent
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
@@ -36,7 +39,7 @@ Row {
     updater.launchUpdate()
   }
 
-  // return true if the taskbar is vertical
+  // return true if the widget area is vertical
   function isBarVertical() {
     return row.width < row.height;
   }
@@ -70,14 +73,12 @@ Row {
     height: isBarVertical() ? row.width : row.height // usefull if the taskbar is vertical
     width: height
 
-    Image {
+    anchors.centerIn: parent
+
+    Components.PlasmoidIcon {
       id: updateIcon
-      height: container.height
-      width: height
-      Layout.fillWidth: true
-      fillMode: Image.PreserveAspectFit
-      // w/ the sourceSize set to the height the svg have alway the right definition
-      sourceSize: Qt.size(height, height)
+      width: isBarVertical() ? container.height : container.width
+      height: width
       source: iconUpdate
     }
 
@@ -113,6 +114,5 @@ Row {
         }
       }
     }
-
   }
 }
