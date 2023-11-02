@@ -15,9 +15,9 @@ Row {
   property string total: "0"
   property bool debug: plasmoid.configuration.debugMode
 
-  Layout.minimumWidth: PlasmaCore.Units.iconSizes.small
-  Layout.minimumHeight: PlasmaCore.Units.iconSizes.small
-  anchors.fill: parent
+  property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+
+  property real itemSize: Math.min(row.height, row.width)
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
@@ -70,15 +70,15 @@ Row {
 
   Item {
     id: container
-    height: isBarVertical() ? row.width : row.height // usefull if the taskbar is vertical
-    width: height
+    height: row.itemSize
+    width: row.width
 
     anchors.centerIn: parent
 
     Components.PlasmoidIcon {
       id: updateIcon
-      width: isBarVertical() ? container.height : container.width
-      height: width
+      height: PlasmaCore.Units.roundToIconSize(Math.min(parent.width, parent.height))
+      width: height
       source: iconUpdate
     }
 
@@ -87,7 +87,7 @@ Row {
         bottom: container.bottom
         horizontalCenter: container.right
       }
-      visible: !isBarVertical()
+      visible: !isPanelVertical
       text: total
       icon: updateIcon
     }
@@ -97,7 +97,7 @@ Row {
         verticalCenter: container.bottom
         right: container.right
       }
-      visible: isBarVertical()
+      visible: isPanelVertical
       text: total
       icon: updateIcon
     }
