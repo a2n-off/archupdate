@@ -3,14 +3,15 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.20 as Kirigami
 
-Kirigami.Page {
+Kirigami.ScrollablePage {
 
   id: intervalConfigPage
 
   property alias cfg_updateInterval: updateIntervalSpin.value
   property alias cfg_debugMode: debugModeBox.checked
   property alias cfg_notCloseCommand: notCloseBox.checked
-  property alias cfg_userCommand: commandInput.text
+  property alias cfg_updateCommand: updateCommandInput.text
+  property alias cfg_countCommand: countCommandInput.text
 
   ColumnLayout {
     anchors {
@@ -24,7 +25,7 @@ Kirigami.Page {
       text: "You must have the <a href=\"https://archlinux.org/packages/extra/x86_64/konsole/\">konsole</a> package installed for this widget to work."
       onLinkActivated: Qt.openUrlExternally(link)
       type: Kirigami.MessageType.Warning
-      visible: !plasmoid.configuraation.konsoleIsValid
+      visible: !plasmoid.configuration.konsoleIsValid
     }
 
     Kirigami.InlineMessage {
@@ -42,6 +43,15 @@ Kirigami.Page {
     }
 
     Kirigami.FormLayout {
+      wideMode: false
+
+      Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: "General"
+      }
+    }
+
+    Kirigami.FormLayout {
 
       Controls.SpinBox {
         id: updateIntervalSpin
@@ -51,11 +61,6 @@ Kirigami.Page {
         editable: true
         textFromValue: (value) => value + " minute(s)"
         valueFromText: (text) => parseInt(text)
-      }
-
-      Controls.TextField {
-        id: commandInput
-        Kirigami.FormData.label: "Update command: "     
       }
 
       Controls.CheckBox {
@@ -70,6 +75,35 @@ Kirigami.Page {
         checked: false
       }
 
+    }
+ 
+   Kirigami.FormLayout {
+      wideMode: false
+
+      Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: "Command"
+      }
+    }
+
+    Kirigami.InlineMessage {
+      Layout.fillWidth: true
+      text: "Replace yay by paru or with the AUR helper of your choice.\n checkupdates is recommanded for the db sync.\n Execute it first."
+      visible: true
+    }
+
+    Kirigami.FormLayout {
+      wideMode: false
+
+      Controls.TextField {
+        id: countCommandInput
+        Kirigami.FormData.label: "Count command: "     
+      }
+
+      Controls.TextField {
+        id: updateCommandInput
+        Kirigami.FormData.label: "Update command: "     
+      }
 
     }
 

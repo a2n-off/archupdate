@@ -13,6 +13,7 @@ Row {
   property string iconRefresh: "../assets/arch-unknown.svg"
   property string total: "0"
   property bool debug: plasmoid.configuration.debugMode
+  property bool onUpdate: false
 
   anchors.fill: parent // the row fill the parent in height and width
 
@@ -33,6 +34,7 @@ Row {
 
   // event handler for the middle click on MouseArea
   function onMClick() {
+    onUpdate = true
     updater.launchUpdate()
   }
 
@@ -55,7 +57,10 @@ Row {
       total = stdout.replace(/\n/g, '')
 
       // update the count after the update
-      if (cmd === "konsole -e 'sudo pacman -Syu'") onLClick()
+      if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
+        onUpdate = false
+        onLClick()
+      }
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)

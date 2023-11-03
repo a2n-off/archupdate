@@ -27,8 +27,12 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 <default>false</default>
 </entry>
 
-<entry name="userCommand" type="String">
-<default>sudo pacman -Syu</default>
+<entry name="updateCommand" type="String">
+<default>yay</default>
+</entry>
+
+<entry name="countCommand" type="String">
+<default>(checkupdates &amp;&amp; yay -Qua) | wc -l</default>
 </entry>
 
 </group>
