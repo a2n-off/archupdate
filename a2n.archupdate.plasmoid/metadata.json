@@ -10,7 +10,6 @@
         "Description": "Show and handle the pending pacman update",
         "Icon": "preferences-desktop",
         "Id": "a2n.archupdate.plasmoid",
-        "EnabledByDefault": "true",
         "License": "GPL-3.0+",
         "Name": "Arch Update Counter",
         "ServiceTypes": [
