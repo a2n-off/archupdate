@@ -83,26 +83,12 @@ Row {
       source: iconUpdate
     }
 
-    // Ideally, the badge should have its own space so it wont cover the icon
-    // personally, I wouldn't mind that for this mostly static widget,
-    // but for the sake of keeping it like it was without overlaping horizontal tray,
-    // there goes another rule that looks like the batttery widget.
-    WorkspaceComponents.BadgeOverlay { // for the horizontal bar, in tray
+    WorkspaceComponents.BadgeOverlay { // for the horizontal bar
       anchors {
         bottom: container.bottom
         right: container.right
       }
-      visible: !isPanelVertical && inTray
-      text: total
-      icon: updateIcon
-    }
-
-    WorkspaceComponents.BadgeOverlay { // for the horizontal bar
-      anchors {
-        bottom: container.bottom
-        horizontalCenter: container.right
-      }
-      visible: !isPanelVertical && !inTray
+      visible: !isPanelVertical
       text: total
       icon: updateIcon
     }
