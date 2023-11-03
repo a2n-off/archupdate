@@ -16,6 +16,7 @@ Row {
   property bool debug: plasmoid.configuration.debugMode
 
   property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+  readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
   property real itemSize: Math.min(row.height, row.width)
 
@@ -82,12 +83,26 @@ Row {
       source: iconUpdate
     }
 
+    // Ideally, the badge should have its own space so it wont cover the icon
+    // personally, I wouldn't mind that for this mostly static widget,
+    // but for the sake of keeping it like it was without overlaping horizontal tray,
+    // there goes another rule that looks like the batttery widget.
+    WorkspaceComponents.BadgeOverlay { // for the horizontal bar, in tray
+      anchors {
+        bottom: container.bottom
+        right: container.right
+      }
+      visible: !isPanelVertical && inTray
+      text: total
+      icon: updateIcon
+    }
+
     WorkspaceComponents.BadgeOverlay { // for the horizontal bar
       anchors {
         bottom: container.bottom
         horizontalCenter: container.right
       }
-      visible: !isPanelVertical
+      visible: !isPanelVertical && !inTray
       text: total
       icon: updateIcon
     }
