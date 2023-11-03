@@ -10,6 +10,7 @@
         "Description": "Show and handle the pending pacman update",
         "Icon": "preferences-desktop",
         "Id": "a2n.archupdate.plasmoid",
+        "EnabledByDefault": "true",
         "License": "GPL-3.0+",
         "Name": "Arch Update Counter",
         "ServiceTypes": [
@@ -20,5 +21,7 @@
         "Depends": ["konsole", "pacman-contrib"]
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml"
+    "X-Plasma-MainScript": "ui/archupdate.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }
