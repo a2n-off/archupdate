@@ -118,7 +118,7 @@ Item {
       height: container.height / 2.5
       width: height
       radius: height / 2
-      color: dotColor === '' ? dotColor : dotColor // todo - add theme color if dotColor === ''
+      color: dotColor === '' ? PlasmaCore.Theme.textColor : dotColor
       anchors {
         right: container.right
         bottom: container.bottom
