@@ -19,6 +19,7 @@ Item {
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
   property bool dot: plasmoid.configuration.dot
+  property bool dotUseCustomColor: plasmoid.configuration.dotUseCustomColor
   property string dotColor: plasmoid.configuration.dotColor
 
   property bool onUpdate: false
@@ -118,7 +119,7 @@ Item {
       height: container.height / 2.5
       width: height
       radius: height / 2
-      color: dotColor === '' ? PlasmaCore.Theme.textColor : dotColor
+      color: dotUseCustomColor ? dotColor : PlasmaCore.Theme.textColor
       anchors {
         right: container.right
         bottom: container.bottom
