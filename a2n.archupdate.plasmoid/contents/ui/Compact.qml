@@ -57,9 +57,9 @@ Item {
 
   // generate the text for the count result
   function generateResult() {
-    if (onRefresh) return "↻"
-    if (separateResult) return totalArch + separator + totalAur
-    return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
+    if (onRefresh) return " ↻ "
+    if (separateResult) return ' ' + totalArch + separator + totalAur + ' '
+    return ` ${parseInt(totalArch, 10) + parseInt(totalAur, 10)} `
   }
 
   // return true if update is needed (total > 0)
