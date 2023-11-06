@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kquickcontrols 2.0 as KQuickControls
 
 Kirigami.ScrollablePage {
 
@@ -19,7 +20,8 @@ Kirigami.ScrollablePage {
   property alias cfg_separator: separator.text
 
   property alias cfg_dot: dot.checked
-  property alias cfg_dotColor: dotColor.text
+  property alias cfg_dotColor: dotColor.color
+  property alias cfg_dotUseCustomColor: dotUseCustomColor.checked
 
   ColumnLayout {
 
@@ -143,10 +145,18 @@ Kirigami.ScrollablePage {
         checked: false
       }
 
-      Controls.TextField {
-        id: dotColor
-        Kirigami.FormData.label: "Dot color (must be a color): "
+      RowLayout {
+        Kirigami.FormData.label: "Custom dot color: "
         visible: dot.checked
+        Controls.CheckBox {
+          id: dotUseCustomColor
+          checked: false
+        }
+
+        KQuickControls.ColorButton {
+          id: dotColor
+          enabled: dotUseCustomColor.checked
+        }
       }
 
     }
