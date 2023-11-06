@@ -47,6 +47,14 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 <default>yay -Qua | wc -l</default>
 </entry>
 
+<entry name="dot" type="Bool">
+<default>false</default>
+</entry>
+
+<entry name="dotColor" type="String">
+<default>white</default>
+</entry>
+
 </group>
 
 </kcfg>

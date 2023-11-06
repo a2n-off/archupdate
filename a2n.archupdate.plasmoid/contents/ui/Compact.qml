@@ -14,11 +14,16 @@ Item {
   property string iconRefresh: "arch-unknown.svg"
   property string totalArch: "0"
   property string totalAur: "0"
+
   property bool debug: plasmoid.configuration.debugMode
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
+  property bool dot: plasmoid.configuration.dot
+  property string dotColor: plasmoid.configuration.dotColor
+
   property bool onUpdate: false
   property bool onRefresh: false
+
   property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
   readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
@@ -52,8 +57,6 @@ Item {
 
   // generate the text for the count result
   function generateResult() {
-    // todo for test remove me after
-    return '152+158'
     if (onRefresh) return "↻"
     if (separateResult) return totalArch + separator + totalAur
     return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
@@ -95,7 +98,7 @@ Item {
     id: container
     height: row.itemSize
     width: height
-    color: "red"
+    color: "transparent"
 
     anchors.centerIn: parent
 
@@ -106,25 +109,37 @@ Item {
       source: iconUpdate
     }
 
-    // WorkspaceComponents.BadgeOverlay { // for the horizontal bar
-    //   anchors {
-    //     bottom: container.bottom
-    //     right: container.right
-    //   }
-    //   text: generateResult()
-    //   visible: !isPanelVertical
-    //   icon: updateIcon
-    // }
-    //
-    // WorkspaceComponents.BadgeOverlay { // for the vertical bar
-    //   anchors {
-    //     verticalCenter: container.bottom
-    //     right: container.right
-    //   }
-    //   text: generateResult()
-    //   visible: isPanelVertical
-    //   icon: updateIcon
-    // }
+    Rectangle {
+      visible: dot // todo add check for update
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: dotColor === '' ? dotColor : dotColor // todo - add theme color if dotColor === ''
+      anchors {
+        right: container.right
+        bottom: container.bottom
+      }
+    }
+
+    WorkspaceComponents.BadgeOverlay { // for the horizontal bar
+      anchors {
+        bottom: container.bottom
+        right: container.right
+      }
+      text: generateResult()
+      visible: !isPanelVertical && !dot
+      icon: updateIcon
+    }
+
+    WorkspaceComponents.BadgeOverlay { // for the vertical bar
+      anchors {
+        verticalCenter: container.bottom
+        right: container.right
+      }
+      text: generateResult()
+      visible: isPanelVertical && !dot
+      icon: updateIcon
+    }
 
     MouseArea {
       anchors.fill: container // cover all the zone
