@@ -11,8 +11,12 @@ Row {
 
   property string iconUpdate: "../assets/software-update-available.svg"
   property string iconRefresh: "../assets/arch-unknown.svg"
-  property string total: "0"
+  property string totalArch: "0"
+  property string totalAur: "0"
+  property string totalText: "0"
   property bool debug: plasmoid.configuration.debugMode
+  property bool separateResult: plasmoid.configuration.separateResult
+  property string separator: plasmoid.configuration.separator
   property bool onUpdate: false
 
   anchors.fill: parent // the row fill the parent in height and width
@@ -21,7 +25,7 @@ Row {
   function updateUi(refresh: boolean) {
     if (refresh) {
       updateIcon.source=iconRefresh
-      total="↻"
+      totalText="↻"
     } else {
       updateIcon.source=iconUpdate
     }
@@ -29,7 +33,7 @@ Row {
 
   // event handler for the left click on MouseArea
   function onLClick() {
-    updater.count()
+    updater.countAll()
   }
 
   // event handler for the middle click on MouseArea
@@ -39,8 +43,17 @@ Row {
   }
 
   // return true if the taskbar is vertical
-  function isBarVertical() {
+  function isBarVertical(): int {
     return row.width < row.height;
+  }
+
+  // generate the text for the count result
+  function generateResult(): string {
+    if (separateResult) {
+      return totalArch + separator + totalAur
+    } else {
+      return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
+    }
   }
 
   // map the cmd signal with the widget
@@ -54,12 +67,21 @@ Row {
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
       if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
-      total = stdout.replace(/\n/g, '')
 
       // update the count after the update
       if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
         onUpdate = false
         onLClick()
+      }
+
+      // handle the result for the count
+      if (cmd === plasmoid.configuration.countArchCommand) {
+        totalArch =  stdout.replace(/\n/g, '')
+        generateResult()
+      }
+      if (cmd === plasmoid.configuration.countAurCommand) {
+        totalAur =  stdout.replace(/\n/g, '')
+        generateResult()
       }
 
       // handle the result for the checker
@@ -92,7 +114,7 @@ Row {
         horizontalCenter: container.right
       }
       visible: !isBarVertical()
-      text: total
+      text: generateResult()
       icon: updateIcon
     }
 
@@ -102,7 +124,7 @@ Row {
         right: container.right
       }
       visible: isBarVertical()
-      text: total
+      text: totalText
       icon: updateIcon
     }
 

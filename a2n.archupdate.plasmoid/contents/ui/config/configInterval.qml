@@ -11,9 +11,13 @@ Kirigami.ScrollablePage {
   property alias cfg_debugMode: debugModeBox.checked
   property alias cfg_notCloseCommand: notCloseBox.checked
   property alias cfg_updateCommand: updateCommandInput.text
-  property alias cfg_countCommand: countCommandInput.text
+  property alias cfg_countArchCommand: countArchCommandInput.text
+  property alias cfg_countAurCommand: countAurCommandInput.text
+  property alias cfg_separateResult: separateResult.checked
+  property alias cfg_separator: separator.text
 
   ColumnLayout {
+
     anchors {
       left: parent.left
       top: parent.top
@@ -88,7 +92,7 @@ Kirigami.ScrollablePage {
 
     Kirigami.InlineMessage {
       Layout.fillWidth: true
-      text: "Replace yay by paru or with the AUR helper of your choice.\n checkupdates is recommanded for the db sync.\n Execute it first."
+      text: "Replace yay by paru or with the AUR helper of your choice.\n checkupdates is recommanded for the db sync."
       visible: true
     }
 
@@ -96,8 +100,13 @@ Kirigami.ScrollablePage {
       wideMode: false
 
       Controls.TextField {
-        id: countCommandInput
-        Kirigami.FormData.label: "Count command: "     
+        id: countArchCommandInput
+        Kirigami.FormData.label: "Count ARCH command: "     
+      }
+ 
+      Controls.TextField {
+        id: countAurCommandInput
+        Kirigami.FormData.label: "Count AUR command: "     
       }
 
       Controls.TextField {
@@ -106,6 +115,38 @@ Kirigami.ScrollablePage {
       }
 
     }
+
+    Kirigami.FormLayout {
+      wideMode: false
+
+      Kirigami.Separator {
+        Kirigami.FormData.isSection: true
+        Kirigami.FormData.label: "Label display"
+      }
+    }
+
+    Kirigami.FormLayout {
+
+      Text {
+        text: "Expected result: arch + seprator + aur"
+        color: "white"
+      }
+
+      Controls.CheckBox {
+        id: separateResult
+        Kirigami.FormData.label: "Separate result: "
+        checked: false
+      }
+ 
+      Controls.TextField {
+        id: separator
+        Kirigami.FormData.label: "Separator: "
+        visible: separateResult.checked
+      }
+
+    }
+
+
 
   }
 
