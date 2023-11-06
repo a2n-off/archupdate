@@ -12,9 +12,13 @@ Row {
 
   property string iconUpdate: "software-update-available.svg"
   property string iconRefresh: "arch-unknown.svg"
-  property string total: "0"
+  property string totalArch: "0"
+  property string totalAur: "0"
+  property string totalText: "0"
   property bool debug: plasmoid.configuration.debugMode
-
+  property bool separateResult: plasmoid.configuration.separateResult
+  property string separator: plasmoid.configuration.separator
+  property bool onUpdate: false
   property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
   readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
@@ -24,7 +28,7 @@ Row {
   function updateUi(refresh: boolean) {
     if (refresh) {
       updateIcon.source=iconRefresh
-      total="↻"
+      totalText="↻"
     } else {
       updateIcon.source=iconUpdate
     }
@@ -32,17 +36,27 @@ Row {
 
   // event handler for the left click on MouseArea
   function onLClick() {
-    updater.count()
+    updater.countAll()
   }
 
   // event handler for the middle click on MouseArea
   function onMClick() {
+    onUpdate = true
     updater.launchUpdate()
   }
 
   // return true if the widget area is vertical
   function isBarVertical() {
     return row.width < row.height;
+  }
+
+  // generate the text for the count result
+  function generateResult(): string {
+    if (separateResult) {
+      return totalArch + separator + totalAur
+    } else {
+      return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
+    }
   }
 
   // map the cmd signal with the widget
@@ -56,10 +70,22 @@ Row {
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
       if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
-      total = stdout.replace(/\n/g, '')
 
       // update the count after the update
-      if (cmd === "konsole -e 'sudo pacman -Syu'") onLClick()
+      if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
+        onUpdate = false
+        onLClick()
+      }
+
+      // handle the result for the count
+      if (cmd === plasmoid.configuration.countArchCommand) {
+        totalArch =  stdout.replace(/\n/g, '')
+        generateResult()
+      }
+      if (cmd === plasmoid.configuration.countAurCommand) {
+        totalAur =  stdout.replace(/\n/g, '')
+        generateResult()
+      }
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)
@@ -88,8 +114,8 @@ Row {
         bottom: container.bottom
         right: container.right
       }
+      text: generateResult()
       visible: !isPanelVertical
-      text: total
       icon: updateIcon
     }
 
@@ -98,8 +124,8 @@ Row {
         verticalCenter: container.bottom
         right: container.right
       }
+      text: totalText
       visible: isPanelVertical
-      text: total
       icon: updateIcon
     }
 
