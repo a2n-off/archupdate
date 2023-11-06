@@ -51,11 +51,11 @@ Item {
   }
 
   // generate the text for the count result
-  function generateResult(): string {
+  function generateResult() {
     if (separateResult) {
-      return totalArch + separator + totalAur
+      totalText = totalArch + separator + totalAur
     } else {
-      return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
+      totalText = `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
     }
   }
 
@@ -82,13 +82,13 @@ Item {
       const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
       if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
       if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
-      if (cmdIsArch || cmdIsAur) totalText = generateResult()
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)
       if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
 
       updateUi(false)
+      generateResult()
     }
   }
 
