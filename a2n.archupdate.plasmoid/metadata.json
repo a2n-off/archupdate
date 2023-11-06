@@ -20,5 +20,7 @@
         "Depends": ["konsole", "pacman-contrib"]
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml"
+    "X-Plasma-MainScript": "ui/archupdate.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

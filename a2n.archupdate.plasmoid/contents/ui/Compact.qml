@@ -5,12 +5,13 @@ import QtQuick.Controls 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import "components" as Components
 
 Row {
   id: row
 
-  property string iconUpdate: "../assets/software-update-available.svg"
-  property string iconRefresh: "../assets/arch-unknown.svg"
+  property string iconUpdate: "software-update-available.svg"
+  property string iconRefresh: "arch-unknown.svg"
   property string totalArch: "0"
   property string totalAur: "0"
   property string totalText: "0"
@@ -18,8 +19,10 @@ Row {
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
   property bool onUpdate: false
+  property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+  readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
-  anchors.fill: parent // the row fill the parent in height and width
+  property real itemSize: Math.min(row.height, row.width)
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
@@ -42,8 +45,8 @@ Row {
     updater.launchUpdate()
   }
 
-  // return true if the taskbar is vertical
-  function isBarVertical(): int {
+  // return true if the widget area is vertical
+  function isBarVertical() {
     return row.width < row.height;
   }
 
@@ -94,27 +97,25 @@ Row {
 
   Item {
     id: container
-    height: isBarVertical() ? row.width : row.height // usefull if the taskbar is vertical
-    width: height
+    height: row.itemSize
+    width: row.width
 
-    Image {
+    anchors.centerIn: parent
+
+    Components.PlasmoidIcon {
       id: updateIcon
-      height: container.height
+      height: PlasmaCore.Units.roundToIconSize(Math.min(parent.width, parent.height))
       width: height
-      Layout.fillWidth: true
-      fillMode: Image.PreserveAspectFit
-      // w/ the sourceSize set to the height the svg have alway the right definition
-      sourceSize: Qt.size(height, height)
       source: iconUpdate
     }
 
     WorkspaceComponents.BadgeOverlay { // for the horizontal bar
       anchors {
         bottom: container.bottom
-        horizontalCenter: container.right
+        right: container.right
       }
-      visible: !isBarVertical()
       text: generateResult()
+      visible: !isPanelVertical
       icon: updateIcon
     }
 
@@ -123,8 +124,8 @@ Row {
         verticalCenter: container.bottom
         right: container.right
       }
-      visible: isBarVertical()
       text: totalText
+      visible: isPanelVertical
       icon: updateIcon
     }
 
@@ -140,6 +141,5 @@ Row {
         }
       }
     }
-
   }
 }
