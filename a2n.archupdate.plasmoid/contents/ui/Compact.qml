@@ -62,6 +62,7 @@ Item {
     return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
   }
 
+  // return true if update is needed (total > 0)
   function isUpdateNeeded() {
     return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
   }
@@ -98,11 +99,10 @@ Item {
     }
   }
 
-  Rectangle {
+  Item {
     id: container
     height: row.itemSize
     width: height
-    color: "transparent"
 
     anchors.centerIn: parent
 
@@ -150,11 +150,8 @@ Item {
       cursorShape: Qt.PointingHandCursor // give user feedback
       acceptedButtons: Qt.LeftButton | Qt.MiddleButton
       onClicked: (mouse) => {
-        if (mouse.button == Qt.LeftButton) {
-          onLClick()
-        } else if (mouse.button == Qt.MiddleButton) {
-          onMClick()
-        }
+        if (mouse.button == Qt.LeftButton) onLClick()
+        if (mouse.button == Qt.MiddleButton) onMClick()
       }
     }
   }
