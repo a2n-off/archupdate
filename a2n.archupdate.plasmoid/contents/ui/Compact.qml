@@ -7,7 +7,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
 import "components" as Components
 
-Row {
+Item {
   id: row
 
   property string iconUpdate: "software-update-available.svg"
@@ -78,14 +78,11 @@ Row {
       }
 
       // handle the result for the count
-      if (cmd === plasmoid.configuration.countArchCommand) {
-        totalArch =  stdout.replace(/\n/g, '')
-        generateResult()
-      }
-      if (cmd === plasmoid.configuration.countAurCommand) {
-        totalAur =  stdout.replace(/\n/g, '')
-        generateResult()
-      }
+      const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
+      const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
+      if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
+      if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
+      if (cmdIsArch || cmdIsAur) totalText = generateResult()
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)
@@ -114,7 +111,7 @@ Row {
         bottom: container.bottom
         right: container.right
       }
-      text: generateResult()
+      text: totalText
       visible: !isPanelVertical
       icon: updateIcon
     }
