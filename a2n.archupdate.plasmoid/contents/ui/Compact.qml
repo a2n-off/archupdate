@@ -14,11 +14,11 @@ Item {
   property string iconRefresh: "arch-unknown.svg"
   property string totalArch: "0"
   property string totalAur: "0"
-  property string totalText: "0"
   property bool debug: plasmoid.configuration.debugMode
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
   property bool onUpdate: false
+  property bool onRefresh: false
   property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
   readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
@@ -26,9 +26,9 @@ Item {
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
+    onRefresh = refresh
     if (refresh) {
       updateIcon.source=iconRefresh
-      totalText="↻"
     } else {
       updateIcon.source=iconUpdate
     }
@@ -52,11 +52,9 @@ Item {
 
   // generate the text for the count result
   function generateResult() {
-    if (separateResult) {
-      totalText = totalArch + separator + totalAur
-    } else {
-      totalText = `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
-    }
+    if (onRefresh) return "↻"
+    if (separateResult) return totalArch + separator + totalAur
+    return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
   }
 
   // map the cmd signal with the widget
@@ -88,7 +86,6 @@ Item {
       if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
 
       updateUi(false)
-      generateResult()
     }
   }
 
@@ -111,7 +108,7 @@ Item {
         bottom: container.bottom
         right: container.right
       }
-      text: totalText
+      text: generateResult()
       visible: !isPanelVertical
       icon: updateIcon
     }
@@ -121,7 +118,7 @@ Item {
         verticalCenter: container.bottom
         right: container.right
       }
-      text: totalText
+      text: generateResult()
       visible: isPanelVertical
       icon: updateIcon
     }
