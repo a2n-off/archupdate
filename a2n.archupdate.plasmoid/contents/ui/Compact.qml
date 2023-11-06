@@ -52,6 +52,8 @@ Item {
 
   // generate the text for the count result
   function generateResult() {
+    // todo for test remove me after
+    return '152+158'
     if (onRefresh) return "↻"
     if (separateResult) return totalArch + separator + totalAur
     return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
@@ -89,39 +91,40 @@ Item {
     }
   }
 
-  Item {
+  Rectangle {
     id: container
     height: row.itemSize
-    width: row.width
+    width: height
+    color: "red"
 
     anchors.centerIn: parent
 
     Components.PlasmoidIcon {
       id: updateIcon
-      height: PlasmaCore.Units.roundToIconSize(Math.min(parent.width, parent.height))
+      height: container.height
       width: height
       source: iconUpdate
     }
 
-    WorkspaceComponents.BadgeOverlay { // for the horizontal bar
-      anchors {
-        bottom: container.bottom
-        right: container.right
-      }
-      text: generateResult()
-      visible: !isPanelVertical
-      icon: updateIcon
-    }
-
-    WorkspaceComponents.BadgeOverlay { // for the vertical bar
-      anchors {
-        verticalCenter: container.bottom
-        right: container.right
-      }
-      text: generateResult()
-      visible: isPanelVertical
-      icon: updateIcon
-    }
+    // WorkspaceComponents.BadgeOverlay { // for the horizontal bar
+    //   anchors {
+    //     bottom: container.bottom
+    //     right: container.right
+    //   }
+    //   text: generateResult()
+    //   visible: !isPanelVertical
+    //   icon: updateIcon
+    // }
+    //
+    // WorkspaceComponents.BadgeOverlay { // for the vertical bar
+    //   anchors {
+    //     verticalCenter: container.bottom
+    //     right: container.right
+    //   }
+    //   text: generateResult()
+    //   visible: isPanelVertical
+    //   icon: updateIcon
+    // }
 
     MouseArea {
       anchors.fill: container // cover all the zone

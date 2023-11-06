@@ -5,16 +5,16 @@ import "."
 
 Item {
     id: root
-    anchors.centerIn: parent //
+    anchors.centerIn: parent
     property var source
 
     PlasmaCore.SvgItem {
         id: svgItem
         opacity: 1
         width: parent.width
-        height: width
+        height: parent.height
         property int sourceIndex: 0
-        anchors.centerIn: parent //
+        anchors.centerIn: parent
         smooth: true
         svg: PlasmaCore.Svg {
             id: svg
