@@ -62,6 +62,10 @@ Item {
     return `${parseInt(totalArch, 10) + parseInt(totalAur, 10)}`
   }
 
+  function isUpdateNeeded() {
+    return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
+  }
+
   // map the cmd signal with the widget
   Connections {
     target: cmd
@@ -110,7 +114,7 @@ Item {
     }
 
     Rectangle {
-      visible: dot // todo add check for update
+      visible: dot && isUpdateNeeded()
       height: container.height / 2.5
       width: height
       radius: height / 2
