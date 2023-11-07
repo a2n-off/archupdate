@@ -1,30 +1,36 @@
 # Maintainer: Bouteiller a2n Alan <a2n.dev@pm.me>
 
 # git rev-parse tagName
-_tag=7529bc6e829cc9ea7cc6e60f0b1662c430a74e06
+_tag=ddaf9d2d3e0b75c4ba3c39d1060cbc30190990b7
+_plasmoidName="a2n.archupdate.plasmoid"
+_souceName="archupdate"
 
-pkgname=
-pkgver=1.0.0
+pkgname="kdeplasma-arch-update-notifier-git"
+# pkgver is updated automatically by the pkgver step
+pkgver=4.2.1
 pkgrel=1
-pkgdesc=""
-arch=('any')
+pkgdesc="KDE plasmoid that lets you know when arch updates are required. Takes all repo's into account (core, extra, aur, ...)."
+arch=(x86_64)
 url="https://github.com/bouteillerAlan/archupdate"
-license=('MIT')
-source=("git+${url}/tree/${_tag}")
-depends=("konsole: for launching the update command"
-         "pacman-contrib: for checking updates on the main arch repository"
-         "yay: for checking updates on another arch repositories and doing the update")
-optdepends=("paru: if you want to replace yay with paru")
+license=("GPL-3.0")
+source=("git+${url}.git#tag=${_tag}?signed")
+depends=("konsole" "pacman-contrib" "yay" "kdialog")
+optdepends=("paru: paru support")
+sha256sums=("SKIP")
+validpgpkeys=(
+  6A2ECC8A396F8A943A109A1E0F11C2A6BF79111E # Bouteiller a2n Alan <a2n.dev@pm.me>, retrieved from https://github.com/bouteillerAlan.gpg
+)
 
 pkgver() {
-  cd "${pkgname}"
-  git describe --tags
+  cd "${_souceName}"
+  git describe --tags | sed 's/^v//'
 }
 
 package() {
-  cd "${pkgname}-v${pkgver}"
-  install -Dm 644 50numlock/module-setup.sh "${pkgdir}"/usr/lib/dracut/modules.d/50numlock/module-setup.sh
-  install -Dm 644 50numlock/numlock.sh "${pkgdir}"/usr/lib/dracut/modules.d/50numlock/numlock.sh
-  install -D LICENSE "${pkgdir}"/usr/share/licenses/"${pkgname}"/LICENSE
+  cd "${_souceName}"
+  install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/"${pkgname}"/
+
+  ## todo - make this stuff working and the dev is done
+  install -vDm 644 "${_plasmoidName}" -t "${pkgdir}"/usr/share/plasma/plasmoids/
 }
 
