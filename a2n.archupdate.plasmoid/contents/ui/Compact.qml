@@ -155,4 +155,12 @@ Item {
       }
     }
   }
+
+  PlasmaCore.ToolTipArea {
+    anchors.fill: row
+    mainItem: Tooltip {
+        totalArch: row.totalArch
+        totalAur: row.totalAur
+    }
+  }
 }
