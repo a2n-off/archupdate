@@ -61,7 +61,6 @@ Go to the 'System Tray Settings' menu and activate it :)
 
 | Name | Description | Result |
 |--|--|--|
-
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 | Debug | Enable the debug mode if set to true | Show each command launch by the plasmoid with `ARCHUPDATE` at the beggining (for regex search) |
 | Do not close the terminal at the end | if true add the `--noclose` flag into the `konsole` command | Prevent the console to close at the end of the update command |
