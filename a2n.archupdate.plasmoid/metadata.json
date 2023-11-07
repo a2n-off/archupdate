@@ -15,10 +15,13 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "4.1.0",
+        "Version": "4.2.0",
         "Website": "https://github.com/bouteillerAlan/archupdate",
-        "Depends": ["konsole", "pacman-contrib"]
+        "Depends": ["konsole", "pacman-contrib", "yay"],
+        "EnabledByDefault": "false"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml"
+    "X-Plasma-MainScript": "ui/archupdate.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

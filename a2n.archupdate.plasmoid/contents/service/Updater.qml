@@ -8,18 +8,31 @@ import org.kde.plasma.plasmoid 2.0
 Item {
 
   property int intervalConfig: Plasmoid.configuration.updateInterval
-  property string userCommand: Plasmoid.configuration.userCommand
+  property string countArchCommand: Plasmoid.configuration.countArchCommand
+  property string countAurCommand: Plasmoid.configuration.countAurCommand
+  property string updateCommand: Plasmoid.configuration.updateCommand
   property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
 
-  function count() {
-    cmd.exec("checkupdates | wc -l")
+  function countArch() {
+    if (countArchCommand !== '') cmd.exec(countArchCommand)
+  }
+
+  function countAur() {
+    if (countAurCommand !== '') cmd.exec(countAurCommand)
+  }
+
+  function countAll() {
+    countArch()
+    countAur()
   }
 
   function launchUpdate() {
-    if (notCloseCommand) {
-      cmd.exec("konsole --noclose -e '" + userCommand + "'")
-    } else {
-      cmd.exec("konsole -e '" + userCommand + "'")
+    if (updateCommand !== '') {
+      if (notCloseCommand) {
+        cmd.exec("konsole --noclose -e '" + updateCommand + "'")
+      } else {
+        cmd.exec("konsole -e '" + updateCommand + "'")
+      }
     }
   }
 
@@ -34,7 +47,7 @@ Item {
     running: true
     repeat: true
     triggeredOnStart: true // trigger on start for a first checkind
-    onTriggered: count()
+    onTriggered: countAll()
   }
 
 }

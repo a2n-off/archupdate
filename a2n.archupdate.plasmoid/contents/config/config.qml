@@ -4,7 +4,7 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18nc("@title", "Interval configuration")
+         name: i18nc("@title", "Arch update notifier configuration")
          icon: "preferences-other"
          source: "config/configInterval.qml"
     }

@@ -5,22 +5,36 @@ import QtQuick.Controls 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import "components" as Components
 
-Row {
+Item {
   id: row
 
-  property string iconUpdate: "../assets/software-update-available.svg"
-  property string iconRefresh: "../assets/arch-unknown.svg"
-  property string total: "0"
-  property bool debug: plasmoid.configuration.debugMode
+  property string iconUpdate: "software-update-available.svg"
+  property string iconRefresh: "arch-unknown.svg"
+  property string totalArch: "0"
+  property string totalAur: "0"
 
-  anchors.fill: parent // the row fill the parent in height and width
+  property bool debug: plasmoid.configuration.debugMode
+  property bool separateResult: plasmoid.configuration.separateResult
+  property string separator: plasmoid.configuration.separator
+  property bool dot: plasmoid.configuration.dot
+  property bool dotUseCustomColor: plasmoid.configuration.dotUseCustomColor
+  property string dotColor: plasmoid.configuration.dotColor
+
+  property bool onUpdate: false
+  property bool onRefresh: false
+
+  property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+  readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
+
+  property real itemSize: Math.min(row.height, row.width)
 
   // updates the icon according to the refresh status
   function updateUi(refresh: boolean) {
+    onRefresh = refresh
     if (refresh) {
       updateIcon.source=iconRefresh
-      total="↻"
     } else {
       updateIcon.source=iconUpdate
     }
@@ -28,17 +42,30 @@ Row {
 
   // event handler for the left click on MouseArea
   function onLClick() {
-    updater.count()
+    updater.countAll()
   }
 
   // event handler for the middle click on MouseArea
   function onMClick() {
+    onUpdate = true
     updater.launchUpdate()
   }
 
-  // return true if the taskbar is vertical
+  // return true if the widget area is vertical
   function isBarVertical() {
     return row.width < row.height;
+  }
+
+  // generate the text for the count result
+  function generateResult() {
+    if (onRefresh) return " ↻ "
+    if (separateResult) return ' ' + totalArch + separator + totalAur + ' '
+    return ` ${parseInt(totalArch, 10) + parseInt(totalAur, 10)} `
+  }
+
+  // return true if update is needed (total > 0)
+  function isUpdateNeeded() {
+    return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
   }
 
   // map the cmd signal with the widget
@@ -52,10 +79,18 @@ Row {
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
       if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
-      total = stdout.replace(/\n/g, '')
 
       // update the count after the update
-      if (cmd === "konsole -e 'sudo pacman -Syu'") onLClick()
+      if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
+        onUpdate = false
+        onLClick()
+      }
+
+      // handle the result for the count
+      const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
+      const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
+      if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
+      if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)
@@ -67,27 +102,37 @@ Row {
 
   Item {
     id: container
-    height: isBarVertical() ? row.width : row.height // usefull if the taskbar is vertical
+    height: row.itemSize
     width: height
 
-    Image {
+    anchors.centerIn: parent
+
+    Components.PlasmoidIcon {
       id: updateIcon
       height: container.height
       width: height
-      Layout.fillWidth: true
-      fillMode: Image.PreserveAspectFit
-      // w/ the sourceSize set to the height the svg have alway the right definition
-      sourceSize: Qt.size(height, height)
       source: iconUpdate
+    }
+
+    Rectangle {
+      visible: dot && isUpdateNeeded()
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: dotUseCustomColor ? dotColor : PlasmaCore.Theme.textColor
+      anchors {
+        right: container.right
+        bottom: container.bottom
+      }
     }
 
     WorkspaceComponents.BadgeOverlay { // for the horizontal bar
       anchors {
         bottom: container.bottom
-        horizontalCenter: container.right
+        right: container.right
       }
-      visible: !isBarVertical()
-      text: total
+      text: generateResult()
+      visible: !isPanelVertical && !dot
       icon: updateIcon
     }
 
@@ -96,8 +141,8 @@ Row {
         verticalCenter: container.bottom
         right: container.right
       }
-      visible: isBarVertical()
-      text: total
+      text: generateResult()
+      visible: isPanelVertical && !dot
       icon: updateIcon
     }
 
@@ -106,13 +151,18 @@ Row {
       cursorShape: Qt.PointingHandCursor // give user feedback
       acceptedButtons: Qt.LeftButton | Qt.MiddleButton
       onClicked: (mouse) => {
-        if (mouse.button == Qt.LeftButton) {
-          onLClick()
-        } else if (mouse.button == Qt.MiddleButton) {
-          onMClick()
-        }
+        if (mouse.button == Qt.LeftButton) onLClick()
+        if (mouse.button == Qt.MiddleButton) onMClick()
       }
     }
+  }
 
+  Plasmoid.toolTipItem: Loader {
+    id: tooltipLoader
+    Layout.minimumWidth: item ? item.implicitWidth : 0
+    Layout.maximumWidth: item ? item.implicitWidth : 0
+    Layout.minimumHeight: item ? item.implicitHeight : 0
+    Layout.maximumHeight: item ? item.implicitHeight : 0
+    source: "Tooltip.qml"
   }
 }
