@@ -49,6 +49,12 @@ Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/pl
 
 Dl via the pling store or via the `get new widgets...` window.
 
+## How to have this in my system tray?
+
+Go to the 'System Tray Settings' menu and activate it :)
+
+![screenshot of how to add in the systray](git-assets/img/v4.2.0/add-systray.png)
+
 ## Configuration
 
 ![screenshot of the settings of the plugin](git-assets/img/v4.2.0/settings-panel-full.png)
