@@ -2,6 +2,8 @@
 
 ![screenshot of the aplet with all the alt](git-assets/img/v4.2.0/all-alt.png)
 
+1 - dot w/ custom color  |  2 - dot with theme color  |  3 - label  |  4 - label with separator  |  5 - in the system tray
+
 ## Description
 
 Counts the number of *aur* and *arch* update available (so all the db - extra, core, aur, ...).
