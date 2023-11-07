@@ -20,7 +20,7 @@ ColumnLayout {
         Layout.leftMargin: PlasmaCore.Units.gridUnit / 2
         Layout.bottomMargin: PlasmaCore.Units.gridUnit / 2
         Layout.rightMargin: PlasmaCore.Units.gridUnit / 2
-        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 50
+        //Layout.preferredWidth: PlasmaCore.Units.gridUnit * 50
 
         PlasmaExtras.Heading {
             id: tooltipMaintext

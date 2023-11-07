@@ -157,11 +157,12 @@ Item {
     }
   }
 
-  PlasmaCore.ToolTipArea {
-    anchors.fill: row
-    mainItem: Tooltip {
-        totalArch: row.totalArch
-        totalAur: row.totalAur
-    }
+  Plasmoid.toolTipItem: Loader {
+    id: tooltipLoader
+    Layout.minimumWidth: item ? item.implicitWidth : 0
+    Layout.maximumWidth: item ? item.implicitWidth : 0
+    Layout.minimumHeight: item ? item.implicitHeight : 0
+    Layout.maximumHeight: item ? item.implicitHeight : 0
+    source: "Tooltip.qml"
   }
 }
