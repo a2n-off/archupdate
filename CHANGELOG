@@ -1,3 +1,13 @@
+### v4.2.0
+  - Huge thanks to Luis Bocanegra for the help and the dev made for this version 🌟
+  - Now we count the update needed by the AUR too !
+  - Now you can choose if you want a dot that appear when an update is needed or a label with the total number of update for representing the notification
+  - The dot color is customizable and if you let the default option it adapts to your theme automatically
+  - The label text is also customizable, you can now choose if you want the total number of update needed (eg: 30) or if you want to separate them (eg: 12-17), and the separator is customizable too
+  - The applet is available in the system tray ! You just have to enable it via the 'Configure system tray...' menu
+  - The tooltips show the total value of update required for the main db and the aur, you just have to move your mouse under the applet !
+  - And finally the size of the applet is now more consistent whenever you place it (horizontal, vertical, system tray or taskbar)
+
 ### v4.1.0
   - New setting : an input where you can customize the command you want to use for the update
   - New setting : you can now ask the console not to close after the update
@@ -32,4 +42,3 @@
   - add signal for `connected` event on `Tb.Cmd`
   - update the ui with more usefull icon
   - add CHANGELOG file
-
