@@ -43,13 +43,17 @@ For that we need to do something like the `-S` flag before and I prefer to use `
 
 Because `yay` cover all the db (core, extra, aur, ...) and `pacman` handle only core and extra.
 
-## Manual installation
+## Installation
 
-Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or dl via [the KDE store](https://www.pling.com/p/1940819/)
+### Automatic installation
 
-## Automatic installation
+You can install the widget from the [AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git) with `yay -S kdeplasma-arch-update-notifier-git`
 
-Dl via the pling store or via the `get new widgets...` window.
+Alternatively: download via the pling store or via KDEs `★ Get New Widgets...` window.
+
+### Manual installation
+
+Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/1940819/)
 
 ## How to have this in my system tray?
 
