@@ -29,8 +29,6 @@ pkgver() {
 package() {
   cd "${_souceName}"
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/"${pkgname}"/
-
-  ## todo - make this stuff working and the dev is done
-  install -vDm 644 "${_plasmoidName}" -t "${pkgdir}"/usr/share/plasma/plasmoids/
+  find "${_plasmoidName}" -type f -exec install -Dm 644 "{}" "${pkgdir}/usr/share/plasma/plasmoids/{}" \;
 }
 
