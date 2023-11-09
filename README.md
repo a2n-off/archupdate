@@ -18,42 +18,25 @@ You can choose between a dot or a label if an update is available.
 
 Possibility to change the visual of the dot or the visual of the label.
 
-## Dependencies and AUR helper
+## Installation
 
-You need to have :
+You can install the widget from :
+
+* the KDE menu `Get New Widgets...`
+* from the AUR, e.g. `yay -s kdeplasma-arch-update-notifier-git`
+
+### Manual installation
+
+Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/1940819/)
+
+#### Dependencies and AUR helper
+
+You need to have the following packages installed on your system:
  - [`pacman-contrib`](https://archlinux.org/packages/extra/x86_64/pacman-contrib/)
  - [`konsole`](https://archlinux.org/packages/extra/x86_64/konsole/)
  - `yay` is used by default for the update and the AUR count. If you want to use another AUR helper you just have to edit the command via the setting window.
 
 `kdialog` is used too, but it's not mandatory because it's used just for alerting if `konsole` or `pacman-contrib` is not installed.
-
-### Why `yay` and `pacman-contrib`
-
-`pacman-contrib` provide `checkupdates` for counting the update for the `core` and `extra` repository AND it sync all the db automatically without the need of sudo.
-
-I'have setup `yay` because I use EOS, but, you can use `paru` in the exact same way, you just have to update the command in the settings window.
-
-### Why not just `yay -Qu` (or `paru -Qu`)
-
-Because this command dosen't sync the DB at the same time so the result is wrong.
-
-For that we need to do something like the `-S` flag before and I prefer to use `checkupdates` for that (it's made for it so...).
-
-### Why the update is made with yay and not pacman
-
-Because `yay` cover all the db (core, extra, aur, ...) and `pacman` handle only core and extra.
-
-## Installation
-
-### Automatic installation
-
-You can install the widget from the [AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git) with `yay -S kdeplasma-arch-update-notifier-git`
-
-Alternatively: download via the pling store or via KDEs `★ Get New Widgets...` window.
-
-### Manual installation
-
-Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/1940819/)
 
 ## How to have this in my system tray?
 
@@ -87,6 +70,24 @@ In no case I'm responsible of anything if your system break due to your command.
 The program launch the update command with `konsole -e`. So you can test your command or script with `konsole -e "my_command"`.
 
 For the update the default command is: `konsole -e (--noclose) 'yay'` where `noclose` is optional.
+
+## FAQ
+
+### Why `yay` and `pacman-contrib`
+
+`pacman-contrib` provide `checkupdates` for counting the update for the `core` and `extra` repository AND it sync all the db automatically without the need of sudo.
+
+I'have setup `yay` because I use EOS, but, you can use `paru` in the exact same way, you just have to update the command in the settings window.
+
+### Why not just `yay -Qu` (or `paru -Qu`)
+
+Because this command dosen't sync the DB at the same time so the result is wrong.
+
+For that we need to do something like the `-S` flag before and I prefer to use `checkupdates` for that (it's made for it so...).
+
+### Why the update is made with yay and not pacman
+
+Because `yay` cover all the db (core, extra, aur, ...) and `pacman` handle only core and extra.
 
 ## Code of conduct, license, authors, changelog, contributing
 
