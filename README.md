@@ -23,7 +23,7 @@ Possibility to change the visual of the dot or the visual of the label.
 You can install the widget from :
 
 * the KDE menu `Get New Widgets...`
-* from the AUR, e.g. `yay -s kdeplasma-arch-update-notifier-git`
+* from the AUR, e.g. `yay -S kdeplasma-arch-update-notifier-git`
 
 ### Manual installation
 
