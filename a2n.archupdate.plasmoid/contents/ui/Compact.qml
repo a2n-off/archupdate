@@ -2,12 +2,13 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.plasma.workspace.components as WorkspaceComponents
 import "components" as Components
+import org.kde.kirigami as Kirigami
 
-Item {
+PlasmoidItem {
   id: row
 
   property string iconUpdate: "software-update-available.svg"
@@ -15,17 +16,17 @@ Item {
   property string totalArch: "0"
   property string totalAur: "0"
 
-  property bool debug: plasmoid.configuration.debugMode
-  property bool separateResult: plasmoid.configuration.separateResult
-  property string separator: plasmoid.configuration.separator
-  property bool dot: plasmoid.configuration.dot
-  property bool dotUseCustomColor: plasmoid.configuration.dotUseCustomColor
-  property string dotColor: plasmoid.configuration.dotColor
+  property bool debug: configuration.debugMode
+  property bool separateResult: configuration.separateResult
+  property string separator: configuration.separator
+  property bool dot: configuration.dot
+  property bool dotUseCustomColor: configuration.dotUseCustomColor
+  property string dotColor: configuration.dotColor
 
   property bool onUpdate: false
   property bool onRefresh: false
 
-  property bool isPanelVertical: plasmoid.formFactor === PlasmaCore.Types.Vertical
+  property bool isPanelVertical: formFactor === PlasmaCore.Types.Vertical
   readonly property bool inTray: parent.objectName === "org.kde.desktop-CompactApplet"
 
   property real itemSize: Math.min(row.height, row.width)
@@ -87,8 +88,8 @@ Item {
       }
 
       // handle the result for the count
-      const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
-      const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
+      const cmdIsAur = cmd === configuration.countAurCommand
+      const cmdIsArch = cmd === configuration.countArchCommand
       if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
       if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
 
@@ -119,7 +120,7 @@ Item {
       height: container.height / 2.5
       width: height
       radius: height / 2
-      color: dotUseCustomColor ? dotColor : PlasmaCore.Theme.textColor
+      color: dotUseCustomColor ? dotColor : Kirigami.Theme.textColor
       anchors {
         right: container.right
         bottom: container.bottom

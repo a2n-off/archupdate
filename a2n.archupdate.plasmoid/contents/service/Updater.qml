@@ -2,16 +2,16 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 
-Item {
+PlasmoidItem {
 
-  property int intervalConfig: Plasmoid.configuration.updateInterval
-  property string countArchCommand: Plasmoid.configuration.countArchCommand
-  property string countAurCommand: Plasmoid.configuration.countAurCommand
-  property string updateCommand: Plasmoid.configuration.updateCommand
-  property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
+  property int intervalConfig: configuration.updateInterval
+  property string countArchCommand: configuration.countArchCommand
+  property string countAurCommand: configuration.countAurCommand
+  property string updateCommand: configuration.updateCommand
+  property bool notCloseCommand: configuration.notCloseCommand
 
   function countArch() {
     if (countArchCommand !== '') cmd.exec(countArchCommand)

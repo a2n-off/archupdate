@@ -2,9 +2,10 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasma5support as Plasma5Support
 
-PlasmaCore.DataSource {
+Plasma5Support.DataSource {
   id: executable
   engine: "executable"
   connectedSources: []
