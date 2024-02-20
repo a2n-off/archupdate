@@ -10,7 +10,7 @@ import "../service" as Sv
 PlasmoidItem {
     id: archupdate
 
-    preferredRepresentation: compactRepresentation
+    preferredRepresentation: Plasmoid.compactRepresentation
     compactRepresentation: Compact {}
 
     // load one instance of each needed service
@@ -24,7 +24,7 @@ PlasmoidItem {
     }
 
     Component.onCompleted: {
-      Plasmoid.setAction("launchUpdate", "Update", "preferences-other")
+      //Plasmoid.setAction("launchUpdate", "Update", "preferences-other")
       checker.konsole()
       checker.checkupdates()
     }

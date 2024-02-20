@@ -16,12 +16,12 @@ PlasmoidItem {
   property string totalArch: "0"
   property string totalAur: "0"
 
-  property bool debug: configuration.debugMode
-  property bool separateResult: configuration.separateResult
-  property string separator: configuration.separator
-  property bool dot: configuration.dot
-  property bool dotUseCustomColor: configuration.dotUseCustomColor
-  property string dotColor: configuration.dotColor
+  property bool debug: Plasmoid.configuration.debugMode
+  property bool separateResult: Plasmoid.configuration.separateResult
+  property string separator: Plasmoid.configuration.separator
+  property bool dot: Plasmoid.configuration.dot
+  property bool dotUseCustomColor: Plasmoid.configuration.dotUseCustomColor
+  property string dotColor: Plasmoid.configuration.dotColor
 
   property bool onUpdate: false
   property bool onRefresh: false
@@ -88,8 +88,8 @@ PlasmoidItem {
       }
 
       // handle the result for the count
-      const cmdIsAur = cmd === configuration.countAurCommand
-      const cmdIsArch = cmd === configuration.countArchCommand
+      const cmdIsAur = cmd === Plasmoid.configuration.countAurCommand
+      const cmdIsArch = cmd === Plasmoid.configuration.countArchCommand
       if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
       if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
 

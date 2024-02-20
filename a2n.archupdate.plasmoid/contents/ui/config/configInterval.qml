@@ -3,10 +3,10 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kquickcontrols as KQuickControls
+import org.kde.plasma.plasmoid
+import org.kde.kcmutils as KCM
 
-Kirigami.ScrollablePage {
-
-  id: intervalConfigPage
+KCM.SimpleKCM {
 
   property alias cfg_updateInterval: updateIntervalSpin.value
   property alias cfg_debugMode: debugModeBox.checked
@@ -22,6 +22,10 @@ Kirigami.ScrollablePage {
   property alias cfg_dot: dot.checked
   property alias cfg_dotColor: dotColor.color
   property alias cfg_dotUseCustomColor: dotUseCustomColor.checked
+
+Kirigami.ScrollablePage {
+
+  id: intervalConfigPage
 
   ColumnLayout {
 
@@ -196,3 +200,5 @@ Kirigami.ScrollablePage {
   }
 
 }
+}
+
