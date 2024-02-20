@@ -20,7 +20,7 @@ Item {
         smooth: true
         svg: KSvg.Svg {
             id: svg
-            colorGroup: Kirigami.Theme.colorSet
+            colorSet: Kirigami.Theme.colorSet
             imagePath: Qt.resolvedUrl("../../assets/" + source)
         }
     }

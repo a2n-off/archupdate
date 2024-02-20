@@ -5,13 +5,13 @@ import QtQuick.Controls 2.15
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 
-PlasmoidItem {
+Item {
 
-  property int intervalConfig: configuration.updateInterval
-  property string countArchCommand: configuration.countArchCommand
-  property string countAurCommand: configuration.countAurCommand
-  property string updateCommand: configuration.updateCommand
-  property bool notCloseCommand: configuration.notCloseCommand
+  property int intervalConfig: plasmoid.configuration.updateInterval
+  property string countArchCommand: plasmoid.configuration.countArchCommand
+  property string countAurCommand: plasmoid.configuration.countAurCommand
+  property string updateCommand: plasmoid.configuration.updateCommand
+  property bool notCloseCommand: plasmoid.configuration.notCloseCommand
 
   function countArch() {
     if (countArchCommand !== '') cmd.exec(countArchCommand)

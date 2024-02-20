@@ -158,7 +158,7 @@ PlasmoidItem {
     }
   }
 
-  Plasmoid.toolTipItem: Loader {
+  toolTipItem: Loader {
     id: tooltipLoader
     Layout.minimumWidth: item ? item.implicitWidth : 0
     Layout.maximumWidth: item ? item.implicitWidth : 0
