@@ -1,6 +1,7 @@
-import QtQuick 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import QtQuick
+import org.kde.kirigami as Kirigami
+import org.kde.ksvg as KSvg
+import org.kde.plasma.workspace.components as WorkspaceComponents
 import "."
 
 Item {
@@ -8,7 +9,7 @@ Item {
     anchors.centerIn: parent
     property var source
 
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         id: svgItem
         opacity: 1
         width: parent.width
@@ -16,9 +17,8 @@ Item {
         property int sourceIndex: 0
         anchors.centerIn: parent
         smooth: true
-        svg: PlasmaCore.Svg {
-            id: svg
-            colorGroup: PlasmaCore.ColorScope.colorGroup
+        svg: KSvg.Svg {
+            colorSet: Kirigami.Theme.colorSet
             imagePath: Qt.resolvedUrl("../../assets/" + source)
         }
     }

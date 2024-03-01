@@ -1,10 +1,10 @@
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.plasmoid
 
 ColumnLayout {
     id: root;
@@ -16,11 +16,11 @@ ColumnLayout {
 
     ColumnLayout {
         id: mainLayout;
-        Layout.topMargin: PlasmaCore.Units.gridUnit / 2
-        Layout.leftMargin: PlasmaCore.Units.gridUnit / 2
-        Layout.bottomMargin: PlasmaCore.Units.gridUnit / 2
-        Layout.rightMargin: PlasmaCore.Units.gridUnit / 2
-        //Layout.preferredWidth: PlasmaCore.Units.gridUnit * 50
+        Layout.topMargin: Kirigami.Units.gridUnit / 2
+        Layout.leftMargin: Kirigami.Units.gridUnit / 2
+        Layout.bottomMargin: Kirigami.Units.gridUnit / 2
+        Layout.rightMargin: Kirigami.Units.gridUnit / 2
+        //Layout.preferredWidth: Kirigami.Units.gridUnit * 50
 
         PlasmaExtras.Heading {
             id: tooltipMaintext

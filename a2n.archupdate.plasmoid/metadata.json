@@ -7,21 +7,18 @@
             }
         ],
         "Category": "System Information",
-        "Description": "Show and handle the pending pacman update",
-        "Icon": "preferences-desktop",
+        "Description": "Show and handle the pending pacman and aur update",
+        "Icon": "update-none",
         "Id": "a2n.archupdate.plasmoid",
         "License": "GPL-3.0+",
         "Name": "Arch Update Counter",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
-        "Version": "4.2.0",
+        "Version": "5",
         "Website": "https://github.com/bouteillerAlan/archupdate",
         "Depends": ["konsole", "pacman-contrib", "yay"],
         "EnabledByDefault": "false"
     },
-    "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/archupdate.qml",
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices"
+    "X-Plasma-NotificationAreaCategory": "SystemServices",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPackageStructure": "Plasma/Applet"
 }
