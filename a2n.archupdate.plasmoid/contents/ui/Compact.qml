@@ -1,10 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.plasma.workspace.components as WorkspaceComponents
 import "components" as Components
 
 Item {
@@ -31,7 +31,7 @@ Item {
   property real itemSize: Math.min(row.height, row.width)
 
   // updates the icon according to the refresh status
-  function updateUi(refresh: boolean) {
+  function updateUi(refresh: bool) {
     onRefresh = refresh
     if (refresh) {
       updateIcon.source=iconRefresh
