@@ -38,6 +38,10 @@ You need to have the following packages installed on your system:
 
 `kdialog` is used too, but it's not mandatory because it's used just for alerting if `konsole` or `pacman-contrib` is not installed.
 
+### KDE plasma 5
+
+If you want to use this plugin with kde plasma 5 you should use ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1).
+
 ## How to have this in my system tray?
 
 Go to the 'System Tray Settings' menu and activate it :)
