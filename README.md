@@ -27,7 +27,7 @@ You can install the widget from :
 
 ### Manual installation
 
-Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/1940819/)
+Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/2134470/)
 
 #### Dependencies and AUR helper
 
@@ -37,6 +37,10 @@ You need to have the following packages installed on your system:
  - `yay` is used by default for the update and the AUR count. If you want to use another AUR helper you just have to edit the command via the setting window.
 
 `kdialog` is used too, but it's not mandatory because it's used just for alerting if `konsole` or `pacman-contrib` is not installed.
+
+### KDE plasma 5
+
+If you want to use this plugin with kde plasma 5 you should use ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1) or [this version on the pling store](https://www.pling.com/p/1940819/).
 
 ## How to have this in my system tray?
 
@@ -111,8 +115,8 @@ Do not hesitate to open a pr or an issue. I reply when I can.
 
 - [Give me a tips](https://ko-fi.com/a2n00)
 - [Give a star on github](https://github.com/bouteillerAlan/archupdate)
-- [Add a rating and a comment on Pling](https://www.pling.com/p/1940819/)
-- [Become a fan on Pling](https://www.pling.com/p/1940819/)
+- [Add a rating and a comment on Pling](https://www.pling.com/p/2134470/)
+- [Become a fan on Pling](https://www.pling.com/p/2134470/)
 - Or just participate to the developement :D
 
 ### Thanks !
