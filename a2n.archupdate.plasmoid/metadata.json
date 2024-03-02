@@ -15,9 +15,9 @@
         "Version": "5",
         "Website": "https://github.com/bouteillerAlan/archupdate",
         "Depends": ["konsole", "pacman-contrib", "yay"],
-        "EnabledByDefault": "false"
+        "EnabledByDefault": false
     },
-    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationArea": true,
     "X-Plasma-NotificationAreaCategory": "SystemServices",
     "X-Plasma-API-Minimum-Version": "6.0",
     "KPackageStructure": "Plasma/Applet"
