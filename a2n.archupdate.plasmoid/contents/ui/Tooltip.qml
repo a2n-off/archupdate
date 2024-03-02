@@ -11,8 +11,8 @@ ColumnLayout {
     // property var usageNow;
     property var dividerColor: Kirigami.Theme.textColor
     property var dividerOpacity: 0.1
-    property string totalArch: row.totalArch
-    property string totalAur: row.totalAur
+    property string totalArch: main.totalArch
+    property string totalAur: main.totalAur
 
     ColumnLayout {
         id: mainLayout;
