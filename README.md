@@ -93,6 +93,10 @@ For that we need to do something like the `-S` flag before and I prefer to use `
 
 Because `yay` cover all the db (core, extra, aur, ...) and `pacman` handle only core and extra.
 
+### I want to update the PKGBUILD or the .SRCINFO for the AUR
+
+You have to made a pr in this repository for that : [https://github.com/bouteillerAlan/kdeplasma-arch-update-notifier-git](https://github.com/bouteillerAlan/kdeplasma-arch-update-notifier-git)
+
 ## Code of conduct, license, authors, changelog, contributing
 
 See the following file :
