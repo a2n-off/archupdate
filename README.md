@@ -33,7 +33,7 @@ You can install the widget from :
 - download via [the KDE store](https://www.pling.com/p/2134470/)
 - [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git)
 
-### plasma 5
+#### plasma 5
 
 If you want to use this plugin with kde plasma 5 you should use : 
  - ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1)
