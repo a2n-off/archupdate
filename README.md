@@ -27,9 +27,18 @@ You can install the widget from :
 
 ### Manual installation
 
+#### Plasma 6
+
 - place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/`
 - download via [the KDE store](https://www.pling.com/p/2134470/)
-- **The AUR package is bound to the plasma release on extra, so for the moment this option work only with palsma 5** [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git)
+- [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git)
+
+### plasma 5
+
+If you want to use this plugin with kde plasma 5 you should use : 
+ - ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1)
+ - [this version on the pling store](https://www.pling.com/p/1940819/)
+ - [this version via the AUR](https://aur.archlinux.org/packages/kdeplasma5-arch-update-notifier-git).
 
 #### Dependencies and AUR helper
 
@@ -39,10 +48,6 @@ You need to have the following packages installed on your system:
  - `yay` is used by default for the update and the AUR count. If you want to use another AUR helper you just have to edit the command via the setting window.
 
 `kdialog` is used too, but it's not mandatory because it's used just for alerting if `konsole` or `pacman-contrib` is not installed.
-
-### KDE plasma 5
-
-If you want to use this plugin with kde plasma 5 you should use ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1) or [this version on the pling store](https://www.pling.com/p/1940819/).
 
 ## How to have this in my system tray?
 
