@@ -27,7 +27,9 @@ You can install the widget from :
 
 ### Manual installation
 
-Place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/` or download via [the KDE store](https://www.pling.com/p/2134470/)
+- place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/`
+- download via [the KDE store](https://www.pling.com/p/2134470/)
+- **The AUR package is bound to the plasma release on extra, so for the moment this option work only with palsma 5** [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git)
 
 #### Dependencies and AUR helper
 
