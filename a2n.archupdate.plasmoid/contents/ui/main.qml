@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import org.kde.plasma.core as PlasmaCore
 
 import org.kde.plasma.plasmoid
 
@@ -30,16 +31,20 @@ PlasmoidItem {
     Sv.Checker{ id: checker }
     Tb.Cmd { id: cmd }
 
-    // this is mendatory to have that in the root elem's : https://techbase.kde.org/Development/Tutorials/Plasma4/JavaScript/API-PlasmoidObject#Context_menu
-    function action_launchUpdate() {
-        updater.launchUpdate()
-    }
-
     Component.onCompleted: {
-      Plasmoid.setAction("launchUpdate", "Update", "preferences-other")
       checker.konsole()
       checker.checkupdates()
     }
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18n("Update")
+            icon.name: "preferences-other"
+            onTriggered: {
+                updater.launchUpdate()
+            }
+        }
+    ]
 
     toolTipItem: Loader {
         id: tooltipLoader
