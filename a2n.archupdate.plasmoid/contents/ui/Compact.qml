@@ -30,6 +30,8 @@ Item {
 
   property real itemSize: Math.min(row.height, row.width)
 
+  property bool invertMouseAction: plasmoid.configuration.invertMouseAction
+
   // updates the icon according to the refresh status
   function updateUi(refresh: bool) {
     onRefresh = refresh
@@ -151,8 +153,13 @@ Item {
       cursorShape: Qt.PointingHandCursor // give user feedback
       acceptedButtons: Qt.LeftButton | Qt.MiddleButton
       onClicked: (mouse) => {
-        if (mouse.button == Qt.LeftButton) onLClick()
-        if (mouse.button == Qt.MiddleButton) onMClick()
+        if (invertMouseAction) {
+          if (mouse.button == Qt.MiddleButton) onLClick()
+          if (mouse.button == Qt.LeftButton) onMClick()
+        } else {
+          if (mouse.button == Qt.LeftButton) onLClick()
+          if (mouse.button == Qt.MiddleButton) onMClick()
+        }
       }
     }
   }
