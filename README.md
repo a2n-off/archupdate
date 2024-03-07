@@ -57,7 +57,7 @@ Go to the 'System Tray Settings' menu and activate it :)
 
 ## Configuration
 
-![screenshot of the settings of the plugin](git-assets/img/v4.2.0/settings-panel-full.png)
+![screenshot of the settings of the plugin](git-assets/img/set1.png)
 
 | Name | Description | Result |
 |--|--|--|
