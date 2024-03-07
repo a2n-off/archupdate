@@ -61,16 +61,20 @@ Go to the 'System Tray Settings' menu and activate it :)
 
 | Name | Description | Result |
 |--|--|--|
+| Command & Debug | | |
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 | Debug | Enable the debug mode if set to true | Show each command launch by the plasmoid with `ARCHUPDATE` at the beggining (for regex search) |
 | Do not close the terminal at the end | if true add the `--noclose` flag into the `konsole` command | Prevent the console to close at the end of the update command |
 | Count ARCH command | The command you want to execute for counting the packages for CORE and EXTRA (default: `checkupdates [pipe] wc -l`) | The `updater` exec this command |
 | Count AUR command | The command you want to execute for counting the packages for the other db (default: `yay -Qua [pipe] wc -l`) | The `updater` exec this command |
 | Update command | The command you want to execute when the `update` action is called | Pass the command to `konsole -e` |
+| Display | | |
 | Show a dot in place of the label | Replace the label with a colored dot | If the total count is > than 0 the dot is visible, otherwise nothing is shown (no label, no dot) |
 | Custom dot color | If you want to customize the color of the dot | If not checked the dot get the color from your theme via `PlasmaCore.Theme.textColor` |
 | Separate result | If you want to have the total for *arch* and the total for the other db in the label | Set the label text to `' ' + totalArch + separator + totalAur + ' '` |
 | Separator | The text you want to have for, space available | Inject the text you put into the label |
+| Mouse action | | |
+| Click configuration | Choose the type of action you want to do for each click on the mouse | Left click to check, middle click to update OR Middle click to check, left click to update |
 
 ### Regarding the customization of the commands
 
