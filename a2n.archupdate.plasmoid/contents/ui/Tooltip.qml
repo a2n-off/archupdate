@@ -8,7 +8,7 @@ import org.kde.plasma.plasmoid
 
 ColumnLayout {
     id: root;
-    // property var usageNow;
+
     property var dividerColor: Kirigami.Theme.textColor
     property var dividerOpacity: 0.1
     property string totalArch: main.totalArch

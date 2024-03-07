@@ -5,64 +5,66 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 <kcfgfile name=""/>
 
-<group name="intervalConfigPage">
+<group name="mouseConfigPage">
+    <entry name="invertMouseAction" type="Bool">
+        <default>false</default>
+    </entry>
+</group>
 
-<entry name="invertMouseAction" type="Bool">
+<group name="commandConfigPage">
+    <entry name="updateInterval" type="Int">
+    <default>30</default>
+    </entry>
+
+    <entry name="debugMode" type="Bool">
     <default>false</default>
-</entry>
+    </entry>
 
-<entry name="updateInterval" type="Int">
-<default>30</default>
-</entry>
+    <entry name="konsoleIsValid" type="Bool">
+    <default>false</default>
+    </entry>
 
-<entry name="debugMode" type="Bool">
-<default>false</default>
-</entry>
+    <entry name="checkupdateIsValid" type="Bool">
+    <default>false</default>
+    </entry>
 
-<entry name="konsoleIsValid" type="Bool">
-<default>false</default>
-</entry>
+    <entry name="notCloseCommand" type="Bool">
+    <default>false</default>
+    </entry>
 
-<entry name="checkupdateIsValid" type="Bool">
-<default>false</default>
-</entry>
+    <entry name="updateCommand" type="String">
+        <default>yay</default>
+    </entry>
 
-<entry name="notCloseCommand" type="Bool">
-<default>false</default>
-</entry>
+    <entry name="countArchCommand" type="String">
+        <default>checkupdates | wc -l</default>
+    </entry>
 
-<entry name="separateResult" type="Bool">
-<default>false</default>
-</entry>
+    <entry name="countAurCommand" type="String">
+        <default>yay -Qua | wc -l</default>
+    </entry>
+</group>
 
-<entry name="separator" type="String">
-<default>~</default>
-</entry>
+<group name="displayConfigPage">
+    <entry name="separateResult" type="Bool">
+    <default>false</default>
+    </entry>
 
-<entry name="updateCommand" type="String">
-<default>yay</default>
-</entry>
+    <entry name="separator" type="String">
+    <default>~</default>
+    </entry>
 
-<entry name="countArchCommand" type="String">
-<default>checkupdates | wc -l</default>
-</entry>
+    <entry name="dot" type="Bool">
+    <default>false</default>
+    </entry>
 
-<entry name="countAurCommand" type="String">
-<default>yay -Qua | wc -l</default>
-</entry>
+    <entry name="dotColor" type="String">
+    <default>white</default>
+    </entry>
 
-<entry name="dot" type="Bool">
-<default>false</default>
-</entry>
-
-<entry name="dotColor" type="String">
-<default>white</default>
-</entry>
-
-<entry name="dotUseCustomColor" type="Bool">
-<default>false</default>
-</entry>
-
+    <entry name="dotUseCustomColor" type="Bool">
+    <default>false</default>
+    </entry>
 </group>
 
 </kcfg>

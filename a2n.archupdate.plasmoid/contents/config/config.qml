@@ -4,17 +4,17 @@ import org.kde.plasma.configuration
 ConfigModel {
     ConfigCategory {
          name: i18nc("@title", "Command & debug")
-         icon: "preferences-other"
+         icon: "applications-development"
          source: "config/configCommand.qml"
     }
     ConfigCategory {
         name: i18nc("@title", "Display")
-        icon: "preferences-other"
+        icon: "computer"
         source: "config/configDisplay.qml"
     }
     ConfigCategory {
         name: i18nc("@title", "Mouse action")
-        icon: "preferences-other"
+        icon: "input-mouse"
         source: "config/configMouse.qml"
     }
 }

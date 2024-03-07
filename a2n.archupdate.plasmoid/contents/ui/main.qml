@@ -14,9 +14,14 @@ PlasmoidItem {
     property string totalArch: "0"
     property string totalAur: "0"
 
+    function hasUpdate() {
+        return !(totalArch === "0" && totalAur === "0")
+    }
+
+    Plasmoid.status: hasUpdate() ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+
     preferredRepresentation: compactRepresentation
     compactRepresentation: Compact {
-
         onTotalArchChanged: {
             main.totalArch = totalArch
         }
@@ -31,15 +36,10 @@ PlasmoidItem {
     Sv.Checker{ id: checker }
     Tb.Cmd { id: cmd }
 
-    Component.onCompleted: {
-      checker.konsole()
-      checker.checkupdates()
-    }
-
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18n("Update")
-            icon.name: "preferences-other"
+            icon.name: "keyboard-caps-locked"
             onTriggered: {
                 updater.launchUpdate()
             }
