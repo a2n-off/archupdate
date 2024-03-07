@@ -1,7 +1,7 @@
 ### v5.1.0
-  - Thanks to Luis Bocanegra for finishing up the last warning on the plasma 6 upgrade 
-  - The settings is divided by it's theme now
-  - A new setting is avalaible for the mouse action, you can now choose wich action is bind to the left or middle click
+  - Thanks to Luis Bocanegra for finishing up the last warning on the plasma 6 upgrade
+  - The settings are divided by its theme now
+  - A new setting is available for the mouse action, you can now choose which action is bind to the left or middle click
   - Now if you select "show when relevant" in the system tray option the plasmoid is only visible if an update is available
 
 ### v5
