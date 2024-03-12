@@ -16,6 +16,9 @@ Kirigami.ScrollablePage {
   property alias cfg_countArchCommand: countArchCommandInput.text
   property alias cfg_countAurCommand: countAurCommandInput.text
 
+  property alias cfg_listArchCommand: listArchCommandInput.text
+  property alias cfg_listAurCommand: listAurCommandInput.text
+
   ColumnLayout {
 
     anchors {
@@ -107,6 +110,16 @@ Kirigami.ScrollablePage {
       Controls.TextField {
         id: countAurCommandInput
         Kirigami.FormData.label: "Count AUR command: "     
+      }
+
+      Controls.TextField {
+        id: listArchCommandInput
+        Kirigami.FormData.label: "List ARCH command: "
+      }
+
+      Controls.TextField {
+        id: listAurCommandInput
+        Kirigami.FormData.label: "List AUR command: "
       }
 
       Controls.TextField {
