@@ -17,6 +17,8 @@ Item {
     anchors.fill: parent
 
     property string listAll: ""
+    property bool onUpdate: false
+    property bool onRefresh: false
 
     Layout.minimumHeight: 200
     Layout.maximumWidth: 200
@@ -27,6 +29,25 @@ Item {
 
     function refresh() {
         updater.countAll()
+    }
+
+    // map the cmd signal with the widget
+    Connections {
+        target: cmd
+
+        function onConnected(source) {
+            onRefresh = true
+        }
+
+        function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
+            // handle the result for the count
+            const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
+            const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
+            if (cmdIsListAur) listAll = stdout
+            if (cmdIsListArch) listAll = listAll + stdout
+            onRefresh = false
+
+        }
     }
 
     // topbar
@@ -73,7 +94,7 @@ Item {
     RowLayout {
         anchors.top: headerSeparator.bottom
         PlasmaComponents3.Label {
-            text: main.listAll
+            text: listAll
             opacity: 1
         }
     }
@@ -83,13 +104,13 @@ Item {
         id: upToDateLabel
         text: i18n("You're up-to-date !")
         anchors.centerIn: parent
-        visible: listAll === "x"
+        visible: !onRefresh && listAll === ""
     }
 
     // loading indicator
     PlasmaComponents.BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        visible: false
+        visible: onRefresh
     }
 }
