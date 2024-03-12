@@ -154,10 +154,16 @@ Item {
       acceptedButtons: Qt.LeftButton | Qt.MiddleButton
       onClicked: (mouse) => {
         if (invertMouseAction) {
-          if (mouse.button == Qt.MiddleButton) onLClick()
+          if (mouse.button == Qt.MiddleButton) {
+            onLClick()
+            main.expanded = !main.expanded
+          }
           if (mouse.button == Qt.LeftButton) onMClick()
         } else {
-          if (mouse.button == Qt.LeftButton) onLClick()
+          if (mouse.button == Qt.LeftButton) {
+            onLClick()
+            main.expanded = !main.expanded
+          }
           if (mouse.button == Qt.MiddleButton) onMClick()
         }
       }
