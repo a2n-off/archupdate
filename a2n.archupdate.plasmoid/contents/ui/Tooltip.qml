@@ -14,6 +14,10 @@ ColumnLayout {
     property string totalArch: main.totalArch
     property string totalAur: main.totalAur
 
+    function noUpdateAvailable() {
+        return totalArch === "0" && totalAur === "0"
+    }
+
     ColumnLayout {
         id: mainLayout;
         Layout.topMargin: Kirigami.Units.gridUnit / 2
@@ -26,7 +30,7 @@ ColumnLayout {
             id: tooltipMaintext
             level: 3
             elide: Text.ElideRight
-            text: Plasmoid.metaData.name
+            text: noUpdateAvailable() ? "No updates available" : "Updates are available"
         }
 
         RowLayout {

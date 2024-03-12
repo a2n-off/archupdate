@@ -54,4 +54,9 @@ PlasmoidItem {
         Layout.maximumHeight: item ? item.implicitHeight : 0
         source: "Tooltip.qml"
     }
+
+    Component.onCompleted: {
+        checker.konsole()
+        checker.checkupdates()
+    }
 }
