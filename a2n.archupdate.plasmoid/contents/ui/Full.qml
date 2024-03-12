@@ -8,6 +8,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.components as PlasmaComponents3
 
 import "components" as Components
 
@@ -15,7 +16,7 @@ Item {
     focus: main.expanded
     anchors.fill: parent
 
-    property string listAll: "dd"
+    property string listAll: ""
 
     Layout.minimumHeight: 200
     Layout.maximumWidth: 200
@@ -69,52 +70,20 @@ Item {
     }
 
     // list of the package
-    Kirigami.ScrollablePage {
-        id: scrollView;
-
-        background: Rectangle {
-            anchors.fill: parent
-            color: "transparent"
-        }
-
+    RowLayout {
         anchors.top: headerSeparator.bottom
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        ListView {
-            id: packageView;
-            anchors.rightMargin: Kirigami.Units.gridUnit
-            clip: true
-            model: ListModel {}
-            currentIndex: -1;
-            boundsBehavior: Flickable.StopAtBounds;
-            focus: true
-            delegate: ListModel {
-                ListElement {
-                    name: "Bill Smith"
-                    number: "555 3264"
-                }
-                ListElement {
-                    name: "John Brown"
-                    number: "555 8426"
-                }
-                ListElement {
-                    name: "Sam Wise"
-                    number: "555 0473"
-                }
-            }
-            onCountChanged: upToDateLabel.visible = !busyIndicator.visible && count == 0;
+        PlasmaComponents3.Label {
+            text: main.listAll
+            opacity: 1
         }
-
     }
 
     // if not update is needed
     PlasmaExtras.PlaceholderMessage {
         id: upToDateLabel
-        text: i18n("Nothing to do")
+        text: i18n("You're up-to-date !")
         anchors.centerIn: parent
-        visible: false
+        visible: listAll === "x"
     }
 
     // loading indicator
