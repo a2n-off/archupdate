@@ -50,20 +50,24 @@ Item {
             if (cmdIsListAur) listAll = stdout
             if (cmdIsListArch) listAll = listAll + stdout
 
-            listAll.split("\n").forEach(line => {
-                const packageDetails = line.split(/\s+/);
-                const name = packageDetails[0];
-                const fv = packageDetails[1];
-                const tv = packageDetails[3];
-                if (name.trim() !== "") {
-                    packageListModel.append({
-                        name: name,
-                        fv: fv,
-                        tv: tv
-                    });
-                }
+            if (cmdIsListAur || cmdIsListArch) {
+                packageListModel.clear()
 
-            });
+                listAll.split("\n").forEach(line => {
+                    const packageDetails = line.split(/\s+/);
+                    const name = packageDetails[0];
+                    const fv = packageDetails[1];
+                    const tv = packageDetails[3];
+                    if (name.trim() !== "") {
+                        packageListModel.append({
+                            name: name,
+                            fv: fv,
+                            tv: tv
+                        });
+                    }
+
+                });
+            }
 
             onRefresh = false
         }
