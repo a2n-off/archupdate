@@ -13,7 +13,6 @@ PlasmoidItem {
 
     property string totalArch: "0"
     property string totalAur: "0"
-    property string listAll: ""
 
     function hasUpdate() {
         return !(totalArch === "0" && totalAur === "0")
@@ -29,13 +28,8 @@ PlasmoidItem {
         onTotalAurChanged: {
             main.totalAur = totalAur
         }
-        onListAllChanged: {
-            listAll = main.listtAll
-        }
     }
-    fullRepresentation: Full {
-        listAll: main.listAll
-    }
+    fullRepresentation: Full {}
 
     // load one instance of each needed service
     Sv.Updater{ id: updater }

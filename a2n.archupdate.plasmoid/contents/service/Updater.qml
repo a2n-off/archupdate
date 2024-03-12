@@ -10,6 +10,8 @@ Item {
   property int intervalConfig: Plasmoid.configuration.updateInterval
   property string countArchCommand: Plasmoid.configuration.countArchCommand
   property string countAurCommand: Plasmoid.configuration.countAurCommand
+  property string listArchCommand: Plasmoid.configuration.listArchCommand
+  property string listAurCommand: Plasmoid.configuration.listAurCommand
   property string updateCommand: Plasmoid.configuration.updateCommand
   property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
 
@@ -21,9 +23,19 @@ Item {
     if (countAurCommand !== '') cmd.exec(countAurCommand)
   }
 
+  function listArch() {
+    if (listArchCommand !== '') cmd.exec(listArchCommand)
+  }
+
+  function listAur() {
+    if (listAurCommand !== '') cmd.exec(listAurCommand)
+  }
+
   function countAll() {
     countArch()
     countAur()
+    listArch()
+    listAur()
   }
 
   function launchUpdate() {

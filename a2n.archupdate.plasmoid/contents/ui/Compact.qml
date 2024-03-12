@@ -14,7 +14,6 @@ Item {
   property string iconRefresh: "arch-unknown.svg"
   property string totalArch: "0"
   property string totalAur: "0"
-  property string listAll: ""
 
   property bool debug: plasmoid.configuration.debugMode
   property bool separateResult: plasmoid.configuration.separateResult
@@ -94,12 +93,6 @@ Item {
       const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
       if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
       if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
-
-      // handle the result for the count
-      const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
-      const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
-      if (cmdIsListArch) listAll = stdout
-      if (cmdIsListAur) listAll = stdout
 
       // handle the result for the checker
       if (cmd === "konsole -v") checker.validateKonsole(stderr)
