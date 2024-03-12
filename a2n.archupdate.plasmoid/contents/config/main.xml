@@ -65,6 +65,14 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <entry name="dotUseCustomColor" type="Bool">
     <default>false</default>
     </entry>
+
+    <entry name="iconColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="iconUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
 </group>
 
 </kcfg>

@@ -15,12 +15,41 @@ Kirigami.ScrollablePage {
     property alias cfg_dotColor: dotColor.color
     property alias cfg_dotUseCustomColor: dotUseCustomColor.checked
 
+    property alias cfg_iconColor: iconColor.color
+    property alias cfg_iconUseCustomColor: iconUseCustomColor.checked
+
     ColumnLayout {
 
         anchors {
             left: parent.left
             top: parent.top
             right: parent.right
+        }
+
+        Kirigami.FormLayout {
+            wideMode: false
+
+            Kirigami.Separator {
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: "Icon"
+            }
+        }
+
+        Kirigami.FormLayout {
+            RowLayout {
+                Kirigami.FormData.label: "Custom icon color: "
+                visible: true
+                Controls.CheckBox {
+                    id: iconUseCustomColor
+                    checked: false
+                }
+
+                KQuickControls.ColorButton {
+                    id: iconColor
+                    enabled: iconUseCustomColor.checked
+                }
+            }
+
         }
 
         Kirigami.FormLayout {
