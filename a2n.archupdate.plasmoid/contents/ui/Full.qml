@@ -32,6 +32,9 @@ Item {
         updater.countAll()
     }
 
+    // list of the packages
+    ListModel { id: packageListModel }
+
     // map the cmd signal with the widget
     Connections {
         target: cmd
@@ -41,13 +44,28 @@ Item {
         }
 
         function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-            // handle the result for the count
+            // handle the result for the list
             const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
             const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
             if (cmdIsListAur) listAll = stdout
             if (cmdIsListArch) listAll = listAll + stdout
-            onRefresh = false
 
+            listAll.split("\n").forEach(line => {
+                const packageDetails = line.split(/\s+/);
+                const name = packageDetails[0];
+                const fv = packageDetails[1];
+                const tv = packageDetails[3];
+                if (name.trim() !== "") {
+                    packageListModel.append({
+                        name: name,
+                        fv: fv,
+                        tv: tv
+                    });
+                }
+
+            });
+
+            onRefresh = false
         }
     }
 
@@ -91,15 +109,7 @@ Item {
         visible: true
     }
 
-    // list of the package
-    ListModel {
-        id: myModel
-        ListElement { type: "Item"; number: 0 }
-        ListElement { type: "Item"; number: 1 }
-        ListElement { type: "Item"; number: 2 }
-        ListElement { type: "Item"; number: 3 }
-    }
-
+    // page view for the list
     Kirigami.ScrollablePage {
         id: scrollView;
         background: Rectangle{
@@ -114,11 +124,11 @@ Item {
             id: packageView;
             anchors.rightMargin: Kirigami.Units.gridUnit
             clip: true
-            model: 200
+            model: packageListModel
             boundsBehavior: Flickable.StopAtBounds;
             focus: true
             delegate: PlasmaComponents.Label {
-                text: "xxx"
+                text: name
             }
         }
     }
