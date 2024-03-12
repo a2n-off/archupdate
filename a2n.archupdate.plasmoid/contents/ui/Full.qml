@@ -21,7 +21,8 @@ Item {
     property bool onRefresh: false
 
     Layout.minimumHeight: 200
-    Layout.maximumWidth: 200
+    Layout.minimumWidth: 200
+    Layout.maximumWidth: 400
 
     function update() {
         updater.launchUpdate()
@@ -91,11 +92,34 @@ Item {
     }
 
     // list of the package
-    RowLayout {
+    ListModel {
+        id: myModel
+        ListElement { type: "Item"; number: 0 }
+        ListElement { type: "Item"; number: 1 }
+        ListElement { type: "Item"; number: 2 }
+        ListElement { type: "Item"; number: 3 }
+    }
+
+    Kirigami.ScrollablePage {
+        id: scrollView;
+        background: Rectangle{
+            anchors.fill: parent
+            color: "transparent"
+        }
         anchors.top: headerSeparator.bottom
-        PlasmaComponents3.Label {
-            text: listAll
-            opacity: 1
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        ListView {
+            id: packageView;
+            anchors.rightMargin: Kirigami.Units.gridUnit
+            clip: true
+            model: 200
+            boundsBehavior: Flickable.StopAtBounds;
+            focus: true
+            delegate: PlasmaComponents.Label {
+                text: "xxx"
+            }
         }
     }
 
