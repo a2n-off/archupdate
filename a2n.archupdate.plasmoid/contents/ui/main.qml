@@ -39,14 +39,14 @@ PlasmoidItem {
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18n("Update")
-            icon.name: "install"
+            icon.name: "install-symbolic"
             onTriggered: {
                 updater.launchUpdate()
             }
         },
         PlasmaCore.Action {
             text: i18n("Refresh")
-            icon.name: "view-refresh"
+            icon.name: "view-refresh-symbolic"
             onTriggered: {
                 updater.countAll()
             }
