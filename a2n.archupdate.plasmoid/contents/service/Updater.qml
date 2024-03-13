@@ -13,6 +13,7 @@ Item {
   property string listArchCommand: Plasmoid.configuration.listArchCommand
   property string listAurCommand: Plasmoid.configuration.listAurCommand
   property string updateCommand: Plasmoid.configuration.updateCommand
+  property string updateCommandOne: Plasmoid.configuration.updateCommandOne
   property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
 
   function countArch() {
@@ -44,6 +45,16 @@ Item {
         cmd.exec("konsole --noclose -e '" + updateCommand + "'")
       } else {
         cmd.exec("konsole -e '" + updateCommand + "'")
+      }
+    }
+  }
+
+  function launchOneUpdate(packageName) {
+    if (updateCommandOne !== '' && packageName) {
+      if (notCloseCommand) {
+        cmd.exec("konsole --noclose -e '" + updateCommandOne + " " + packageName + "'")
+      } else {
+        cmd.exec("konsole -e '" + updateCommandOne + " " + packageName + "'")
       }
     }
   }

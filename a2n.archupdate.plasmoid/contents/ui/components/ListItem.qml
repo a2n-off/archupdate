@@ -16,6 +16,10 @@ PlasmaComponents.ItemDelegate {
 
     width: parent.width
 
+    function updateOne() {
+        updater.launchOneUpdate(name)
+    }
+
     // generate & style the name of the package
     function generateName() {
         const nc = plasmoid.configuration.nameUseCustomColor ? plasmoid.configuration.nameColor : Kirigami.Theme.textColor
@@ -31,30 +35,36 @@ PlasmaComponents.ItemDelegate {
         return '<font color="' + fvc + '">' + fv + '</font><font color="' + sc + '"> ' + plasmoid.configuration.separatorText + ' </font><font color="' + tvc + '">' + tv + '</font>'
     }
 
-    // Add MouseArea to detect mouse hover
-    MouseArea {
-        id: mouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: listItem.highlighted = true
-        onExited: listItem.highlighted = false
-    }
+    contentItem: RowLayout {
+        ColumnLayout {
+            spacing: 2
 
-    contentItem: ColumnLayout {
-        spacing: 2
+            Kirigami.Heading {
+                id: itemHeading
+                level: 3
+                width: parent.width
+                text: generateName()
+            }
 
-        Kirigami.Heading {
-            id: itemHeading
-            level: 3
-            width: parent.width
-            text: generateName()
+            Controls.Label {
+                id: itemLabel
+                width: parent.width
+                wrapMode: Text.Wrap
+                text: generateVersion()
+            }
         }
-
-        Controls.Label {
-            id: itemLabel
-            width: parent.width
-            wrapMode: Text.Wrap
-            text: generateVersion()
+        ColumnLayout {
+            Layout.alignment: Qt.AlignRight
+            PlasmaComponents.ToolButton {
+                id: actionToolButton
+                icon.name: "system-run-symbolic"
+                display: PlasmaComponents.AbstractButton.IconOnly
+                text: i18n("Update " + name)
+                onClicked: updateOne()
+                PlasmaComponents.ToolTip {
+                    text: parent.text
+                }
+            }
         }
     }
 

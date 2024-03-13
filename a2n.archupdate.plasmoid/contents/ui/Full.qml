@@ -100,15 +100,25 @@ PlasmaExtras.Representation {
                 id: updateIcon
                 height: Kirigami.Units.iconSizes.medium
                 icon.name: "install-symbolic"
+                display: PlasmaComponents.AbstractButton.IconOnly
+                text: i18n("Install all update")
                 onClicked: update()
                 visible: main.hasUpdate()
+                PlasmaComponents.ToolTip {
+                    text: parent.text
+                }
             }
 
             PlasmaComponents.ToolButton {
                 id: checkUpdatesIcon
                 height: Kirigami.Units.iconSizes.medium
                 icon.name: "view-refresh-symbolic"
+                display: PlasmaComponents.AbstractButton.IconOnly
+                text: i18n("Refresh list")
                 onClicked: refresh()
+                PlasmaComponents.ToolTip {
+                    text: parent.text
+                }
             }
         }
     }
