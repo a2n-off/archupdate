@@ -20,7 +20,6 @@ PlasmoidItem {
 
     Plasmoid.status: hasUpdate() ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
 
-    preferredRepresentation: compactRepresentation
     compactRepresentation: Compact {
         onTotalArchChanged: {
             main.totalArch = totalArch
