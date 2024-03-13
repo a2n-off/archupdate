@@ -8,17 +8,17 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.components as PlasmaComponents3
 
 import "components" as Components
 
-Item {
-    focus: main.expanded
-    anchors.fill: parent
+PlasmaExtras.Representation {
 
     property string listAll: ""
     property bool onUpdate: false
     property bool onRefresh: false
+
+    focus: true
+    anchors.fill: parent
 
     Layout.minimumHeight: 200
     Layout.minimumWidth: 200
