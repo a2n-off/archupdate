@@ -18,12 +18,17 @@ PlasmaComponents.ItemDelegate {
 
     // generate & style the name of the package
     function generateName() {
-        return name + '<font color="' + Kirigami.Theme.disabledTextColor + '"> from ' + (isArch ? 'arch' : 'aur') + '</font>'
+        const nc = plasmoid.configuration.nameUseCustomColor ? plasmoid.configuration.nameColor : Kirigami.Theme.textColor
+        const sc = plasmoid.configuration.sourceUseCustomColor ? plasmoid.configuration.sourceColor : Kirigami.Theme.disabledTextColor
+        return '<font color="' + nc + '"> ' + name + ' </font><font color="' + sc + '"> from ' + (isArch ? 'arch' : 'aur') + '</font>'
     }
 
     // generate & style the version of the package
     function generateVersion() {
-        return '<font color="' + Kirigami.Theme.negativeTextColor + '">' + fv + '</font> > <font color="' + Kirigami.Theme.positiveTextColor + '">' + tv + '</font>'
+        const fvc = plasmoid.configuration.fvUseCustomColor ? plasmoid.configuration.fvColor : Kirigami.Theme.negativeTextColor
+        const sc = plasmoid.configuration.separatorUseCustomColor ? plasmoid.configuration.separatorColor : Kirigami.Theme.textColor
+        const tvc = plasmoid.configuration.tvUseCustomColor ? plasmoid.configuration.tvColor : Kirigami.Theme.positiveTextColor
+        return '<font color="' + fvc + '">' + fv + '</font><font color="' + sc + '"> ' + plasmoid.configuration.separatorText + ' </font><font color="' + tvc + '">' + tv + '</font>'
     }
 
     // Add MouseArea to detect mouse hover
