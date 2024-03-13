@@ -155,13 +155,13 @@ Item {
       onClicked: (mouse) => {
         if (invertMouseAction) {
           if (mouse.button == Qt.MiddleButton) {
-            onLClick()
+            //onLClick() - don't do it again
             main.expanded = !main.expanded
           }
           if (mouse.button == Qt.LeftButton) onMClick()
         } else {
           if (mouse.button == Qt.LeftButton) {
-            onLClick()
+            //onLClick() - don't do it again
             main.expanded = !main.expanded
           }
           if (mouse.button == Qt.MiddleButton) onMClick()
