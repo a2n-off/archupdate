@@ -1,8 +1,8 @@
 # Arch update counter - plasma widget
 
-![screenshot of the aplet with all the alt](git-assets/img/v4.2.0/all-alt.png)
+![screenshot of the aplet with all the alt](git-assets/img/allalt.png)
 
-1 - dot w/ custom color  |  2 - dot with theme color  |  3 - label  |  4 - label with separator  |  5 - in the system tray
+1 - custom icon color  |  2 - custom dot color  |  3 - default dot  |  4 - label with separator  |  5 - label without separator | 6 - in the system tray | 7 - package list
 
 ## Description
 
@@ -16,7 +16,11 @@ Custom setting for the update command and for the count command !
 
 You can choose between a dot or a label if an update is available.
 
-Possibility to change the visual of the dot or the visual of the label.
+Possibility to change the visual of the dot, the visual of the label and the visual of the icon.
+
+A popup list all the available update.
+
+And a lot of settings is provided for customizing all that !
 
 ## Installation
 
@@ -53,7 +57,7 @@ You need to have the following packages installed on your system:
 
 Go to the 'System Tray Settings' menu and activate it :)
 
-![screenshot of how to add in the systray](git-assets/img/v4.2.0/add-systray.png)
+![screenshot of how to add in the systray](git-assets/img/add-systray.png)
 
 ## Configuration
 
@@ -67,14 +71,19 @@ Go to the 'System Tray Settings' menu and activate it :)
 | Do not close the terminal at the end | if true add the `--noclose` flag into the `konsole` command | Prevent the console to close at the end of the update command |
 | Count ARCH command | The command you want to execute for counting the packages for CORE and EXTRA (default: `checkupdates [pipe] wc -l`) | The `updater` exec this command |
 | Count AUR command | The command you want to execute for counting the packages for the other db (default: `yay -Qua [pipe] wc -l`) | The `updater` exec this command |
-| Update command | The command you want to execute when the `update` action is called | Pass the command to `konsole -e` |
+| Update all command | The command for updating all the package at once | Pass the command to `konsole -e` |
+| Update one command | The command for updating one package via the popup | Pass the command to `konsole -e` and add the package name at the end |
 | Display | | |
 | Show a dot in place of the label | Replace the label with a colored dot | If the total count is > than 0 the dot is visible, otherwise nothing is shown (no label, no dot) |
 | Custom dot color | If you want to customize the color of the dot | If not checked the dot get the color from your theme via `PlasmaCore.Theme.textColor` |
 | Separate result | If you want to have the total for *arch* and the total for the other db in the label | Set the label text to `' ' + totalArch + separator + totalAur + ' '` |
 | Separator | The text you want to have for, space available | Inject the text you put into the label |
+| Popup | | |
+| Custom X color | You can tick the box if you want a custom color on the X element | Change the color on the popup element and on the preview in the same page |
+| Separator text | Custom text for the version separator | Use the text provided to separate versions in the text |
 | Mouse action | | |
 | Click configuration | Choose the type of action you want to do for each click on the mouse | Left click to check, middle click to update OR Middle click to check, left click to update |
+| Main action behavior | If you want to refresh the list or open the popup when you click | Main click depend on the choice made in the Click configuration settings |
 
 ### Regarding the customization of the commands
 
@@ -84,9 +93,15 @@ In no case I'm responsible of anything if your system break due to your command.
 
 The program launch the update command with `konsole -e`. So you can test your command or script with `konsole -e "my_command"`.
 
-For the update the default command is: `konsole -e (--noclose) 'yay'` where `noclose` is optional.
+When you update all the packages the default command is: `konsole -e (--noclose) 'yay'` where `noclose` is optional.
+
+When you update one package the default command is: `konsole -e (--noclose) 'yay -Sy' packageName` where `noclose` is optional and `packageName` is injected from the list.
 
 ## FAQ
+
+### Why all these options for a similar command
+
+I like to have the opportunity to really configure everything, and to do so simply.
 
 ### Why `yay` and `pacman-contrib`
 
@@ -120,7 +135,7 @@ See the following file :
 
 ## Roadmap
 
-- nothing yet, I take feature request on the go :)
+- Nothing yet, I take feature request on the go :)
 
 ## Want to participate? Have a bug or a request feature?
 

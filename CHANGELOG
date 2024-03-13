@@ -1,3 +1,11 @@
+### v6.0.0
+  - Now a list of all the update is available on click (on systray and on plasmoid)
+  - You can choose if the click refresh the list or open the list
+  - You can personallyse the color of the list item
+  - Each package on the list can be updated one by one if needed
+  - The color of the icon should be correct on most of the theme now
+  - refresh action is available on the menu
+
 ### v5.1.0
   - Thanks to Luis Bocanegra for finishing up the last warning on the plasma 6 upgrade
   - The settings are divided by its theme now
