@@ -99,7 +99,7 @@ Item {
             PlasmaComponents.ToolButton {
                 id: updateIcon
                 height: Kirigami.Units.iconSizes.medium
-                icon.name: "install"
+                icon.name: "install-symbolic"
                 onClicked: update()
                 visible: main.hasUpdate()
             }
@@ -107,7 +107,7 @@ Item {
             PlasmaComponents.ToolButton {
                 id: checkUpdatesIcon
                 height: Kirigami.Units.iconSizes.medium
-                icon.name: "view-refresh"
+                icon.name: "view-refresh-symbolic"
                 onClicked: refresh()
             }
         }
