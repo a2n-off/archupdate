@@ -13,6 +13,7 @@ Kirigami.ScrollablePage {
   property alias cfg_notCloseCommand: notCloseBox.checked
 
   property alias cfg_updateCommand: updateCommandInput.text
+  property alias cfg_updateCommandOne: updateCommandOneInput.text
   property alias cfg_countArchCommand: countArchCommandInput.text
   property alias cfg_countAurCommand: countAurCommandInput.text
 
@@ -124,7 +125,12 @@ Kirigami.ScrollablePage {
 
       Controls.TextField {
         id: updateCommandInput
-        Kirigami.FormData.label: "Update command: "     
+        Kirigami.FormData.label: "Update all command: "
+      }
+
+      Controls.TextField {
+        id: updateCommandOneInput
+        Kirigami.FormData.label: "Update one command: "
       }
 
     }

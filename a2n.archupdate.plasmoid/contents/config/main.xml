@@ -39,6 +39,10 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
         <default>yay</default>
     </entry>
 
+    <entry name="updateCommandOne" type="String">
+        <default>yay -Sy</default>
+    </entry>
+
     <entry name="countArchCommand" type="String">
         <default>checkupdates | wc -l</default>
     </entry>
