@@ -9,6 +9,9 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <entry name="invertMouseAction" type="Bool">
         <default>false</default>
     </entry>
+    <entry name="mainIsRefresh" type="Bool">
+        <default>false</default>
+    </entry>
 </group>
 
 <group name="commandConfigPage">
@@ -81,6 +84,45 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <entry name="iconUseCustomColor" type="Bool">
         <default>false</default>
     </entry>
+</group>
+
+<group name="popupConfigPage">
+
+    <entry name="nameUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry name="nameColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="sourceUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry name="sourceColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="separatorUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry name="separatorColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="fvUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry name="fvColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="tvUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry name="tvColor" type="String">
+        <default>white</default>
+    </entry>
+
 </group>
 
 </kcfg>

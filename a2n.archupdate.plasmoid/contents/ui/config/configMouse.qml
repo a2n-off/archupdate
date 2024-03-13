@@ -10,6 +10,7 @@ Kirigami.ScrollablePage {
     id: mouseConfigPage
 
     property alias cfg_invertMouseAction: invertMouseAction.checked
+    property alias cfg_mainIsRefresh: mainIsRefresh.checked
 
     ColumnLayout {
 
@@ -41,6 +42,34 @@ Kirigami.ScrollablePage {
                     text: i18n("Middle click to check, left click to update")
                     autoExclusive: true
                 }
+            }
+
+        }
+
+        Kirigami.FormLayout {
+            wideMode: false
+
+            Kirigami.Separator {
+                Kirigami.FormData.isSection: true
+                Kirigami.FormData.label: "Main action behavior"
+            }
+        }
+
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            text: "Doing both at the same time is prone to bug so it's not possible"
+            visible: true
+        }
+
+        Kirigami.FormLayout {
+            RowLayout {
+                Kirigami.FormData.label: "Do a refresh in place of openning the popup: "
+                visible: true
+                Controls.CheckBox {
+                    id: mainIsRefresh
+                    checked: cfg_mainIsRefresh
+                }
+
             }
 
         }
