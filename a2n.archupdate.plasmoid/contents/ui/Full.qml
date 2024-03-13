@@ -62,7 +62,8 @@ Item {
                         packageListModel.append({
                             name: name,
                             fv: fv,
-                            tv: tv
+                            tv: tv,
+                            isArch: cmdIsListArch
                         });
                     }
 
@@ -115,8 +116,8 @@ Item {
 
     // page view for the list
     Kirigami.ScrollablePage {
-        id: scrollView;
-        background: Rectangle{
+        id: scrollView
+        background: Rectangle {
             anchors.fill: parent
             color: "transparent"
         }
@@ -125,15 +126,10 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         ListView {
-            id: packageView;
+            id: packageView
             anchors.rightMargin: Kirigami.Units.gridUnit
-            clip: true
             model: packageListModel
-            boundsBehavior: Flickable.StopAtBounds;
-            focus: true
-            delegate: PlasmaComponents.Label {
-                text: name
-            }
+            delegate: Components.ListItem {} // automatically inject the data from the model
         }
     }
 
