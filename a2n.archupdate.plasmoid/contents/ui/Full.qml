@@ -83,6 +83,16 @@ Item {
         width: parent.width
 
         RowLayout {
+            Layout.alignment: Qt.AlignLeft
+            spacing: 0
+
+            Controls.Label {
+                height: Kirigami.Units.iconSizes.medium
+                text: 'Arch ' + main.totalArch + ' - Aur ' + main.totalAur
+            }
+        }
+
+        RowLayout {
             Layout.alignment: Qt.AlignRight
             spacing: 0
 
