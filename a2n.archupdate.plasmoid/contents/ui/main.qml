@@ -39,9 +39,16 @@ PlasmoidItem {
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18n("Update")
-            icon.name: "keyboard-caps-locked"
+            icon.name: "install"
             onTriggered: {
                 updater.launchUpdate()
+            }
+        },
+        PlasmaCore.Action {
+            text: i18n("Refresh")
+            icon.name: "view-refresh"
+            onTriggered: {
+                updater.countAll()
             }
         }
     ]
