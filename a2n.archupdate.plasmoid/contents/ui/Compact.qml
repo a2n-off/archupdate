@@ -31,6 +31,7 @@ Item {
   property real itemSize: Math.min(row.height, row.width)
 
   property bool invertMouseAction: plasmoid.configuration.invertMouseAction
+  property bool mainIsRefresh: plasmoid.configuration.mainIsRefresh
 
   // updates the icon according to the refresh status
   function updateUi(refresh: bool) {
@@ -155,14 +156,12 @@ Item {
       onClicked: (mouse) => {
         if (invertMouseAction) {
           if (mouse.button == Qt.MiddleButton) {
-            //onLClick() - don't do it again
-            main.expanded = !main.expanded
+            mainIsRefresh ? onLClick() : main.expanded = !main.expanded
           }
           if (mouse.button == Qt.LeftButton) onMClick()
         } else {
           if (mouse.button == Qt.LeftButton) {
-            //onLClick() - don't do it again
-            main.expanded = !main.expanded
+            mainIsRefresh ? onLClick() : main.expanded = !main.expanded
           }
           if (mouse.button == Qt.MiddleButton) onMClick()
         }
