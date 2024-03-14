@@ -23,8 +23,9 @@ ConfigModel {
         source: "config/configMouse.qml"
     }
     ConfigCategory {
-        name: i18nc("@title", "Debug")
+        name: i18nc("@title", "Debug log")
         icon: "backup-relative"
         source: "config/showLog.qml"
+        visible: plasmoid.configuration.debugMode
     }
 }
