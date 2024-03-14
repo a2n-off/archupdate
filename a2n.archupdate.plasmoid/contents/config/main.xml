@@ -5,6 +5,12 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 <kcfgfile name=""/>
 
+<group name="shadow">
+    <entry name="cmdIsRunning" type="Bool">
+        <default>false</default>
+    </entry>
+</group>
+
 <group name="debugConfigPage">
     <entry name="debugLog" type="String">
         <default>Nothing</default>
