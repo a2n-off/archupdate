@@ -4,6 +4,7 @@ import QtQuick.Controls
 import org.kde.plasma.core as PlasmaCore
 
 import org.kde.plasma.plasmoid
+import org.kde.plasma.plasma5support as Plasma5Support
 
 import "../_toolbox" as Tb
 import "../service" as Sv
@@ -15,11 +16,46 @@ PlasmoidItem {
     property string totalArch: "0"
     property string totalAur: "0"
 
+    signal updatingList()
+    signal stoppedUpdatingList()
+
     // load one instance of each needed service
     Sv.Updater{ id: updater }
     Sv.Checker{ id: checker }
     Sv.Debug{ id: debug }
-    Tb.Cmd { id: cmd }
+
+    Plasma5Support.DataSource {
+        id: cmd
+        engine: "executable"
+        connectedSources: []
+
+        onNewData: function (sourceName, data) {
+            var exitCode = data["exit code"]
+            var exitStatus = data["exit status"]
+            var stdout = data["stdout"]
+            var stderr = data["stderr"]
+            exited(sourceName, exitCode, exitStatus, stdout, stderr)
+            disconnectSource(sourceName)
+        }
+
+        onSourceConnected: function (source) {
+            main.updatingList()
+            connected(source)
+        }
+
+        onExited: function (cmd, exitCode, exitStatus, stdout, stderr) {
+            main.stoppedUpdatingList()
+        }
+
+        // execute the given cmd
+        function exec(cmd: string) {
+            if (!cmd) return
+            connectSource(cmd)
+        }
+
+        signal connected(string source)
+        signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
+    }
 
     // execute function count each updateInterval minutes
     Timer {
@@ -66,7 +102,7 @@ PlasmoidItem {
         }
     ]
 
-    // inject the data for the tooltip
+    // load the tooltip
     toolTipItem: Loader {
         id: tooltipLoader
         Layout.minimumWidth: item ? item.implicitWidth : 0

@@ -7,7 +7,7 @@ Item {
   Timer { id: sleeper }
 
   function exec(time, callback) {
-    sleeper.interval = time * 1000; // ms to s
+    sleeper.interval = time * 1000; // ms
     sleeper.repeat = false;
     sleeper.triggered.connect(callback);
     sleeper.start();

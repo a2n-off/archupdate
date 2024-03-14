@@ -19,6 +19,15 @@ Plasma5Support.DataSource {
     connectSource(queue[0])
   }
 
+  function closing() {
+    isRunning = false; // Set isRunning to false after 1 second delay
+    if (queue.length > 0) {
+      launchCmdInQueue(); // If a cmd is still in queue launch it
+    } else {
+      console.log("*************************************************** I'm empty boss");
+    }
+  }
+
   onNewData: function (sourceName, data) {
     var exitCode = data["exit code"]
     var exitStatus = data["exit status"]
@@ -33,20 +42,17 @@ Plasma5Support.DataSource {
   }
 
   onExited: function (cmd, exitCode, exitStatus, stdout, stderr) {
-    // queue.shift() // delete the first value, so this exited cmd
-    // isRunning = false
-    // if (queue.length > 0) launchCmdInQueue() // if a cmd is still in queue launch it
+    queue.shift() // delete the first value, so this exited cmd
+    closing()
   }
 
   // execute the given cmd
   function exec(cmd: string) {
     if (!cmd) return
-    connectSource(cmd)
+      //connectSource(cmd)
 
-    // queue.push(cmd)
-    // if (!isRunning) {
-    //   launchCmdInQueue()
-    // }
+      queue.push(cmd)
+      if (!isRunning) launchCmdInQueue()
   }
 
   signal connected(string source)

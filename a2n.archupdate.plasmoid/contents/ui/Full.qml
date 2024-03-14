@@ -16,6 +16,8 @@ PlasmaExtras.Representation {
     property string listAur: ""
     property string listArch: ""
     property bool onRefresh: false
+    property bool onError: false
+    property string errorMessage: ""
 
     focus: true
     anchors.fill: parent
@@ -25,22 +27,31 @@ PlasmaExtras.Representation {
     Layout.maximumWidth: 400
 
     function updateAll() {
-        updater.launchUpdate()
+        if (!onRefresh) updater.launchUpdate()
     }
 
     function refresh() {
-        updater.countAll()
+        if (!onRefresh) updater.countAll()
     }
 
     // list of the packages
     ListModel { id: packageListModel }
+
+    // map the main signal
+    Connections {
+        target: main
+        function onUpdatingList() {
+            onRefresh = true
+        }
+        function onStoppedUpdatingList() {}
+    }
 
     // map the cmd signal with the widget
     Connections {
         target: cmd
 
         function onConnected(source) {
-            onRefresh = true
+            onError = false
         }
 
         function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
@@ -70,6 +81,11 @@ PlasmaExtras.Representation {
                 });
             }
 
+            if (stderr !== '') {
+                onError = true
+                errorMessage = stderr
+            }
+
             onRefresh = false
         }
     }
@@ -96,6 +112,11 @@ PlasmaExtras.Representation {
             Layout.alignment: Qt.AlignRight
             spacing: 0
 
+            PlasmaComponents.BusyIndicator {
+                id: busyIndicatorUpdateIcon
+                visible: onRefresh && main.hasUpdate()
+            }
+
             PlasmaComponents.ToolButton {
                 id: updateIcon
                 height: Kirigami.Units.iconSizes.medium
@@ -103,10 +124,15 @@ PlasmaExtras.Representation {
                 display: PlasmaComponents.AbstractButton.IconOnly
                 text: i18n("Install all update")
                 onClicked: updateAll()
-                visible: main.hasUpdate()
+                visible: !onRefresh && main.hasUpdate()
                 PlasmaComponents.ToolTip {
                     text: parent.text
                 }
+            }
+
+            PlasmaComponents.BusyIndicator {
+                id: busyIndicatorCheckUpdatesIcon
+                visible: onRefresh
             }
 
             PlasmaComponents.ToolButton {
@@ -115,6 +141,7 @@ PlasmaExtras.Representation {
                 icon.name: "view-refresh-symbolic"
                 display: PlasmaComponents.AbstractButton.IconOnly
                 text: i18n("Refresh list")
+                visible: !onRefresh
                 onClicked: refresh()
                 PlasmaComponents.ToolTip {
                     text: parent.text
@@ -137,6 +164,7 @@ PlasmaExtras.Representation {
     // page view for the list
     Kirigami.ScrollablePage {
         id: scrollView
+        visible: !onRefresh && !onError
         background: Rectangle {
             anchors.fill: parent
             color: "transparent"
@@ -158,18 +186,23 @@ PlasmaExtras.Representation {
         id: upToDateLabel
         text: i18n("You're up-to-date !")
         anchors.centerIn: parent
-        visible: !onRefresh && listAur === "" && listArch === ""
+        visible: !onRefresh && listAur === "" && listArch === ""  && !onError
+    }
+
+    // if an error happend
+    Controls.Label {
+        id: errorLabel
+        width: parent.width
+        text: i18n("Hu ho something is wrong : " + errorMessage)
+        anchors.centerIn: parent
+        visible: onError
+        wrapMode: Text.Wrap
     }
 
     // loading indicator
     PlasmaComponents.BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        visible: onRefresh
-    }
-
-    // HACK launch a refresh
-    Component.onCompleted: {
-        refresh()
+        visible: onRefresh  && !onError
     }
 }

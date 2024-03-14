@@ -45,13 +45,15 @@ Item {
 
   // event handler for the left click on MouseArea
   function onLClick() {
-    updater.countAll()
+    if (!onRefresh || !onUpdate) updater.countAll()
   }
 
   // event handler for the middle click on MouseArea
   function onMClick() {
-    onUpdate = true
-    updater.launchUpdate()
+    if (!onRefresh || !onUpdate) {
+      onUpdate = true
+      updater.launchUpdate()
+    }
   }
 
   // return true if the widget area is vertical
@@ -69,6 +71,15 @@ Item {
   // return true if update is needed (total > 0)
   function isUpdateNeeded() {
     return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
+  }
+
+  // map the main signal
+  Connections {
+    target: main
+    function onUpdatingList() {
+      onRefresh = true
+    }
+    function onStoppedUpdatingList() {}
   }
 
   // map the cmd signal with the widget
