@@ -11,16 +11,17 @@ import "../service" as Sv
 PlasmoidItem {
     id: main
 
-    property int intervalConfig: Plasmoid.configuration.updateInterval
+    property int intervalConfig: plasmoid.configuration.updateInterval
     property string totalArch: "0"
     property string totalAur: "0"
 
     // load one instance of each needed service
     Sv.Updater{ id: updater }
     Sv.Checker{ id: checker }
+    Sv.Debug{ id: debug }
     Tb.Cmd { id: cmd }
 
-    // execute function count each 30 minutes
+    // execute function count each updateInterval minutes
     Timer {
         id: timer
         interval: intervalConfig * 60000 // minute to milisecond
@@ -79,5 +80,6 @@ PlasmoidItem {
     Component.onCompleted: {
         checker.konsole()
         checker.checkupdates()
+        plasmoid.configuration.debugLog = "" // clear log window
     }
 }

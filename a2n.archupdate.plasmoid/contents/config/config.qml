@@ -22,4 +22,9 @@ ConfigModel {
         icon: "input-mouse-relative"
         source: "config/configMouse.qml"
     }
+    ConfigCategory {
+        name: i18nc("@title", "Debug")
+        icon: "backup-relative"
+        source: "config/showLog.qml"
+    }
 }

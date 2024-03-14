@@ -15,7 +15,7 @@ Item {
   property string totalArch: "0"
   property string totalAur: "0"
 
-  property bool debug: plasmoid.configuration.debugMode
+  property bool isOnDebug: plasmoid.configuration.debugMode
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
   property bool dot: plasmoid.configuration.dot
@@ -76,12 +76,12 @@ Item {
     target: cmd
 
     function onConnected(source) {
-      if (debug) console.log('ARCHUPDATE - cmd connected: ', source)
+      if (isOnDebug) debug.log('ARCHUPDATE - cmd connected: ' + source)
       updateUi(true)
     }
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-      if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
+      if (isOnDebug) debug.log('ARCHUPDATE - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
 
       // update the count after the update
       if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
