@@ -13,7 +13,8 @@ import "components" as Components
 
 PlasmaExtras.Representation {
 
-    property string listAll: ""
+    property string listAur: ""
+    property string listArch: ""
     property bool onRefresh: false
 
     focus: true
@@ -46,12 +47,12 @@ PlasmaExtras.Representation {
             // handle the result for the list
             const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
             const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
-            if (cmdIsListAur) listAll = listAll + stdout
-            if (cmdIsListArch) listAll = listAll + stdout
+            if (cmdIsListAur) listAur = stdout
+            if (cmdIsListArch) listArch = stdout
 
             if (cmdIsListAur || cmdIsListArch) {
                 packageListModel.clear()
-
+                let listAll = listAur + listArch
                 listAll.split("\n").forEach(line => {
                     const packageDetails = line.split(/\s+/);
                     const name = packageDetails[0];
@@ -157,7 +158,7 @@ PlasmaExtras.Representation {
         id: upToDateLabel
         text: i18n("You're up-to-date !")
         anchors.centerIn: parent
-        visible: !onRefresh && listAll === ""
+        visible: !onRefresh && listAur === "" && listArch === ""
     }
 
     // loading indicator

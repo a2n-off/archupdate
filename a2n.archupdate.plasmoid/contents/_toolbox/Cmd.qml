@@ -33,19 +33,20 @@ Plasma5Support.DataSource {
   }
 
   onExited: function (cmd, exitCode, exitStatus, stdout, stderr) {
-    queue.shift() // delete the first value, so this exited cmd
-    isRunning = false
-    if (queue.length > 0) launchCmdInQueue() // if a cmd is still in queue launch it
+    // queue.shift() // delete the first value, so this exited cmd
+    // isRunning = false
+    // if (queue.length > 0) launchCmdInQueue() // if a cmd is still in queue launch it
   }
 
   // execute the given cmd
   function exec(cmd: string) {
     if (!cmd) return
+    connectSource(cmd)
 
-    queue.push(cmd)
-    if (!isRunning) {
-      launchCmdInQueue()
-    }
+    // queue.push(cmd)
+    // if (!isRunning) {
+    //   launchCmdInQueue()
+    // }
   }
 
   signal connected(string source)
