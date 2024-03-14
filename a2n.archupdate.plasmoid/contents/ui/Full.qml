@@ -14,7 +14,6 @@ import "components" as Components
 PlasmaExtras.Representation {
 
     property string listAll: ""
-    property bool onUpdate: false
     property bool onRefresh: false
 
     focus: true
@@ -24,7 +23,7 @@ PlasmaExtras.Representation {
     Layout.minimumWidth: 200
     Layout.maximumWidth: 400
 
-    function update() {
+    function updateAll() {
         updater.launchUpdate()
     }
 
@@ -47,7 +46,7 @@ PlasmaExtras.Representation {
             // handle the result for the list
             const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
             const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
-            if (cmdIsListAur) listAll = stdout
+            if (cmdIsListAur) listAll = listAll + stdout
             if (cmdIsListArch) listAll = listAll + stdout
 
             if (cmdIsListAur || cmdIsListArch) {
@@ -102,7 +101,7 @@ PlasmaExtras.Representation {
                 icon.name: "install-symbolic"
                 display: PlasmaComponents.AbstractButton.IconOnly
                 text: i18n("Install all update")
-                onClicked: update()
+                onClicked: updateAll()
                 visible: main.hasUpdate()
                 PlasmaComponents.ToolTip {
                     text: parent.text
@@ -166,5 +165,10 @@ PlasmaExtras.Representation {
         id: busyIndicator
         anchors.centerIn: parent
         visible: onRefresh
+    }
+
+    // HACK launch a refresh
+    Component.onCompleted: {
+        refresh()
     }
 }

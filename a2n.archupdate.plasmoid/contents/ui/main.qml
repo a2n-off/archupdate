@@ -11,15 +11,32 @@ import "../service" as Sv
 PlasmoidItem {
     id: main
 
+    property int intervalConfig: Plasmoid.configuration.updateInterval
     property string totalArch: "0"
     property string totalAur: "0"
 
+    // load one instance of each needed service
+    Sv.Updater{ id: updater }
+    Sv.Checker{ id: checker }
+    Tb.Cmd { id: cmd }
+
+    // execute function count each 30 minutes
+    Timer {
+        id: timer
+        interval: intervalConfig * 60000 // minute to milisecond
+        running: true
+        repeat: true
+        triggeredOnStart: true // trigger on start for a first check
+        onTriggered: updater.countAll()
+    }
+
+    // handle the "show when relevant" property for the systray
     function hasUpdate() {
         return !(totalArch === "0" && totalAur === "0")
     }
-
     Plasmoid.status: hasUpdate() ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
 
+    // map the UI
     compactRepresentation: Compact {
         onTotalArchChanged: {
             main.totalArch = totalArch
@@ -30,11 +47,7 @@ PlasmoidItem {
     }
     fullRepresentation: Full {}
 
-    // load one instance of each needed service
-    Sv.Updater{ id: updater }
-    Sv.Checker{ id: checker }
-    Tb.Cmd { id: cmd }
-
+    // map the context menu
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18n("Update")
@@ -52,6 +65,7 @@ PlasmoidItem {
         }
     ]
 
+    // inject the data for the tooltip
     toolTipItem: Loader {
         id: tooltipLoader
         Layout.minimumWidth: item ? item.implicitWidth : 0
@@ -61,6 +75,7 @@ PlasmoidItem {
         source: "Tooltip.qml"
     }
 
+    // launch a check for the dependancies
     Component.onCompleted: {
         checker.konsole()
         checker.checkupdates()

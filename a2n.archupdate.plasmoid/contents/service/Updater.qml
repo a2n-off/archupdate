@@ -7,7 +7,6 @@ import org.kde.plasma.plasmoid
 
 Item {
 
-  property int intervalConfig: Plasmoid.configuration.updateInterval
   property string countArchCommand: Plasmoid.configuration.countArchCommand
   property string countAurCommand: Plasmoid.configuration.countAurCommand
   property string listArchCommand: Plasmoid.configuration.listArchCommand
@@ -61,16 +60,6 @@ Item {
 
   function killProcess(process) {
     cmd.exec("kill -9 " + process)
-  }
-
-  // execute function count each 30 minutes
-  Timer {
-    id: timer
-    interval: intervalConfig * 60000 // minute to milisecond
-    running: true
-    repeat: true
-    triggeredOnStart: true // trigger on start for a first checkind
-    onTriggered: countAll()
   }
 
 }

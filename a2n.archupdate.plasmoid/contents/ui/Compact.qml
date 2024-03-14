@@ -86,7 +86,7 @@ Item {
       // update the count after the update
       if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
         onUpdate = false
-        onLClick()
+        updater.countAll()
       }
 
       // handle the result for the count
