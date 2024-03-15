@@ -7,15 +7,28 @@ import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.plasmoid
 
 ColumnLayout {
-    id: root;
+    id: root
 
     property var dividerColor: Kirigami.Theme.textColor
     property var dividerOpacity: 0.1
-    property string totalArch: main.totalArch
-    property string totalAur: main.totalAur
+    property string totalArch: "0"
+    property string totalAur: "0"
 
     function noUpdateAvailable() {
         return totalArch === "0" && totalAur === "0"
+    }
+
+    // map the cmd signal
+    Connections {
+        target: cmd
+
+        function onTotalAur(total) {
+            root.totalAur = total
+        }
+
+        function onTotalArch(total) {
+            root.totalArch = total
+        }
     }
 
     ColumnLayout {
