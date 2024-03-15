@@ -207,4 +207,8 @@ PlasmaExtras.Representation {
         anchors.centerIn: parent
         visible: onRefresh  && !onError
     }
+
+    Component.onCompleted: {
+        refresh()
+    }
 }
