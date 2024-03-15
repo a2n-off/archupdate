@@ -1,3 +1,9 @@
+### v6.1.0
+  - A new section is available in the setting if you want to check the debug log
+  - Fix a bug in the "Install all update" button
+  - Rework all the plugin data with signal
+  - Add an error handler
+
 ### v6.0.0
   - Now a list of all the update is available on click (on systray and on plasmoid)
   - You can choose if the click refresh the list or open the list
