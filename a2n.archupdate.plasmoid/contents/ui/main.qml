@@ -75,7 +75,7 @@ PlasmoidItem {
             if (cmdIsListAur) listAur = stdout
             if (cmdIsListArch) listArch = stdout
             if (cmdIsListAur || cmdIsListArch) {
-                packagesList(listAur + listArch)
+                packagesList(listAur, listArch)
             }
 
 
@@ -93,7 +93,7 @@ PlasmoidItem {
         }
 
         signal isUpdating(bool status)
-        signal packagesList(string list)
+        signal packagesList(string listAur, string listArch)
         signal totalAur(string total)
         signal totalArch(string total)
         signal connected(string source)

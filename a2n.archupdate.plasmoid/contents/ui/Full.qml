@@ -36,6 +36,24 @@ PlasmaExtras.Representation {
         if (!onRefresh) updater.countAll()
     }
 
+    function injectList(list: string, isArch: bool) {
+        list.split("\n").forEach(line => {
+            const packageDetails = line.split(/\s+/);
+            const name = packageDetails[0];
+            const fv = packageDetails[1];
+            const tv = packageDetails[3];
+            if (name.trim() !== "") {
+                packageListModel.append({
+                    name: name,
+                    fv: fv,
+                    tv: tv,
+                    isArch: isArch
+                });
+            }
+
+        });
+    }
+
     // list of the packages
     ListModel { id: packageListModel }
 
@@ -66,24 +84,11 @@ PlasmaExtras.Representation {
             }
         }
 
-        function onPackagesList(list) {
+        function onPackagesList(listAur, listArch) {
             packageListModel.clear()
-            full.packageList = list
-            list.split("\n").forEach(line => {
-                const packageDetails = line.split(/\s+/);
-                const name = packageDetails[0];
-                const fv = packageDetails[1];
-                const tv = packageDetails[3];
-                if (name.trim() !== "") {
-                    packageListModel.append({
-                        name: name,
-                        fv: fv,
-                        tv: tv,
-                        isArch: true // TODO
-                    });
-                }
-
-            });
+            full.packageList = listArch + listAur
+            injectList(listArch, true)
+            injectList(listAur, false)
         }
     }
 
