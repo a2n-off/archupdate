@@ -195,7 +195,7 @@ PlasmaExtras.Representation {
     Controls.Label {
         id: errorLabel
         width: parent.width
-        text: i18n("Hu ho something is wrong : " + errorMessage)
+        text: i18n("Hu ho something is wrong\n" + errorMessage)
         anchors.centerIn: parent
         visible: onError
         wrapMode: Text.Wrap
