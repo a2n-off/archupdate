@@ -14,7 +14,7 @@ PlasmaComponents.ItemDelegate {
     // fv     = from version
     // tv     = to version
 
-    width: parent.width
+    width: parent.width // throw a warning but work anyway
 
     function updateOne() {
         updater.launchOneUpdate(name)

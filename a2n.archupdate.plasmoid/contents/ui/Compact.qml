@@ -15,7 +15,6 @@ Item {
   property string totalArch: "0"
   property string totalAur: "0"
 
-  property bool debug: plasmoid.configuration.debugMode
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
   property bool dot: plasmoid.configuration.dot
@@ -45,13 +44,15 @@ Item {
 
   // event handler for the left click on MouseArea
   function onLClick() {
-    updater.countAll()
+    if (!onRefresh || !onUpdate) updater.countAll()
   }
 
   // event handler for the middle click on MouseArea
   function onMClick() {
-    onUpdate = true
-    updater.launchUpdate()
+    if (!onRefresh || !onUpdate) {
+      onUpdate = true
+      updater.launchUpdate()
+    }
   }
 
   // return true if the widget area is vertical
@@ -71,35 +72,20 @@ Item {
     return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
   }
 
-  // map the cmd signal with the widget
+  // map the cmd signal
   Connections {
     target: cmd
 
-    function onConnected(source) {
-      if (debug) console.log('ARCHUPDATE - cmd connected: ', source)
-      updateUi(true)
+    function onIsUpdating(status) {
+      updateUi(status)
     }
 
-    function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-      if (debug) console.log('ARCHUPDATE - cmd exited: ', JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
+    function onTotalAur(total) {
+      row.totalAur = total
+    }
 
-      // update the count after the update
-      if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button
-        onUpdate = false
-        onLClick()
-      }
-
-      // handle the result for the count
-      const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
-      const cmdIsArch = cmd === plasmoid.configuration.countArchCommand
-      if (cmdIsArch) totalArch =  stdout.replace(/\n/g, '')
-      if (cmdIsAur) totalAur =  stdout.replace(/\n/g, '')
-
-      // handle the result for the checker
-      if (cmd === "konsole -v") checker.validateKonsole(stderr)
-      if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
-
-      updateUi(false)
+    function onTotalArch(total) {
+      row.totalArch = total
     }
   }
 
