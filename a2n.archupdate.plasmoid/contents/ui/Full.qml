@@ -12,9 +12,11 @@ import org.kde.plasma.components as PlasmaComponents
 import "components" as Components
 
 PlasmaExtras.Representation {
+    id: full
 
-    property string listAur: ""
-    property string listArch: ""
+    property string totalAur: "0"
+    property string totalArch: "0"
+    property string packageList: ""
     property bool onRefresh: false
     property bool onError: false
     property string errorMessage: ""
@@ -37,16 +39,7 @@ PlasmaExtras.Representation {
     // list of the packages
     ListModel { id: packageListModel }
 
-    // map the main signal
-    Connections {
-        target: main
-        function onUpdatingList() {
-            onRefresh = true
-        }
-        function onStoppedUpdatingList() {}
-    }
-
-    // map the cmd signal with the widget
+    // map the cmd signal
     Connections {
         target: cmd
 
@@ -54,39 +47,43 @@ PlasmaExtras.Representation {
             onError = false
         }
 
+        function onIsUpdating(status) {
+            onRefresh = status
+        }
+
+        function onTotalAur(total) {
+            full.totalAur = total
+        }
+
+        function onTotalArch(total) {
+            full.totalArch = total
+        }
+
         function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-            // handle the result for the list
-            const cmdIsListAur = cmd === plasmoid.configuration.listAurCommand
-            const cmdIsListArch = cmd === plasmoid.configuration.listArchCommand
-            if (cmdIsListAur) listAur = stdout
-            if (cmdIsListArch) listArch = stdout
-
-            if (cmdIsListAur || cmdIsListArch) {
-                packageListModel.clear()
-                let listAll = listAur + listArch
-                listAll.split("\n").forEach(line => {
-                    const packageDetails = line.split(/\s+/);
-                    const name = packageDetails[0];
-                    const fv = packageDetails[1];
-                    const tv = packageDetails[3];
-                    if (name.trim() !== "") {
-                        packageListModel.append({
-                            name: name,
-                            fv: fv,
-                            tv: tv,
-                            isArch: cmdIsListArch
-                        });
-                    }
-
-                });
-            }
-
             if (stderr !== '') {
                 onError = true
                 errorMessage = stderr
             }
+        }
 
-            onRefresh = false
+        function onPackagesList(list) {
+            packageListModel.clear()
+            full.packageList = list
+            list.split("\n").forEach(line => {
+                const packageDetails = line.split(/\s+/);
+                const name = packageDetails[0];
+                const fv = packageDetails[1];
+                const tv = packageDetails[3];
+                if (name.trim() !== "") {
+                    packageListModel.append({
+                        name: name,
+                        fv: fv,
+                        tv: tv,
+                        isArch: true // TODO
+                    });
+                }
+
+            });
         }
     }
 
@@ -104,7 +101,7 @@ PlasmaExtras.Representation {
 
             Controls.Label {
                 height: Kirigami.Units.iconSizes.medium
-                text: 'Arch ' + main.totalArch + ' - Aur ' + main.totalAur
+                text: 'Arch ' + full.totalArch + ' - Aur ' + full.totalAur
             }
         }
 
@@ -114,7 +111,7 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.BusyIndicator {
                 id: busyIndicatorUpdateIcon
-                visible: onRefresh && main.hasUpdate()
+                visible: onRefresh && packageList !== ""
             }
 
             PlasmaComponents.ToolButton {
@@ -124,7 +121,7 @@ PlasmaExtras.Representation {
                 display: PlasmaComponents.AbstractButton.IconOnly
                 text: i18n("Install all update")
                 onClicked: updateAll()
-                visible: !onRefresh && main.hasUpdate()
+                visible: !onRefresh && packageList !== ""
                 PlasmaComponents.ToolTip {
                     text: parent.text
                 }
@@ -186,7 +183,7 @@ PlasmaExtras.Representation {
         id: upToDateLabel
         text: i18n("You're up-to-date !")
         anchors.centerIn: parent
-        visible: !onRefresh && listAur === "" && listArch === ""  && !onError
+        visible: !onRefresh && packageList === "" && !onError
     }
 
     // if an error happend
