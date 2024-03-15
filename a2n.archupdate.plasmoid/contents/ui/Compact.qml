@@ -87,12 +87,12 @@ Item {
     target: cmd
 
     function onConnected(source) {
-      if (isOnDebug) debug.log('ARCHUPDATE - cmd connected: ' + source)
+      if (isOnDebug) debug.log('ARCHUPDATE - cmd connected: ' + source, false)
       updateUi(true)
     }
 
     function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
-      if (isOnDebug) debug.log('ARCHUPDATE - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}))
+      if (isOnDebug) debug.log('ARCHUPDATE - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}), stderr !== "")
 
       // update the count after the update
       if (onUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button

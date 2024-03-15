@@ -9,9 +9,9 @@ import org.kde.kirigami as Kirigami
 
 Item {
 
-    function log(message) {
+    function log(message: string, onError: bool) {
         let date = Qt.formatTime(new Date(), "hh:mm:ss")
-        let msg = '<font color="' + Kirigami.Theme.positiveTextColor + '">' + date + "</font>" + ' - ' + message + '<br/>'
+        let msg = '<font color="' + (onError ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.positiveTextColor) + '">' + date + "</font>" + ' - ' + message + '<br/>'
         console.log(date + ' - ' + message)
         plasmoid.configuration.debugLog = plasmoid.configuration.debugLog + msg
     }
