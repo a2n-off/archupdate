@@ -34,6 +34,9 @@ Item {
   function countAll() {
     countArch()
     countAur()
+  }
+
+  function listAll() {
     listArch()
     listAur()
   }
