@@ -41,19 +41,13 @@ PlasmoidItem {
         }
 
         onSourceConnected: function (source) {
-            if (isOnDebug) debug.log('ARCHUPDATE - cmd connected: ' + source, false)
+            if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd connected: ' + source, false)
             isUpdating(true)
             connected(source)
         }
 
         onExited: function (cmd, exitCode, exitStatus, stdout, stderr) {
-            if (isOnDebug) debug.log('ARCHUPDATE - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}), stderr !== "")
-
-            // update the count after the update
-            if (isOnUpdate || stdout === '') { // eg. the stdout is empty if the user close the update term with the x button, or if stderr is pop
-                isOnUpdate = false
-                updater.countAll()
-            }
+            if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}), stderr !== "")
 
             // handle the result for the count
             const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
@@ -62,11 +56,13 @@ PlasmoidItem {
                 let total = stdout.replace(/\n/g, '')
                 totalArch(total)
                 main.tArch = total
+                updater.listArch()
             }
             if (cmdIsAur) {
                 let total = stdout.replace(/\n/g, '')
                 totalAur(total)
                 main.tAur = total
+                updater.listAur()
             }
 
             // handle the result for the list
@@ -78,10 +74,20 @@ PlasmoidItem {
                 packagesList(listAur, listArch)
             }
 
-
             // handle the result for the checker
             if (cmd === "konsole -v") checker.validateKonsole(stderr)
             if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
+
+            if (stderr !== "") {
+                // retry the cmd if error execpt for the upgrade (that crash the plasmoid)
+                if (!cmd.startsWith("konsole")) {
+                    if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd retry after error : ' + cmd, true)
+                    cmd.exec(cmd)
+                } else {
+                    if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - konsole error, refreshing : ' + cmd, true)
+                    updater.countAll()
+                }
+            }
 
             isUpdating(false)
         }
