@@ -78,15 +78,19 @@ PlasmoidItem {
             if (cmd === "konsole -v") checker.validateKonsole(stderr)
             if (cmd === "checkupdates --version") checker.validateCheckupdates(stderr)
 
-            if (stderr !== "") {
-                // retry the cmd if error execpt for the upgrade (that crash the plasmoid)
-                if (!cmd.startsWith("konsole")) {
-                    if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd retry after error : ' + cmd, true)
-                    cmd.exec(cmd)
-                } else {
-                    if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - konsole error, refreshing : ' + cmd, true)
-                    updater.countAll()
-                }
+            const isUpdateCmd = cmd.startsWith(plasmoid.configuration.termCmd) || cmd.startsWith(plasmoid.configuration.termNoCloseCmd)
+            const isOnError = stderr !== ""
+
+            // retry the cmd if error execpt for the upgrade (that crash the plasmoid)
+            if (isOnError && !isUpdateCmd && plasmoid.configuration.retryMode) {
+                if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd retry after error : ' + cmd, true)
+                cmd.exec(cmd)
+            }
+
+            // refresh after an update action
+            if (isUpdateCmd) {
+                if (isOnDebug) debug.log('ARCHUPDATE - an update end, refreshing : ' + cmd, false)
+                updater.countAll()
             }
 
             isUpdating(false)
