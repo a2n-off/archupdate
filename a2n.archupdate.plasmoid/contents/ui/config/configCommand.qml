@@ -10,6 +10,7 @@ Kirigami.ScrollablePage {
 
   property alias cfg_updateInterval: updateIntervalSpin.value
   property alias cfg_debugMode: debugModeBox.checked
+  property alias cfg_retryMode: retryModeBox.checked
   property alias cfg_notCloseCommand: notCloseBox.checked
 
   property alias cfg_updateCommand: updateCommandInput.text
@@ -85,13 +86,19 @@ Kirigami.ScrollablePage {
 
       Controls.CheckBox {
         id: notCloseBox
-        Kirigami.FormData.label: "Do not close the terminal at the end: "
+        Kirigami.FormData.label: "Do not close the terminal at the end of the upgrade action: "
         checked: false
       }
 
       Controls.CheckBox {
         id: debugModeBox
         Kirigami.FormData.label: "Debug: "
+        checked: false
+      }
+
+      Controls.CheckBox {
+        id: retryModeBox
+        Kirigami.FormData.label: "Retry \"Search & count\" cmd if they are in error: "
         checked: false
       }
 
