@@ -10,9 +10,9 @@ Counts the number of *aur* and *arch* update available (so all the db - extra, c
 
 Refresh each 30 minutes, on click or on the interval you set.
 
-And you can launch an update console via the context menu or the middle click of your mouse !
+You can launch an update console via the context menu or the middle click of your mouse !
 
-Custom setting for the update command and for the count command !
+Custom setting for ALL the command !
 
 You can choose between a dot or a label if an update is available.
 
@@ -33,29 +33,32 @@ You can install the widget from :
 
 #### Plasma 6
 
-- place the source (`a2n.archupdate.plasmoid` folder) in `~/.local/share/plasma/plasmoids/`
-- download via [the KDE store](https://www.pling.com/p/2134470/)
-- [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git)
+- place the `a2n.archupdate.plasmoid` folder from the latest release in `~/.local/share/plasma/plasmoids/`
+- download via [the KDE store](https://www.pling.com/p/2134470/) (install in `~/.local/share/plasma/plasmoids/`)
+- [Dl the package via the AUR](https://aur.archlinux.org/packages/kdeplasma-arch-update-notifier-git) (install in `/usr/share/plasma/plasmoids/`)
 
 #### plasma 5
 
-If you want to use this plugin with kde plasma 5 you should use : 
+If you want to use this plugin with kde plasma 5 you should use:
  - ["The new era release" (v4.2)](https://github.com/bouteillerAlan/archupdate/releases/tag/v4.2.1)
  - [this version on the pling store](https://www.pling.com/p/1940819/)
  - [this version via the AUR](https://aur.archlinux.org/packages/kdeplasma5-arch-update-notifier-git).
 
+**Please note that this version is not maintained since the v4.2.**
+
 #### Dependencies and AUR helper
 
-You need to have the following packages installed on your system:
- - [`pacman-contrib`](https://archlinux.org/packages/extra/x86_64/pacman-contrib/)
- - [`konsole`](https://archlinux.org/packages/extra/x86_64/konsole/)
- - `yay` is used by default for the update and the AUR count. If you want to use another AUR helper you just have to edit the command via the setting window.
-
-`kdialog` is used too, but it's not mandatory because it's used just for alerting if `konsole` or `pacman-contrib` is not installed.
+You need to have the following packages installed on your system **OR** to edit the settings with your prefered one:
+ - [`pacman-contrib`](https://archlinux.org/packages/extra/x86_64/pacman-contrib/) is used for the list and count of the main repository.
+ - [`yay`](https://github.com/Jguer/yay) is used for the list and count of the AUR repository.
+ - [`konsole`](https://archlinux.org/packages/extra/x86_64/konsole/) is used to launch the cmd for the upgrade.
+ - [`kdialog`](https://archlinux.org/packages/extra/x86_64/kdialog/) is used too, but it's not mandatory because it's used just for alerting if a cmd throw an error.
 
 ## How to have this in my system tray?
 
 Go to the 'System Tray Settings' menu and activate it :)
+
+*in some case you may need to log out / log in to see it in the list*
 
 ![screenshot of how to add in the systray](git-assets/img/add-systray.png)
 
@@ -68,11 +71,14 @@ Go to the 'System Tray Settings' menu and activate it :)
 | Command & Debug | | |
 | Interval configuration | set the interval between each execution of the update check function | the `updater` is launch each X minutes |
 | Debug | Enable the debug mode if set to true | Show each command launch by the plasmoid with `ARCHUPDATE` at the beggining (for regex search) |
+| Retry | Enable the retry mode if set to true | Retry the Count or the List cmd if `stderr` is not empty |
 | Do not close the terminal at the end | if true add the `--noclose` flag into the `konsole` command | Prevent the console to close at the end of the update command |
 | Count ARCH command | The command you want to execute for counting the packages for CORE and EXTRA (default: `checkupdates [pipe] wc -l`) | The `updater` exec this command |
 | Count AUR command | The command you want to execute for counting the packages for the other db (default: `yay -Qua [pipe] wc -l`) | The `updater` exec this command |
-| Update all command | The command for updating all the package at once | Pass the command to `konsole -e` |
-| Update one command | The command for updating one package via the popup | Pass the command to `konsole -e` and add the package name at the end |
+| Update all command | The command for updating all the package at once | Pass the command to the Terminal cmd (or the cmd with no close) |
+| Update one command | The command for updating one package via the popup | Pass the command to the Terminal cmd (or the cmd with no close) and add the package name at the end |
+| Terminal cmd | The command for launching the update all or one cmd | Launch the update cmd and automatically close at the end of it |
+| Terminal cmd & no close | The command for launching the update all or one cmd, executed only when "Do not close at the end" is checked | Launch the update cmd and rest open at the end of it |
 | Display | | |
 | Show a dot in place of the label | Replace the label with a colored dot | If the total count is > than 0 the dot is visible, otherwise nothing is shown (no label, no dot) |
 | Custom dot color | If you want to customize the color of the dot | If not checked the dot get the color from your theme via `PlasmaCore.Theme.textColor` |
@@ -87,11 +93,17 @@ Go to the 'System Tray Settings' menu and activate it :)
 
 ### Regarding the customization of the commands
 
-Is up to you to double check the command you want to exec.
+If you have any problems after modifying the default settings (especially the cmds):
 
-In no case I'm responsible of anything if your system break due to your command.
+*quoting the ThinkFan repo here*
 
-The program launch the update command with `konsole -e`. So you can test your command or script with `konsole -e "my_command"`.
+> If this program steals your car, kills your horse, smokes your dope or pees on your carpet... too bad, you're on your own.
+
+Is up to you to double check the command you want to exec. In no case I'm responsible of anything if your system break due to your command.
+
+The program launch the update command with `konsole -e` or the cmd that you put in the setting. So you can test your command or script with `konsole -e "my_command"` or the cmd that you put in the settings `mycmd "my_command"`.
+
+For the update command you have a demo of each cmd just between the title of the section and the setting input.
 
 When you update all the packages the default command is: `konsole -e (--noclose) 'yay'` where `noclose` is optional.
 
@@ -114,6 +126,10 @@ I'have setup `yay` because I use EOS, but, you can use `paru` in the exact same 
 Because this command dosen't sync the DB at the same time so the result is wrong.
 
 For that we need to do something like the `-S` flag before and I prefer to use `checkupdates` for that (it's made for it so...).
+
+### Why the `Do not close at the end` option when you can just update the terminal cmd
+
+Because it's easier for people who don't want to update the default option to switch between not closing and closing the terminal at the end of the update.
 
 ### Why the update is made with yay and not pacman
 

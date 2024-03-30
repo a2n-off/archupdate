@@ -48,6 +48,7 @@ PlasmoidItem {
 
         onExited: function (cmd, exitCode, exitStatus, stdout, stderr) {
             if (isOnDebug) debug.log('ARCHUPDATE - '+plasmoid.id+' - cmd exited: ' + JSON.stringify({cmd, exitCode, exitStatus, stdout, stderr}), stderr !== "")
+            if (stderr !== '') cmd.exec("kdialog --passivepopup 'Archupdate counter throw " + stderr + " error on cmd: " + cmd + "'")
 
             // handle the result for the count
             const cmdIsAur = cmd === plasmoid.configuration.countAurCommand
