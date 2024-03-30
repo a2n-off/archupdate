@@ -1,3 +1,9 @@
+### v6.2.0
+  - Add parameters for the last two cmds without parameters (those of the update :))
+  - Added a kdialog trigger if a list or count cmd has an error
+  - Added an option to retry a list or count cmd if it has an error (disabled by default)
+  - Now list and count are refreshed at the end of an update
+
 ### v6.1.0
   - A new section is available in the setting if you want to check the debug log
   - Fix a bug in the "Install all update" button
