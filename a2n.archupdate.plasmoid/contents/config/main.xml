@@ -70,6 +70,15 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <entry name="listAurCommand" type="String">
         <default>yay -Qua</default>
     </entry>
+
+    <entry name="termCmd" type="String">
+        <default>konsole -e</default>
+    </entry>
+
+    <entry name="termNoCloseCmd" type="String">
+        <default>konsole --noclose -e</default>
+    </entry>
+
 </group>
 
 <group name="displayConfigPage">

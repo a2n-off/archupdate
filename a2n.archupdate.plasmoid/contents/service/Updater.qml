@@ -13,6 +13,8 @@ Item {
   property string listAurCommand: Plasmoid.configuration.listAurCommand
   property string updateCommand: Plasmoid.configuration.updateCommand
   property string updateCommandOne: Plasmoid.configuration.updateCommandOne
+  property string termCmd: Plasmoid.configuration.termCmd
+  property string termNoCloseCmd: Plasmoid.configuration.termNoCloseCmd
   property bool notCloseCommand: Plasmoid.configuration.notCloseCommand
 
   function countArch() {
@@ -44,9 +46,9 @@ Item {
   function launchUpdate() {
     if (updateCommand !== '') {
       if (notCloseCommand) {
-        cmd.exec("konsole --noclose -e '" + updateCommand + "'")
+        cmd.exec(termNoCloseCmd + " '" + updateCommand + "'")
       } else {
-        cmd.exec("konsole -e '" + updateCommand + "'")
+        cmd.exec(termCmd + " '" + updateCommand + "'")
       }
     }
   }
@@ -54,9 +56,9 @@ Item {
   function launchOneUpdate(packageName) {
     if (updateCommandOne !== '' && packageName) {
       if (notCloseCommand) {
-        cmd.exec("konsole --noclose -e '" + updateCommandOne + " " + packageName + "'")
+        cmd.exec(termNoCloseCmd + " '" + updateCommandOne + " " + packageName + "'")
       } else {
-        cmd.exec("konsole -e '" + updateCommandOne + " " + packageName + "'")
+        cmd.exec(termCmd + " '" + updateCommandOne + " " + packageName + "'")
       }
     }
   }

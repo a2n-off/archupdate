@@ -20,6 +20,18 @@ Kirigami.ScrollablePage {
   property alias cfg_listArchCommand: listArchCommandInput.text
   property alias cfg_listAurCommand: listAurCommandInput.text
 
+  property alias cfg_termCmd: termCmdInput.text
+  property alias cfg_termNoCloseCmd: termNoCloseCmdInput.text
+
+  function generateCmdExample() {
+    const cmdA = "<font color=\"" + Kirigami.Theme.disabledTextColor + "\">" + cfg_termCmd + "</font> '<font color=\"" + Kirigami.Theme.positiveTextColor + "\">" + cfg_updateCommand + "</font>'<br/>"
+    const cmdB = "<font color=\"" + Kirigami.Theme.disabledTextColor + "\">" + cfg_termCmd + "</font> '<font color=\"" + Kirigami.Theme.positiveTextColor + "\">" + cfg_updateCommandOne + "</font> packageName'<br/>"
+    const cmdC = "<font color=\"" + Kirigami.Theme.disabledTextColor + "\">" + cfg_termNoCloseCmd + "</font> '<font color=\"" + Kirigami.Theme.positiveTextColor + "\">" + cfg_updateCommand + "</font>'<br/>"
+    const cmdD = "<font color=\"" + Kirigami.Theme.disabledTextColor + "\">" + cfg_termNoCloseCmd + "</font> '<font color=\"" + Kirigami.Theme.positiveTextColor + "\">" + cfg_updateCommandOne + "</font> packageName'<br/>"
+
+    return "Give the following cmd: <br/>" + cmdA + cmdB + cmdC + cmdD
+  }
+
   ColumnLayout {
 
     anchors {
@@ -90,7 +102,7 @@ Kirigami.ScrollablePage {
 
       Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: "Command"
+        Kirigami.FormData.label: "Search & count"
       }
     }
 
@@ -105,12 +117,12 @@ Kirigami.ScrollablePage {
 
       Controls.TextField {
         id: countArchCommandInput
-        Kirigami.FormData.label: "Count ARCH command: "     
+        Kirigami.FormData.label: "Count ARCH command: "
       }
  
       Controls.TextField {
         id: countAurCommandInput
-        Kirigami.FormData.label: "Count AUR command: "     
+        Kirigami.FormData.label: "Count AUR command: "
       }
 
       Controls.TextField {
@@ -122,18 +134,46 @@ Kirigami.ScrollablePage {
         id: listAurCommandInput
         Kirigami.FormData.label: "List AUR command: "
       }
-
-      Controls.TextField {
-        id: updateCommandInput
-        Kirigami.FormData.label: "Update all command: "
-      }
-
-      Controls.TextField {
-        id: updateCommandOneInput
-        Kirigami.FormData.label: "Update one command: "
-      }
-
     }
+
+      Kirigami.FormLayout {
+        wideMode: false
+
+        Kirigami.Separator {
+          Kirigami.FormData.isSection: true
+          Kirigami.FormData.label: "Update package"
+        }
+      }
+
+      Kirigami.FormLayout {
+        wideMode: false
+
+        Kirigami.Heading {
+          level: 3
+          width: parent.width
+          text: generateCmdExample()
+        }
+
+        Controls.TextField {
+          id: updateCommandInput
+          Kirigami.FormData.label: "Update command: "
+        }
+
+        Controls.TextField {
+          id: updateCommandOneInput
+          Kirigami.FormData.label: "Update one command: "
+        }
+
+        Controls.TextField {
+          id: termCmdInput
+          Kirigami.FormData.label: "Terminal cmd for update action: "
+        }
+
+        Controls.TextField {
+          id: termNoCloseCmdInput
+          Kirigami.FormData.label: "Terminal cmd for update action with do no close: "
+        }
+      }
 
   }
 
