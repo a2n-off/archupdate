@@ -154,10 +154,7 @@ PlasmoidItem {
         source: "Tooltip.qml"
     }
 
-    // launch a check for the dependancies
     Component.onCompleted: {
-        checker.konsole()
-        checker.checkupdates()
         plasmoid.configuration.debugLog = "" // clear log window
     }
 }
