@@ -17,9 +17,18 @@ Item {
 
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
-  property bool dot: plasmoid.configuration.dot
-  property bool dotUseCustomColor: plasmoid.configuration.dotUseCustomColor
-  property string dotColor: plasmoid.configuration.dotColor
+
+  property bool separateDot: plasmoid.configuration.separateDot
+
+  property bool mainDot: plasmoid.configuration.mainDot
+  property bool mainDotUseCustomColor: plasmoid.configuration.mainDotUseCustomColor
+  property string mainDotColor: plasmoid.configuration.mainDotColor
+  property int mainDotPosition: parseInt(plasmoid.configuration.mainDotPosition, 10)
+
+  property bool secondDot: plasmoid.configuration.secondDot
+  property bool secondDotUseCustomColor: plasmoid.configuration.secondDotUseCustomColor
+  property string secondDotColor: plasmoid.configuration.secondDotColor
+  property int secondDotPosition: parseInt(plasmoid.configuration.secondDotPosition, 10)
 
   property bool onUpdate: false
   property bool onRefresh: false
@@ -72,6 +81,16 @@ Item {
     return (parseInt(totalArch, 10) + parseInt(totalAur, 10)) > 0
   }
 
+  // return true if update is needed (total > 0)
+  function isArchUpdateNeeded() {
+    return (parseInt(totalArch, 10) > 0)
+  }
+
+  // return true if update is needed (total > 0)
+  function isAurUpdateNeeded() {
+    return (parseInt(totalAur, 10) > 0)
+  }
+
   // map the cmd signal
   Connections {
     target: cmd
@@ -104,13 +123,26 @@ Item {
     }
 
     Rectangle {
-      visible: dot && isUpdateNeeded()
+      id: mainDotRect
+      visible: separateDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()
       height: container.height / 2.5
       width: height
       radius: height / 2
-      color: dotUseCustomColor ? dotColor : PlasmaCore.Theme.textColor
+      color: mainDotUseCustomColor ? mainDotColor : PlasmaCore.Theme.textColor
       anchors {
         right: container.right
+        bottom: container.bottom
+      }
+    }
+
+    Rectangle {
+      visible: (separateDot) && (mainDot) && (secondDot && isAurUpdateNeeded())
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: secondDotUseCustomColor ? secondDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        left: container.left
         bottom: container.bottom
       }
     }
@@ -121,7 +153,7 @@ Item {
         right: container.right
       }
       text: generateResult()
-      visible: !isPanelVertical && !dot
+      visible: !isPanelVertical && !mainDot
       icon: updateIcon
     }
 
@@ -131,7 +163,7 @@ Item {
         right: container.right
       }
       text: generateResult()
-      visible: isPanelVertical && !dot
+      visible: isPanelVertical && !mainDot
       icon: updateIcon
     }
 
@@ -152,6 +184,10 @@ Item {
           if (mouse.button == Qt.MiddleButton) onMClick()
         }
       }
+    }
+
+    Component.onCompleted: {
+      console.log("xxxxxxxxxxxxxxxxx")
     }
   }
 }

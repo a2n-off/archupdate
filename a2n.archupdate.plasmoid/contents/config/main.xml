@@ -87,23 +87,59 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
 <group name="displayConfigPage">
     <entry name="separateResult" type="Bool">
-    <default>false</default>
+        <default>false</default>
+    </entry>
+
+    <entry name="separateDot" type="Bool">
+        <default>false</default>
     </entry>
 
     <entry name="separator" type="String">
-    <default>~</default>
+        <default>~</default>
     </entry>
 
-    <entry name="dot" type="Bool">
-    <default>false</default>
+    <entry name="mainDot" type="Bool">
+        <default>false</default>
     </entry>
 
-    <entry name="dotColor" type="String">
-    <default>white</default>
+    <entry name="mainDotPosition" type="Enum">
+        <choices>
+            <choice name="Top Right" />
+            <choice name="Top Left" />
+            <choice name="Bottom Right" />
+            <choice name="Bottom Left" />
+        </choices>
+        <default>2</default>
     </entry>
 
-    <entry name="dotUseCustomColor" type="Bool">
-    <default>false</default>
+    <entry name="secondDot" type="Bool">
+        <default>false</default>
+    </entry>
+
+    <entry name="secondDotPosition" type="Enum">
+        <choices>
+            <choice name="Top Right" />
+            <choice name="Top Left" />
+            <choice name="Bottom Right" />
+            <choice name="Bottom Left" />
+        </choices>
+        <default>3</default>
+    </entry>
+
+    <entry name="mainDotColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="secondDotColor" type="String">
+        <default>white</default>
+    </entry>
+
+    <entry name="mainDotUseCustomColor" type="Bool">
+        <default>false</default>
+    </entry>
+
+    <entry name="secondDotUseCustomColor" type="Bool">
+        <default>false</default>
     </entry>
 
     <entry name="iconColor" type="String">
