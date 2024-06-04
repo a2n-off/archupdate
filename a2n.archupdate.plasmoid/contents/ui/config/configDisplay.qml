@@ -11,9 +11,17 @@ Kirigami.ScrollablePage {
     property alias cfg_separateResult: separateResult.checked
     property alias cfg_separator: separator.text
 
-    property alias cfg_dot: dot.checked
-    property alias cfg_dotColor: dotColor.color
-    property alias cfg_dotUseCustomColor: dotUseCustomColor.checked
+    property alias cfg_separateDot: separateDot.checked
+    property alias cfg_mainDotPosition: mainDotPosition.currentIndex
+    property alias cfg_secondDotPosition: secondDotPosition.currentIndex
+
+    property alias cfg_mainDot: mainDot.checked
+    property alias cfg_mainDotColor: mainDotColor.color
+    property alias cfg_mainDotUseCustomColor: mainDotUseCustomColor.checked
+
+    property alias cfg_secondDot: secondDot.checked
+    property alias cfg_secondDotColor: secondDotColor.color
+    property alias cfg_secondDotUseCustomColor: secondDotUseCustomColor.checked
 
     property alias cfg_iconColor: iconColor.color
     property alias cfg_iconUseCustomColor: iconUseCustomColor.checked
@@ -69,25 +77,70 @@ Kirigami.ScrollablePage {
 
         Kirigami.FormLayout {
             Controls.CheckBox {
-                id: dot
+                id: mainDot
                 Kirigami.FormData.label: "Show a dot in place of the label: "
                 checked: false
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Custom dot color: "
-                visible: dot.checked
+                Kirigami.FormData.label: "Custom main dot color: "
+                visible: mainDot.checked
                 Controls.CheckBox {
-                    id: dotUseCustomColor
+                    id: mainDotUseCustomColor
                     checked: false
                 }
 
                 KQuickControls.ColorButton {
-                    id: dotColor
-                    enabled: dotUseCustomColor.checked
+                    id: mainDotColor
+                    enabled: mainDotUseCustomColor.checked
+                }
+
+                Controls.ComboBox {
+                    id: mainDotPosition
+                    enabled: mainDot.checked
+                    model: ["Top Right", "Top Left", "Bottom Right", "Bottom Left"]
+                    onActivated: cfg_mainDotPosition = index
                 }
             }
+        }
 
+        Kirigami.FormLayout {
+            visible: mainDot.checked
+            Controls.CheckBox {
+                id: separateDot
+                Kirigami.FormData.label: "Separate the dot between the two command: "
+                checked: false
+            }
+        }
+
+        Kirigami.FormLayout {
+            visible: separateDot.checked && mainDot.checked
+            Controls.CheckBox {
+                id: secondDot
+                Kirigami.FormData.label: "Show a dot for AUR update: "
+                checked: false && separateDot.checked
+            }
+
+            RowLayout {
+                Kirigami.FormData.label: "Custom AUR dot color: "
+                visible: secondDot.checked
+                Controls.CheckBox {
+                    id: secondDotUseCustomColor
+                    checked: false
+                }
+
+                KQuickControls.ColorButton {
+                    id: secondDotColor
+                    enabled: secondDotUseCustomColor.checked
+                }
+
+                Controls.ComboBox {
+                    id: secondDotPosition
+                    enabled: secondDot.checked
+                    model: ["Top Right", "Top Left", "Bottom Right", "Bottom Left"]
+                    onActivated: cfg_secondDotPosition = currentIndex
+                }
+            }
         }
 
         Kirigami.FormLayout {
@@ -117,7 +170,6 @@ Kirigami.ScrollablePage {
                 Kirigami.FormData.label: "Separator: "
                 visible: separateResult.checked
             }
-
         }
 
 
