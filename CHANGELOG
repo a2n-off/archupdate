@@ -1,3 +1,7 @@
+### v6.3.0
+  - Add a new parameter for splitting the dot between two CMD
+  - The dots are customizable in color and position
+
 ### v6.2.0
   - Add parameters for the last two cmds without parameters (those of the update :))
   - Added a kdialog trigger if a list or count cmd has an error
