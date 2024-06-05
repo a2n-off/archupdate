@@ -90,10 +90,6 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
         <default>false</default>
     </entry>
 
-    <entry name="separateDot" type="Bool">
-        <default>false</default>
-    </entry>
-
     <entry name="separator" type="String">
         <default>~</default>
     </entry>

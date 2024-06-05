@@ -18,8 +18,6 @@ Item {
   property bool separateResult: plasmoid.configuration.separateResult
   property string separator: plasmoid.configuration.separator
 
-  property bool separateDot: plasmoid.configuration.separateDot
-
   property bool mainDot: plasmoid.configuration.mainDot
   property bool mainDotUseCustomColor: plasmoid.configuration.mainDotUseCustomColor
   property string mainDotColor: plasmoid.configuration.mainDotColor
@@ -122,9 +120,9 @@ Item {
       source: iconUpdate
     }
 
+    // MAIN BR
     Rectangle {
-      id: mainDotRect
-      visible: separateDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()
+      visible: (secondDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()) && mainDotPosition === 2
       height: container.height / 2.5
       width: height
       radius: height / 2
@@ -135,8 +133,61 @@ Item {
       }
     }
 
+    // MAIN BL
     Rectangle {
-      visible: (separateDot) && (mainDot) && (secondDot && isAurUpdateNeeded())
+      visible: (secondDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()) && mainDotPosition === 3
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: mainDotUseCustomColor ? mainDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        left: container.left
+        bottom: container.bottom
+      }
+    }
+
+    // MAIN TR
+    Rectangle {
+      visible: (secondDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()) && mainDotPosition === 0
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: mainDotUseCustomColor ? mainDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        right: container.right
+        top: container.top
+      }
+    }
+
+    // MAIN TL
+    Rectangle {
+      visible: (secondDot ? mainDot && isArchUpdateNeeded() : mainDot && isUpdateNeeded()) && mainDotPosition === 1
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: mainDotUseCustomColor ? mainDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        left: container.left
+        top: container.top
+      }
+    }
+
+    // SECOND BR
+    Rectangle {
+      visible: (secondDot && mainDot && isAurUpdateNeeded()) && secondDotPosition === 2
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: secondDotUseCustomColor ? secondDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        right: container.right
+        bottom: container.bottom
+      }
+    }
+
+    // SECOND BL
+    Rectangle {
+      visible: (secondDot && mainDot && isAurUpdateNeeded()) && secondDotPosition === 3
       height: container.height / 2.5
       width: height
       radius: height / 2
@@ -145,6 +196,32 @@ Item {
         left: container.left
         bottom: container.bottom
       }
+    }
+
+    // SECOND TR
+    Rectangle {
+      visible: (secondDot && mainDot && isAurUpdateNeeded()) && secondDotPosition === 0
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: secondDotUseCustomColor ? secondDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        right: container.right
+        top: container.top
+      }
+    }
+
+    // SECOND TL
+    Rectangle {
+      visible: (secondDot && mainDot && isAurUpdateNeeded()) && secondDotPosition === 1
+      height: container.height / 2.5
+      width: height
+      radius: height / 2
+      color: secondDotUseCustomColor ? secondDotColor : PlasmaCore.Theme.textColor
+      anchors {
+        left: container.left
+        top: container.top
+     }
     }
 
     WorkspaceComponents.BadgeOverlay { // for the horizontal bar
@@ -184,10 +261,6 @@ Item {
           if (mouse.button == Qt.MiddleButton) onMClick()
         }
       }
-    }
-
-    Component.onCompleted: {
-      console.log("xxxxxxxxxxxxxxxxx")
     }
   }
 }
