@@ -11,17 +11,15 @@ Kirigami.ScrollablePage {
     property alias cfg_separateResult: separateResult.checked
     property alias cfg_separator: separator.text
 
-    property alias cfg_separateDot: separateDot.checked
-    property alias cfg_mainDotPosition: mainDotPosition.currentIndex
-    property alias cfg_secondDotPosition: secondDotPosition.currentIndex
-
     property alias cfg_mainDot: mainDot.checked
     property alias cfg_mainDotColor: mainDotColor.color
     property alias cfg_mainDotUseCustomColor: mainDotUseCustomColor.checked
+    property alias cfg_mainDotPosition: mainDotPosition.currentIndex
 
     property alias cfg_secondDot: secondDot.checked
     property alias cfg_secondDotColor: secondDotColor.color
     property alias cfg_secondDotUseCustomColor: secondDotUseCustomColor.checked
+    property alias cfg_secondDotPosition: secondDotPosition.currentIndex
 
     property alias cfg_iconColor: iconColor.color
     property alias cfg_iconUseCustomColor: iconUseCustomColor.checked
@@ -83,7 +81,7 @@ Kirigami.ScrollablePage {
             }
 
             RowLayout {
-                Kirigami.FormData.label: "Custom main dot color: "
+                Kirigami.FormData.label: "Custom main dot options: "
                 visible: mainDot.checked
                 Controls.CheckBox {
                     id: mainDotUseCustomColor
@@ -107,7 +105,7 @@ Kirigami.ScrollablePage {
         Kirigami.FormLayout {
             visible: mainDot.checked
             Controls.CheckBox {
-                id: separateDot
+                id: secondDot
                 Kirigami.FormData.label: "Separate the dot between the two command: "
                 checked: false
             }
@@ -115,14 +113,9 @@ Kirigami.ScrollablePage {
 
         Kirigami.FormLayout {
             visible: separateDot.checked && mainDot.checked
-            Controls.CheckBox {
-                id: secondDot
-                Kirigami.FormData.label: "Show a dot for AUR update: "
-                checked: false && separateDot.checked
-            }
 
             RowLayout {
-                Kirigami.FormData.label: "Custom AUR dot color: "
+                Kirigami.FormData.label: "Custom second dot options: "
                 visible: secondDot.checked
                 Controls.CheckBox {
                     id: secondDotUseCustomColor
