@@ -112,7 +112,7 @@ Kirigami.ScrollablePage {
         }
 
         Kirigami.FormLayout {
-            visible: separateDot.checked && mainDot.checked
+            visible: secondDot.checked && mainDot.checked
 
             RowLayout {
                 Kirigami.FormData.label: "Custom second dot options: "
